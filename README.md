@@ -11,5 +11,8 @@
 
 
 ### DB연결방법
-
+mariaDB
 cosdb로 갑니다
+
+mongoDB
+greendb
