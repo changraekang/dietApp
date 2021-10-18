@@ -68,6 +68,18 @@ public class PageControllerTest {
 		
 		return "user/updateForm";
 	}
+	
+	@GetMapping("/test/joinForm")
+	public String join () {
+		
+		return "user/joinForm";
+	}
+	
+	@GetMapping("/test/")
+	public String main () {
+		
+		return "index";
+	}
 }
 
 

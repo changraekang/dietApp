@@ -56,7 +56,9 @@ cursor: pointer;
 .card-header h3{
 color: white;
 }
-
+.card-footer{
+background-color: #F2FAFF  !important;
+}
 .social_icon{
 position: absolute;
 right: 20px;
@@ -89,31 +91,30 @@ box-shadow: 0 0 0 0 !important;
 
 }
 
-.remember{
-color: white;
-}
-
-.remember input
-{
-width: 20px;
-height: 20px;
-margin-left: 15px;
-margin-right: 5px;
-}
 
 .login_btn{
 color: black;
 background-color: #FFC312;
 width: 100px;
 }
-
 .login_btn:hover{
 color: black;
 background-color: white;
 }
+.join_btn{
+color: black;
+background-color: #72C8FF;
+height: 35px;
+width: 100px;
+}
+
+.join_btn:hover{
+color: black;
+background-color: #32AFFF;
+}
 
 .links{
-color: white;
+color: black;
 }
 
 .links a{
@@ -153,7 +154,7 @@ margin-left: 4px;
 			</div>
 			<div class="card-footer">
 				<div class="d-flex justify-content-center links">
-					아직 회원이 아니십니까?<a href="#">회원가입</a>
+					아직 회원이 아니십니까?<a href="/test/joinForm" class="btn float-right join_btn">회원가입</a>
 				</div>
 			</div>
 		</div>
