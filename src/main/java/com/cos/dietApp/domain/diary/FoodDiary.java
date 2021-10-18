@@ -19,9 +19,7 @@ import lombok.NoArgsConstructor;
 @Document( collection = "FoodDiary" )
 public class FoodDiary {
 		@Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private int 	id;
-		@Column(nullable = false, length = 50)
 		private String 	food;
 		private String 	kcal;
 		private String 	mealtime; // 아침,점심,저녁

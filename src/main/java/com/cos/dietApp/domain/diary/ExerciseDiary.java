@@ -23,7 +23,6 @@ public class ExerciseDiary {
 
 	@Id
 	private int 	id;
-	@Column(nullable = false, length = 50)
 	private String 	Exercise;
 	private String 	kcal;
 	private String 	time; // 운동시간,횟수
