@@ -97,7 +97,7 @@ dropdown2 {
 			</div></li>
   <li class="dropdown2 flex-fill"><a href="javascript:void(0)" class="dropbtn">다이어트 다이어리</a>
 			<div class="dropdown2-content flex-fill" style= "width: 19.5%" >
-				<a href="/test/exercise">운동 일기</a> <a href="#">식단 일기</a> 
+				<a href="/test/exercise">운동 일기</a> <a href="/test/diet">식단 일기</a> 
 			</div></li>
   <li  class="flex-fill" ><a href="/test/myBody">나의 Body</a></li>
   <li  class="flex-fill" ><a href="/test/userupdate">회원정보</a></li>

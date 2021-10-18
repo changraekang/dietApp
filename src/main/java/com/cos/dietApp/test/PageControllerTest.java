@@ -17,6 +17,11 @@ public class PageControllerTest {
 		
 		return "diary/exercise";
 	}
+	@GetMapping("/test/diet")
+	public String diet () {
+		
+		return "diary/diet";
+	}
 	@GetMapping("/test/dietPhoto")
 	public String dietPhoto () {
 		
