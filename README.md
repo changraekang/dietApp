@@ -12,9 +12,9 @@
 
 ### DB연결방법
 mariaDB
-create user 'diet' identified by 'diet1234';
-GRANT ALL PRIVILEGES ON *.* TO 'diet';
-create database dietdb;
+create user 'diet'@'%' identified by 'diet1234';
+GRANT ALL PRIVILEGES ON *.* TO 'diet'@'%';
+create database didietdb;
 ## MongoDB
 mongoDB
 dietdb
