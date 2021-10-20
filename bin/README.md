@@ -12,9 +12,7 @@
 
 ### DB연결방법
 mariaDB
-create user 'diet'@'%' identified by 'diet1234';
-GRANT ALL PRIVILEGES ON *.* TO 'diet'@'%';
-create database dietdb;
-## MongoDB
+cosdb로 갑니다
+
 mongoDB
-dietdb
+greendb
