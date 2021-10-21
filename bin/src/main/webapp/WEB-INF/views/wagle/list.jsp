@@ -4,10 +4,6 @@
 
 <%@ include file="../layout/header.jsp" %>
 	<h2>게시글 리스트</h2>
-	<h2><a href="/test/board?menuId=1">자유게시판</a></h2><br><br>
-	<h2><a href="/test/board?menuId=2">QnA게시판</a></h2><br><br>
-	<h2><a href="/test/board?menuId=3">인증게시판</a></h2>
-	
 <div class="container">
 	<!-- boardsEntity -> pageScope에 있음. -->
  	<c:forEach var="board" items="${boardsEntity}">
@@ -24,12 +20,6 @@
 		<br>
 		<!-- 카드 글 끝 -->
 	</c:forEach>
-</div>
-
-<div class="container">
-	<div align="right">
-		<h2><a href="/test/board/saveForm?menuId=${menuId}">글쓰기</a></h2>
-	</div>
 </div>
 
 <%@ include file="../layout/footer.jsp" %>

@@ -5,7 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+
+import com.cos.dietApp.domain.boardmenu.BoardMenu;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,4 +29,8 @@ public class Board {
 	private String content;
 	@Lob
 	private String thumbnail;
+	
+	@JoinColumn(name = "menuId")
+	@ManyToOne
+	private BoardMenu boardMenu;
 }
