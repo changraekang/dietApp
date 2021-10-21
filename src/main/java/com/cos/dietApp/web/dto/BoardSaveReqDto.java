@@ -4,6 +4,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.cos.dietApp.domain.board.Board;
+import com.cos.dietApp.domain.boardmenu.BoardMenu;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,13 +19,14 @@ public class BoardSaveReqDto {
 	private String title;
 	private String content;
 	private String thumbnail;
+	private String menuId;
 	
-	public Board toEntity() {
+	public Board toEntity(BoardMenu boardMenu) {
 		Board board = new Board();
 		board.setTitle(title);
 		board.setContent(content);
 		board.setThumbnail(thumbnail);
-		
+		board.setBoardMenu(boardMenu);
 		return board;
 	}
 }

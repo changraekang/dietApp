@@ -6,7 +6,6 @@
 	<h2>게시글 등록</h2>
 	<div class="container">
 		<form onsubmit="save()">
-			<input type="hidden" name="menuId" id="menuId" value="${menuId}">
 			<div class="form-group">
 				<input type="text" id="title" name="title" class="form-control"
 					placeholder="Enter title">
@@ -22,15 +21,13 @@
 	<script>
 		async function save() {
 			event.preventDefault();
-			let tn = document.querySelector('.note-editable img');
-			if(tn != null){
-				tn = tn.getAttribute('src');
+			for(let i = 0; i < 6 ; i++){
+				alert(i);
 			};
 			let boardSaveReqDto = {
 				title : document.querySelector('#title').value,
 				content : document.querySelector('#summernote').value,
-				thumbnail : tn,
-				menuId : document.querySelector('#menuId').value
+				thumbnail : document.querySelector('.note-editable img').getAttribute('src')
 			};
 			let response = await fetch("http://localhost:8080/test/board", {
 				method : "post",
@@ -44,7 +41,7 @@
 			
 			if (parseResponse.code == 1) {
 				alert("업데이트 성공");
-				location.href = "/test/board?menuId=" + document.querySelector('#menuId').value;
+				location.href = "/board";
 			} else {
 				alert("업데이트 실패 - " + parseResponse.msg);
 			}
