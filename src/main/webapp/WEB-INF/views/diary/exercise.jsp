@@ -205,26 +205,24 @@ dropdown2 {
 </head>
 <body>
 <ul class="nav justify-content-around bg-light">
-  <li class="flex-fill"><a class="" href="/test/news">News</a></li>
-  <li class="dropdown2 flex-fill"><a href="javascript:void(0)" class="dropbtn">다이어트 자극</a>
-			<div class="dropdown2-content flex-fill" style= "width: 17.8%">
-				<a href="/test/dietPhoto">다이어트 자극 사진</a> <a href="/test/dietYoutube">다이어트 자극 영상<img src="/image/youtube.png" style= "height: 18px;"></a> 
+		<li class="flex-fill"><a class="" href="/test/news">News</a></li>
+		<li class="flex-fill"><a href="/test/calorieDic">칼로리 사전</a></li>
+		
+		<li class="dropdown2 flex-fill"><a href="javascript:void(0)"
+			class="dropbtn ">와글와글</a>
+			<div class="dropdown2-content flex-fill" style="width: 15.8%">
+				<a href="/test/wagleFree">자유게시판</a> <a href="/test/wagleQnA">건강
+					QnA</a>  <a href="/test/recipe">다이어트
+					Recipe</a> <a href="/test/wagleShowoff">다이어트 인증샷</a>
 			</div></li>
-  <li class="dropdown2 flex-fill"><a href="javascript:void(0)" class="dropbtn " >와글와글</a>
-			<div class="dropdown2-content flex-fill" style= "width: 15.8%">
-				<a href="/test/wagleFree">자유게시판</a> 
-				<a href="/test/wagleQnA">건강 QnA</a> 
-				<a href="/test/calorieDic">칼로리 사전</a> 
-				<a href="/test/recipe">다이어트 Recipe</a> 
-				<a href="/test/wagleShowoff">다이어트 인증샷</a>
+		<li class="dropdown2 flex-fill"><a href="javascript:void(0)"
+			class="dropbtn">다이어트 다이어리</a>
+			<div class="dropdown2-content flex-fill" style="width: 19.5%">
+				<a href="/test/exercise">운동 일기</a> <a href="/test/diet">식단 일기</a>
 			</div></li>
-  <li class="dropdown2 flex-fill"><a href="javascript:void(0)" class="dropbtn">다이어트 다이어리</a>
-			<div class="dropdown2-content flex-fill" style= "width: 19.5%" >
-				<a href="/test/exercise">운동 일기</a> <a href="/test/diet">식단 일기</a> 
-			</div></li>
-  <li  class="flex-fill" ><a href="/test/myBody">나의 Body</a></li>
-  <li  class="flex-fill" ><a href="/test/userupdate">회원정보</a></li>
-</ul>
+		<li class="flex-fill"><a href="/test/myBody">나의 Body</a></li>
+		<li class="flex-fill"><a href="/test/userupdate">회원정보</a></li>
+	</ul>
 	<div class="jumbotron text-center" style=" height: 200px; position:relative" ><img class = "image-thumbnail" src="/image/exercise.jpg" ></div>
 	<div id="calendar" style="float: left; width: 66%; height: 200px;"></div>
 	<div id="diary" style="float: left; width: 34%; height: 650px; " >
