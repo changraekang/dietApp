@@ -85,7 +85,7 @@ dropdown2 {
   <li class="flex-fill"><a class="" href="#home">News</a></li>
   <li class="dropdown2 flex-fill"><a href="javascript:void(0)" class="dropbtn">다이어트 자극</a>
 			<div class="dropdown2-content flex-fill" style= "width: 17.8%">
-				<a href="/">다이어트 자극 사진</a> <a href="/dietApp/src/main/webapp/WEB-INF/views/diary/exercise.jsp">다이어트 자극 영상<img src="/image/youtube.png" style= "height: 18px;"></a> 
+				<a href="/">다이어트 자극 사진</a> <a href="">다이어트 자극 영상<img src="/image/youtube.png" style= "height: 18px;"></a> 
 			</div></li>
   <li class="dropdown2 flex-fill"><a href="javascript:void(0)" class="dropbtn " >와글와글</a>
 			<div class="dropdown2-content flex-fill" style= "width: 15.8%">

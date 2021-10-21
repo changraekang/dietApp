@@ -1,31 +1,28 @@
 package com.cos.dietApp.domain.diary;
 
-import javax.persistence.Column; 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-
+import javax.persistence.Lob;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-@Builder
-@AllArgsConstructor
 @Data
-public class ExerciseDiary {
-
-	@Id
-	private int 	id;
-	private String 	Exercise;
-	private String 	kcal;
-	private String 	time; // 운동시간,횟수
-	private String 	date;
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+public class Exercise {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int 	id;
+	@Column(nullable = false, length = 50)
+	private String 	exercise;
+	private int 	mat;
 	
 	
 }
