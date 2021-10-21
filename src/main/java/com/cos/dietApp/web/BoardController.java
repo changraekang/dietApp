@@ -37,6 +37,7 @@ public class BoardController {
 	// ---- 게시글 목록 보기
 	@GetMapping("/test/board")
 	public String home(Model model, int menuId) {
+
 		List<Board> boardsEntity = boardRepository.mFindAll(menuId);
 		model.addAttribute("boardsEntity", boardsEntity);
 		model.addAttribute("menuId", menuId);
@@ -45,7 +46,7 @@ public class BoardController {
 	
 	// ---- 게시글 상세보기
 	@GetMapping("/test/board/{id}")
-	public String detail(@PathVariable int id, Model model) {
+	public String detail(Model model, @PathVariable int id) {
 		Board boardEntity = boardRepository.findById(id)
 				.orElseThrow(() -> new MyNotFoundException(id + "번은 없는 게시글입니다") );
 		model.addAttribute("boardEntity", boardEntity);
