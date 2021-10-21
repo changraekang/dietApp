@@ -3,10 +3,6 @@
 
 
 <%@ include file="../layout/header.jsp" %>
-<%
-	response.sendRedirect("http://localhost:5000/");
-	//request.getRequestDispatcher("/board?page=0").forward(request, response);
-%>
-
+<h2>뉴스</h2>
 
 <%@ include file="../layout/footer.jsp" %>
