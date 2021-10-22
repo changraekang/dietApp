@@ -112,6 +112,10 @@
 }
 </style>
 <style>
+body {
+  display: flex;
+  flex-direction: column;
+}
 a {
 	color: black;
 	text-decoration: none;
@@ -236,10 +240,8 @@ dropdown2 {
 		<img class="image-thumbnail" src="/image/exercise.jpg">
 	</div>
 	<div class="container m_tm_20" style="height: 100%;">
-		<div style="float: left; width: 66%; height: 400px;">
-		<div id="calendar" style="float: left; width: 100%;"></div>
-		</div>
-		<div id="diary" style="float: left; width: 34%; height: 100%;">
+		<div id="calendar" style="float: left; width: 66%; "></div>
+		<div id="diary" style="float: left; width: 34%; height: 650px;">
 			<form action="/join" method="post">
 				<div class="form-group">
 					<input type="text" id="date" name="date" class="form-control"
@@ -284,9 +286,9 @@ dropdown2 {
 			</div>
 		</div>
 	</div>
-
+	<footer>
 	<div class="jumbotron text-center"
-		style="position: absolute; left: 0; bottom: 0; width: 100%; flex-grow:1">
+		style="position: absolute; left: 0; bottom: -20; width: 100%;">
 		
 		<p>2조 다이어트App 1557</p>
 
@@ -294,6 +296,7 @@ dropdown2 {
 		<p>📬부산시 부산진구</p>
 		<p>📝사업자번호: 051-****-1557</p>
 	</div>
+	</footer>
 
 
 </body>

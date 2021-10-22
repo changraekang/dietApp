@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		dayMaxEventRows : 3, // adjust to 6 only for timeGridWeek/timeGridDay
 
 		select : function(arg) {
+			var title = prompt('Event Title:');
 			if (title) {
 				calendar.addEvent({
 					title : title,
@@ -114,6 +115,10 @@ const remove = (obj) => {
 
 </script>
 <style>
+body {
+  display: flex;
+  flex-direction: column;
+}
 #chooseFile {
 	visibility: hidden;
 }
@@ -259,6 +264,7 @@ dropdown2 {
 		<img class="image-thumbnail" src="/image/eating.jpg">
 	</div>
 	<div class="container m_tm_20" style="height: 100%;">
+	
 		<div id="calendar" style="float: left; width: 66%; height: 200px;"></div>
 		<div id="diary" style="float: left; width: 34%; height: 650px;">
 			<form action="/join" method="post">
@@ -306,13 +312,15 @@ dropdown2 {
 			</div>
 		</div>
 	</div>
+	<footer>
 	<div class="jumbotron text-center"
-		style="position: absolute; left: 0; bottom: 0; width: 100%;">
+		style="position: absolute; left: 0; bottom: -20; width: 100%;">
 		<p>2조 다이어트App 1557</p>
 		<p>📞010-1234-1557</p>
 		<p>📬부산시 부산진구</p>
 		<p>📝사업자번호: 051-****-1557</p>
 	</div>
+	</footer>
 
 
 
