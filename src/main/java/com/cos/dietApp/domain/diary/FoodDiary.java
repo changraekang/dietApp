@@ -23,6 +23,6 @@ public class FoodDiary {
 		private String 	food;
 		private String 	kcal;
 		private String 	mealtime; // 아침,점심,저녁
-		private String 	date;
+		private String 	date;	//식사 날짜
 	
 }

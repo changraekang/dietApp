@@ -24,7 +24,7 @@ public class ExerciseDiary {
 	private String 	Exercise;
 	private String 	kcal;
 	private String 	time; // 운동시간,횟수
-	private String 	date;
+	private String 	date; // 운동한 날짜
 	
 	
 	
