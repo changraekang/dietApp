@@ -50,15 +50,7 @@
 			dayMaxEventRows : 3, // adjust to 6 only for timeGridWeek/timeGridDay
 
 			select : function(arg) {
-				var title = prompt('Event Title:');
-				if (title) {
-					calendar.addEvent({
-						title : title,
-						start : arg.start,
-						end : arg.end,
-						allDay : arg.allDay
-					})
-				}
+			
 			},
 
 			eventClick : function(arg) {
@@ -241,27 +233,28 @@ dropdown2 {
 	</div>
 	<div class="container m_tm_20" style="height: 100%;">
 		<div id="calendar" style="float: left; width: 66%; "></div>
+								<br> <br> <br>
 		<div id="diary" style="float: left; width: 34%; height: 650px;">
-			<form action="/join" method="post">
+			<form action="/test/exercise" method="post">
 				<div class="form-group">
 					<input type="text" id="date" name="date" class="form-control"
 						required="required" readonly="readonly">
 				</div>
 				<div class="form-group" id="exercise" style="width: 100%;">
-					<input id="exercise" type="text" class="form-control"
+					<input id="exercise" name="exercise"  type="text" class="form-control"
 						placeholder="오늘의 운동을 입력해주세요" required="required"
 						style="width: 100%; float: right">
 
 				</div>
-				<div class="form-group" id=style="width:100%;">
-					<input id="exercise" type="text" class="form-control"
+				<div class="form-group" id="exercise" style="width:100%;">
+					<input id="time"  name="time" type="text" class="form-control"
 						placeholder="분" required="required"
 						style="width: 100%; float: right">
 
 				</div>
 
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="kcal"
+					<input type="text" class="form-control" name="kcal" placeholder="kcal"
 						required="required" maxlength="20">
 				</div>
 				<div class="image-upload" id="image-upload">
