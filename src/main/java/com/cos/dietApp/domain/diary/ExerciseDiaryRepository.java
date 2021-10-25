@@ -1,7 +1,7 @@
 package com.cos.dietApp.domain.diary;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ExerciseDiaryRepository extends MongoRepository<ExerciseDiary, String> {
+public interface ExerciseDiaryRepository extends JpaRepository<ExerciseDiary, String> {
 
 }

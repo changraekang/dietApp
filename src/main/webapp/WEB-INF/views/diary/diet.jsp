@@ -34,35 +34,18 @@ document.addEventListener('DOMContentLoaded', function() {
 		height: 650,
 		dateClick : function(info) {
 			document.getElementById("date").value = info.dateStr;
-
+			  
+			
+			
 			events: [ /* event data here */]
 			
 
 		},
 		initialDate : '2021-10-12',
-		/*  
-		calendar.addEvent({
-			title : i,
-			start : '2021-10-06',
-			end : '2021-10-07'
-		})
-
-		,
-		 */
 		dayMaxEventRows : true, // for all non-TimeGrid views
 		dayMaxEventRows : 3, // adjust to 6 only for timeGridWeek/timeGridDay
 
 		select : function(arg) {
-			var title = prompt('Event Title:');
-			if (title) {
-				calendar.addEvent({
-					title : title,
-					start : arg.start,
-					end : arg.end,
-					allDay : arg.allDay
-				})
-			}
-			
 		},
 
 		eventClick : function(arg) {
@@ -103,22 +86,33 @@ function loadFile(input) {
 };
 
 
+var i = 1;
 const add_textbox = () => {
+    	
+    if (i >= 5) {
+    	
+    	return alert("음식입력갯수를 초과하였습니다");
+      }
     const box = document.getElementById("fooddiary");
     const newP = document.createElement('p');
-    newP.innerHTML = "<input id= 'food' type='text' class='form-control' placeholder='음식명을 입력해주세요' required='required' style='width:85%;float:left'> <input type='button' value='삭제'style='width:15%'; onclick='remove(this)'>";
+    newP.innerHTML = "<input id='food"+ i +"' type='text' class='form-control' name='food"+ i +"'" + " placeholder='음식명을 입력해주세요' value='' required='required' style='width:85%;float:left'> <input type='button' value='삭제'style='width:15%'; onclick='remove(this)'>";
     box.appendChild(newP);
+    i = i + 1;
+    
+   
 }
 const remove = (obj) => {
-    document.getElementById('fooddiary').removeChild(obj.parentNode);
+	
+	obj.parentNode.firstChild.value = '';
 }
 
 </script>
 <style>
 body {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
+
 #chooseFile {
 	visibility: hidden;
 }
@@ -239,7 +233,7 @@ dropdown2 {
 </head>
 <body>
 
-	
+
 	<ul class="nav justify-content-around bg-light">
 		<li class="flex-fill"><a class="" href="/test/news">News</a></li>
 		<li class="flex-fill"><a href="/test/calorieDic">칼로리 사전</a></li>
@@ -263,19 +257,35 @@ dropdown2 {
 		style="height: 200px; position: relative">
 		<img class="image-thumbnail" src="/image/eating.jpg">
 	</div>
+
+
+
+
+	<!-- 달력 + 입력 부분 -->
 	<div class="container m_tm_20" style="height: 100%;">
-	
+
 		<div id="calendar" style="float: left; width: 66%; height: 200px;"></div>
+						<br> <br> <br>
+						
 		<div id="diary" style="float: left; width: 34%; height: 650px;">
-			<form action="/join" method="post">
+			<form action="/test/food" method="post">
 				<div class="form-group">
-					<input type="text" id="date" name="username" class="form-control"
+					<input type="text" id="date" name="date" class="form-control"
 						required="required" readonly="readonly">
+				</div>
+				<br>
+				<div class="form-group">
+						<p>식사 시간을 입력해주세요:</p>
+					  <input type="radio" id="아침" name="mealtime" value="아침">  <label for="아침">아침</label>
+					  <input type="radio" id="점심" name="mealtime" value="점심">  <label for="점심">점심</label>
+					  <input type="radio" id="저녁" name="mealtime" value="저녁">  <label for="저녁">저녁</label>
+					  <input type="radio" id="야식" name="mealtime"  value="야식">  <label for="야식">야식</label><br>
+
 				</div>
 				<div class="form-group" id="diet" style="width: 100%;">
 					<table style="width: 100%;" id="fooddiary">
 						<tr>
-							<td><input id='food' type='text' class='form-control'
+							<td><input id='food' name='food' type='text' class='form-control'
 								placeholder='음식명을 입력해주세요' required='required'
 								style='width: 100%; float: right'></td>
 							<td><input type="button" value="+" onclick="add_textbox()"
@@ -286,7 +296,7 @@ dropdown2 {
 				</div>
 
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="kcal"
+					<input type="text" class="form-control" name='kcal'  placeholder="kcal"
 						required="required" maxlength="20">
 				</div>
 				<div class="image-upload" id="image-upload">
@@ -313,13 +323,13 @@ dropdown2 {
 		</div>
 	</div>
 	<footer>
-	<div class="jumbotron text-center"
-		style="position: absolute; left: 0; bottom: -20; width: 100%;">
-		<p>2조 다이어트App 1557</p>
-		<p>📞010-1234-1557</p>
-		<p>📬부산시 부산진구</p>
-		<p>📝사업자번호: 051-****-1557</p>
-	</div>
+		<div class="jumbotron text-center"
+			style="position: absolute; left: 0; bottom: -20; width: 100%;">
+			<p>2조 다이어트App 1557</p>
+			<p>📞010-1234-1557</p>
+			<p>📬부산시 부산진구</p>
+			<p>📝사업자번호: 051-****-1557</p>
+		</div>
 	</footer>
 
 

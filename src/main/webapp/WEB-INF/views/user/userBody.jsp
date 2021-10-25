@@ -58,4 +58,10 @@
 	</table>
 	</div>
 </div>
+<div class="container mt-3">
+  <h2>목표체중 도달</h2>
+  <div class="progress">
+    <div class="progress-bar" style="width:70%"></div>
+  </div>
+</div>
 <%@ include file="../layout/footer.jsp"%>
