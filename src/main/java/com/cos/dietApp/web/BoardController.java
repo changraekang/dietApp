@@ -28,31 +28,7 @@ public class BoardController {
 	private final BoardRepository boardRepository;
 	
 	//창래
-	@GetMapping("/wagleFree")
-	public String wagleFree () {
-		
-		return "wagle/Free";
-	}
-	@GetMapping("/wagleQnA")
-	public String wagleQnA () {
-		
-		return "wagle/QnA";
-	}
-	@GetMapping("/wagleShowoff")
-	public String wagleShowoff () {
-		
-		return "wagle/showoff";
-	}
-	@GetMapping("/calorieDic")
-	public String calorieDic () {
-		
-		return "wagle/calorieDic";
-	}
-	@GetMapping("/recipe")
-	public String recipe () {
-		
-		return "wagle/recipe";
-	}
+	
 	//용세
 	
 	// ---- 게시글 상세보기
