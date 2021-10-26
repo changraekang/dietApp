@@ -22,6 +22,7 @@ public class PageControllerTest {
 		
 		return "diary/diet";
 	}
+<<<<<<< HEAD
 	
 	@GetMapping("/test/wagleFree")
 	public String wagleFree () {
@@ -37,6 +38,17 @@ public class PageControllerTest {
 	public String wagleShowoff () {
 		
 		return "wagle/showoff";
+=======
+	@GetMapping("/test/dietPhoto")
+	public String dietPhoto () {
+		
+		return "dietStimulate/dietPhoto";
+	}
+	@GetMapping("/test/dietYoutube")
+	public String dietYoutube () {
+		
+		return "dietStimulate/dietYoutube";
+>>>>>>> 2ca5cc8aceb8c3a4124f939839a7395a8a4f610b
 	}
 	@GetMapping("/test/calorieDic")
 	public String calorieDic () {
