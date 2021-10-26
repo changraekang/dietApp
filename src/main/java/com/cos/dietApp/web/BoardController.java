@@ -28,10 +28,35 @@ public class BoardController {
 	private final BoardRepository boardRepository;
 	
 	//창래
+	@GetMapping("/wagleFree")
+	public String wagleFree () {
+		
+		return "wagle/Free";
+	}
+	@GetMapping("/wagleQnA")
+	public String wagleQnA () {
+		
+		return "wagle/QnA";
+	}
+	@GetMapping("/wagleShowoff")
+	public String wagleShowoff () {
+		
+		return "wagle/showoff";
+	}
+	@GetMapping("/calorieDic")
+	public String calorieDic () {
+		
+		return "wagle/calorieDic";
+	}
+	@GetMapping("/recipe")
+	public String recipe () {
+		
+		return "wagle/recipe";
+	}
 	//용세
 	
 	// ---- 게시글 상세보기
-	@GetMapping("/test/board/{id}")
+	@GetMapping("/board/{id}")
 	public String detail(@PathVariable int id, Model model) {
 		Board boardEntity = boardRepository.findById(id)
 				.orElseThrow(() -> new MyNotFoundException(id + "번은 없는 게시글입니다") );
@@ -40,7 +65,7 @@ public class BoardController {
 	}
 	
 	// ---- 게시글 목록
-	@GetMapping("/test/board")
+	@GetMapping("/board")
 	public String home(Model model) {
 		System.out.println("호출됨");
 		List<Board> boardsEntity = boardRepository.findAll();
@@ -50,7 +75,7 @@ public class BoardController {
 	}
 	
 	// ---- 게시글 등록
-	@PostMapping("/test/board")
+	@PostMapping("/board")
 	public @ResponseBody CMRespDto boardInsert(@Valid @RequestBody BoardSaveReqDto dto, BindingResult bindingResult) {
 		
 		boardRepository.save(dto.toEntity());
@@ -58,7 +83,7 @@ public class BoardController {
 		return new CMRespDto(1,"성공",null);
 	}
 	
-	@GetMapping("/test/board/saveForm")
+	@GetMapping("/board/saveForm")
 	public String saveForm() {
 		return "wagle/saveForm";
 	}

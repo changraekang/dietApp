@@ -22,16 +22,7 @@ public class PageControllerTest {
 		
 		return "diary/diet";
 	}
-	@GetMapping("/test/dietPhoto")
-	public String dietPhoto () {
-		
-		return "dietStimulate/dietPhoto";
-	}
-	@GetMapping("/test/dietYoutube")
-	public String dietYoutube () {
-		
-		return "dietStimulate/dietYoutube";
-	}
+	
 	@GetMapping("/test/wagleFree")
 	public String wagleFree () {
 		

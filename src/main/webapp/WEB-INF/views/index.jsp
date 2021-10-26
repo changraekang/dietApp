@@ -156,7 +156,7 @@ margin-left: 4px;
 			</div>
 			<div class="card-footer">
 				<div class="d-flex justify-content-center links">
-					아직 회원이 아니십니까?<a href="/test/joinForm" class="btn float-right join_btn">회원가입</a>
+					아직 회원이 아니십니까?<a href="/joinForm" class="btn float-right join_btn">회원가입</a>
 				</div>
 			</div>
 		</div>

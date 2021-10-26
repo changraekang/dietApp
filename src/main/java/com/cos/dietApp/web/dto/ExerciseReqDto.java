@@ -18,6 +18,8 @@ public class ExerciseReqDto {
 	private String 	kcal;
 	@NotBlank
 	private String 	time; // 운동시간
+	private String 	file;
+
 	@NotBlank
 	private String 	date; // 운동한 날짜
 	

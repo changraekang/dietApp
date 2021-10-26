@@ -209,23 +209,23 @@ dropdown2 {
 </head>
 <body>
 	<ul class="nav justify-content-around bg-light">
-		<li class="flex-fill"><a class="" href="/test/news">News</a></li>
-		<li class="flex-fill"><a href="/test/calorieDic">칼로리 사전</a></li>
+		<li class="flex-fill"><a class="" href="/news">News</a></li>
+		<li class="flex-fill"><a href="/calorieDic">칼로리 사전</a></li>
 
 		<li class="dropdown2 flex-fill"><a href="javascript:void(0)"
 			class="dropbtn ">와글와글</a>
 			<div class="dropdown2-content flex-fill" style="width: 15.8%">
-				<a href="/test/wagleFree">자유게시판</a> <a href="/test/wagleQnA">건강
-					QnA</a> <a href="/test/recipe">다이어트 Recipe</a> <a
-					href="/test/wagleShowoff">다이어트 인증샷</a>
+				<a href="/wagleFree">자유게시판</a> <a href="/wagleQnA">건강
+					QnA</a> <a href="/recipe">다이어트 Recipe</a> <a
+					href="/wagleShowoff">다이어트 인증샷</a>
 			</div></li>
 		<li class="dropdown2 flex-fill"><a href="javascript:void(0)"
 			class="dropbtn">다이어트 다이어리</a>
 			<div class="dropdown2-content flex-fill" style="width: 19.5%">
-				<a href="/test/exercise">운동 일기</a> <a href="/test/diet">식단 일기</a>
+				<a href="/exercise">운동 일기</a> <a href="/diet">식단 일기</a>
 			</div></li>
-		<li class="flex-fill"><a href="/test/myBody">나의 Body</a></li>
-		<li class="flex-fill"><a href="/test/userupdate">회원정보</a></li>
+		<li class="flex-fill"><a href="/myBody">나의 Body</a></li>
+		<li class="flex-fill"><a href="/userupdate">회원정보</a></li>
 	</ul>
 	<div class="jumbotron text-center"
 		style="height: 200px; position: relative">
@@ -235,7 +235,7 @@ dropdown2 {
 		<div id="calendar" style="float: left; width: 66%; "></div>
 								<br> <br> <br>
 		<div id="diary" style="float: left; width: 34%; height: 650px;">
-			<form action="/test/exercise" method="post">
+			<form class="upload-form" action="/exercise" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<input type="text" id="date" name="date" class="form-control"
 						required="required" readonly="readonly">
