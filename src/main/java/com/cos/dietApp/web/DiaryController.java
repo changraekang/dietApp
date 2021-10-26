@@ -1,7 +1,5 @@
 package com.cos.dietApp.web;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class DiaryController {
 	
