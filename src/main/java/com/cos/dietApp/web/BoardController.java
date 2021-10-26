@@ -37,6 +37,7 @@ public class BoardController {
 	// ---- 게시글 목록 보기
 	@GetMapping("/test/board")
 	public String home(Model model, int menuId) {
+
 		List<Board> boardsEntity = boardRepository.mFindAll(menuId);
 		model.addAttribute("boardsEntity", boardsEntity);
 		model.addAttribute("menuId", menuId);
@@ -45,7 +46,7 @@ public class BoardController {
 	
 	// ---- 게시글 상세보기
 	@GetMapping("/test/board/{id}")
-	public String detail(@PathVariable int id, Model model) {
+	public String detail(Model model, @PathVariable int id) {
 		Board boardEntity = boardRepository.findById(id)
 				.orElseThrow(() -> new MyNotFoundException(id + "번은 없는 게시글입니다") );
 		model.addAttribute("boardEntity", boardEntity);
@@ -57,7 +58,7 @@ public class BoardController {
 	public @ResponseBody CMRespDto boardInsert(@Valid @RequestBody BoardSaveReqDto dto, BindingResult bindingResult) {
 		BoardMenu bm = boardMenuRepository.findById(Integer.parseInt(dto.getMenuId()))
 				.orElseThrow( () -> new MyAPINotFoundException("없는 게시판입니다.") );
-
+		
 		boardRepository.save(dto.toEntity(bm));
 		
 		return new CMRespDto(1,"성공",null);
@@ -68,6 +69,11 @@ public class BoardController {
 	public String saveForm(Model model, int menuId) {
 		model.addAttribute("menuId", menuId);
 		return "wagle/saveForm";
+	}
+	
+	@GetMapping("/test/board/updateForm")
+	public String updateForm() {
+		return "wagle/updateForm";
 	}
 	//규호
 	

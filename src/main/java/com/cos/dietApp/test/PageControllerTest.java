@@ -32,21 +32,6 @@ public class PageControllerTest {
 		
 		return "dietStimulate/dietYoutube";
 	}
-	@GetMapping("/test/wagleFree")
-	public String wagleFree () {
-		
-		return "wagle/Free";
-	}
-	@GetMapping("/test/wagleQnA")
-	public String wagleQnA () {
-		
-		return "wagle/QnA";
-	}
-	@GetMapping("/test/wagleShowoff")
-	public String wagleShowoff () {
-		
-		return "wagle/showoff";
-	}
 	@GetMapping("/test/calorieDic")
 	public String calorieDic () {
 		
