@@ -22,6 +22,7 @@ public class ExerciseDiary {
 	private int 	id;
 	private String 	Exercise;
 	private String 	kcal;
+	private String 	file;
 	private String 	time; // 운동시간
 	private String 	date; // 운동한 날짜
 	

@@ -2,6 +2,8 @@ package com.cos.dietApp.web.dto;
 
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.cos.dietApp.domain.diary.FoodDiary;
 
 import lombok.AllArgsConstructor;

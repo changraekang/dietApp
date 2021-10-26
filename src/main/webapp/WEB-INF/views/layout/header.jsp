@@ -94,22 +94,22 @@ dropdown2 {
 </head>
 <body>
 	<ul class="nav justify-content-around bg-light">
-		<li class="flex-fill"><a class="" href="/test/news" style= "text-decoration: none;">News</a></li>
-		<li class="flex-fill"><a href="/test/calorieDic" style= "text-decoration: none;">칼로리 사전</a> </li>
+		<li class="flex-fill"><a class="" href="/news" style= "text-decoration: none;">News</a></li>
+		<li class="flex-fill"><a href="/calorieDic" style= "text-decoration: none;">칼로리 사전</a> </li>
 		<li class="dropdown2 flex-fill"><a href="javascript:void(0)"
 			class="dropbtn " style= "text-decoration: none;">와글와글</a>
 			<div class="dropdown2-content flex-fill" style="width: 15.8%">
-				<a href="/test/board?menuId=1" style= "text-decoration: none;">자유게시판</a>
-				<a href="/test/board?menuId=2" style= "text-decoration: none;">건강 QnA</a>
-				<a href="/test/recipe" style= "text-decoration: none;">다이어트 Recipe</a>
-				<a href="/test/board?menuId=3" style= "text-decoration: none;">다이어트 인증샷</a>
+				<a href="/board" style= "text-decoration: none;">자유게시판</a> 
+				<a href="/wagleQnA" style= "text-decoration: none;">건강 QnA</a>
+				<a href="/recipe" style= "text-decoration: none;">다이어트 Recipe</a> 
+				<a href="/wagleShowoff" style= "text-decoration: none;">다이어트 인증샷</a>
 			</div></li>
 		<li class="dropdown2 flex-fill"><a href="javascript:void(0)"
 			class="dropbtn" style= "text-decoration: none;">다이어트 다이어리</a>
 			<div class="dropdown2-content flex-fill" style="width: 19.5%">
-				<a href="/test/exercise" style= "text-decoration: none;">운동 일기</a>
-				<a href="/test/diet" style= "text-decoration: none;">식단 일기</a>
+			<a href="/exercise" style= "text-decoration: none;">운동 일기</a> 
+			<a href="/diet" style= "text-decoration: none;">식단 일기</a>
 			</div></li>
-		<li class="flex-fill"><a href="/test/myBody" style= "text-decoration: none;">나의 Body</a></li>
-		<li class="flex-fill"><a href="/test/userupdate" style= "text-decoration: none;">회원정보</a></li>
+		<li class="flex-fill"><a href="/myBody" style= "text-decoration: none;">나의 Body</a></li>
+		<li class="flex-fill"><a href="/userupdate" style= "text-decoration: none;">회원정보</a></li>
 	</ul>

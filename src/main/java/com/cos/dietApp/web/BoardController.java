@@ -32,6 +32,21 @@ public class BoardController {
 	private final BoardMenuRepository boardMenuRepository;
 	
 	//창래
+	@GetMapping("/wagleFree")
+	public String wagleFree () {
+		
+		return "wagle/Free";
+	}
+	@GetMapping("/wagleQnA")
+	public String wagleQnA () {
+		
+		return "wagle/QnA";
+	}
+	@GetMapping("/wagleShowoff")
+	public String wagleShowoff () {
+		
+		return "wagle/showoff";
+	}
 	//용세
 	
 	// ---- 게시글 목록 보기
@@ -43,18 +58,39 @@ public class BoardController {
 		model.addAttribute("menuId", menuId);
 		return "wagle/list";
 	}
+	@GetMapping("/calorieDic")
+	public String calorieDic () {
+		
+		return "wagle/calorieDic";
+	}
+	@GetMapping("/recipe")
+	public String recipe () {
+		
+		return "wagle/recipe";
+	} 
+	//용세
 	
+
 	// ---- 게시글 상세보기
-	@GetMapping("/test/board/{id}")
-	public String detail(Model model, @PathVariable int id) {
+	@GetMapping("/board/{id}")
+	public String detail(@PathVariable int id, Model model) {
 		Board boardEntity = boardRepository.findById(id)
 				.orElseThrow(() -> new MyNotFoundException(id + "번은 없는 게시글입니다") );
 		model.addAttribute("boardEntity", boardEntity);
 		return "wagle/detail"; // ViewResolver
 	}
 	
-	// ---- 게시글 등록
-	@PostMapping("/test/board")
+	// ---- 게시글 목록
+	@GetMapping("/board")
+	public String home(Model model) {
+		System.out.println("호출됨");
+		List<Board> boardsEntity = boardRepository.findAll();
+		System.out.println("2");
+		model.addAttribute("boardsEntity", boardsEntity);
+		return "wagle/list";
+	}
+	
+	@PostMapping("/board")
 	public @ResponseBody CMRespDto boardInsert(@Valid @RequestBody BoardSaveReqDto dto, BindingResult bindingResult) {
 		BoardMenu bm = boardMenuRepository.findById(Integer.parseInt(dto.getMenuId()))
 				.orElseThrow( () -> new MyAPINotFoundException("없는 게시판입니다.") );
@@ -65,7 +101,7 @@ public class BoardController {
 	}
 	
 	// ---- 게시글 쓰기 페이지로 이동
-	@GetMapping("/test/board/saveForm")
+	@GetMapping("/board/saveForm")
 	public String saveForm(Model model, int menuId) {
 		model.addAttribute("menuId", menuId);
 		return "wagle/saveForm";
