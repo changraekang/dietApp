@@ -99,14 +99,26 @@ dropdown2 {
 		<li class="dropdown2 flex-fill"><a href="javascript:void(0)"
 			class="dropbtn " style= "text-decoration: none;">와글와글</a>
 			<div class="dropdown2-content flex-fill" style="width: 15.8%">
+<<<<<<< HEAD
 				<a href="/board" style= "text-decoration: none;">자유게시판</a> <a href="/wagleQnA" style= "text-decoration: none;">건강 QnA</a>
 				<a href="/recipe" style= "text-decoration: none;">다이어트
 					Recipe</a> <a href="/wagleShowoff" style= "text-decoration: none;">다이어트 인증샷</a>
+=======
+				<a href="/test/board?menuId=1" style= "text-decoration: none;">자유게시판</a>
+				<a href="/test/board?menuId=2" style= "text-decoration: none;">건강 QnA</a>
+				<a href="/test/recipe" style= "text-decoration: none;">다이어트 Recipe</a>
+				<a href="/test/board?menuId=3" style= "text-decoration: none;">다이어트 인증샷</a>
+>>>>>>> 39c5e8fd5b38f249d98e8b49c26085ae5f21d5b4
 			</div></li>
 		<li class="dropdown2 flex-fill"><a href="javascript:void(0)"
 			class="dropbtn" style= "text-decoration: none;">다이어트 다이어리</a>
 			<div class="dropdown2-content flex-fill" style="width: 19.5%">
+<<<<<<< HEAD
 				<a href="/exercise" style= "text-decoration: none;">운동 일기</a> <a href="/diet" style= "text-decoration: none;">식단 일기</a>
+=======
+				<a href="/test/exercise" style= "text-decoration: none;">운동 일기</a>
+				<a href="/test/diet" style= "text-decoration: none;">식단 일기</a>
+>>>>>>> 39c5e8fd5b38f249d98e8b49c26085ae5f21d5b4
 			</div></li>
 		<li class="flex-fill"><a href="/myBody" style= "text-decoration: none;">나의 Body</a></li>
 		<li class="flex-fill"><a href="/userupdate" style= "text-decoration: none;">회원정보</a></li>

@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cos.dietApp.domain.board.Board;
 import com.cos.dietApp.domain.board.BoardRepository;
+import com.cos.dietApp.domain.boardmenu.BoardMenu;
+import com.cos.dietApp.domain.boardmenu.BoardMenuRepository;
+import com.cos.dietApp.handler.ex.MyAPINotFoundException;
 import com.cos.dietApp.handler.ex.MyNotFoundException;
 import com.cos.dietApp.web.dto.BoardSaveReqDto;
 import com.cos.dietApp.web.dto.CMRespDto;
@@ -26,11 +29,37 @@ import lombok.RequiredArgsConstructor;
 public class BoardController {
 	
 	private final BoardRepository boardRepository;
+	private final BoardMenuRepository boardMenuRepository;
 	
 	//창래
-	
+	@GetMapping("/wagleFree")
+	public String wagleFree () {
+		
+		return "wagle/Free";
+	}
+	@GetMapping("/wagleQnA")
+	public String wagleQnA () {
+		
+		return "wagle/QnA";
+	}
+	@GetMapping("/wagleShowoff")
+	public String wagleShowoff () {
+		
+		return "wagle/showoff";
+	}
+	@GetMapping("/calorieDic")
+	public String calorieDic () {
+		
+		return "wagle/calorieDic";
+	}
+	@GetMapping("/recipe")
+	public String recipe () {
+		
+		return "wagle/recipe";
+	} 
 	//용세
 	
+
 	// ---- 게시글 상세보기
 	@GetMapping("/board/{id}")
 	public String detail(@PathVariable int id, Model model) {
@@ -50,17 +79,20 @@ public class BoardController {
 		return "wagle/list";
 	}
 	
-	// ---- 게시글 등록
 	@PostMapping("/board")
 	public @ResponseBody CMRespDto boardInsert(@Valid @RequestBody BoardSaveReqDto dto, BindingResult bindingResult) {
-		
-		boardRepository.save(dto.toEntity());
+		BoardMenu bm = boardMenuRepository.findById(Integer.parseInt(dto.getMenuId()))
+				.orElseThrow( () -> new MyAPINotFoundException("없는 게시판입니다.") );
+
+		boardRepository.save(dto.toEntity(bm));
 		
 		return new CMRespDto(1,"성공",null);
 	}
 	
+	// ---- 게시글 쓰기 페이지로 이동
 	@GetMapping("/board/saveForm")
-	public String saveForm() {
+	public String saveForm(Model model, int menuId) {
+		model.addAttribute("menuId", menuId);
 		return "wagle/saveForm";
 	}
 	//규호
