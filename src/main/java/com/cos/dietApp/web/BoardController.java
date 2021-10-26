@@ -58,7 +58,7 @@ public class BoardController {
 	public @ResponseBody CMRespDto boardInsert(@Valid @RequestBody BoardSaveReqDto dto, BindingResult bindingResult) {
 		BoardMenu bm = boardMenuRepository.findById(Integer.parseInt(dto.getMenuId()))
 				.orElseThrow( () -> new MyAPINotFoundException("없는 게시판입니다.") );
-
+		
 		boardRepository.save(dto.toEntity(bm));
 		
 		return new CMRespDto(1,"성공",null);
@@ -69,6 +69,11 @@ public class BoardController {
 	public String saveForm(Model model, int menuId) {
 		model.addAttribute("menuId", menuId);
 		return "wagle/saveForm";
+	}
+	
+	@GetMapping("/test/board/updateForm")
+	public String updateForm() {
+		return "wagle/updateForm";
 	}
 	//규호
 	
