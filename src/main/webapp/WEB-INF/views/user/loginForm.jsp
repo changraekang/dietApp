@@ -1,14 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<h1>최주호 로그인 페이지 수정중 --- 완료안됨</h1>
-<h1>최주호 로그인 페이지 수정중 --- 아직도 수정중 - 새벽2</h1>
-<h1>최주호 로그인 페이지 수정완료  </h1>
-</body>
-</html>
+
+<%@ include file="../layout/header.jsp" %>
+
+
+
+<div class="container">
+	<form action="/login"  method="post">
+	  <div class="form-group">
+	    <input type="text" name="username" class="form-control" placeholder="Enter username" required="required">
+	  </div>
+	  <div class="form-group">
+	    <input type="password" name="password" class="form-control" placeholder="Enter password" required="required">
+	  </div>
+	  <button type="submit" class="btn btn-primary">로그인</button>
+	</form>
+</div>
+
+
+<%@ include file="../layout/footer.jsp" %>
+
+
+    
