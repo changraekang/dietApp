@@ -69,15 +69,7 @@ public class BoardController {
 		return "wagle/detail"; // ViewResolver
 	}
 	
-	// ---- 게시글 목록
-	@GetMapping("/board")
-	public String home(Model model) {
-		System.out.println("호출됨");
-		List<Board> boardsEntity = boardRepository.findAll();
-		System.out.println("2");
-		model.addAttribute("boardsEntity", boardsEntity);
-		return "wagle/list";
-	}
+
 	
 	@PostMapping("/board")
 	public @ResponseBody CMRespDto boardInsert(@Valid @RequestBody BoardSaveReqDto dto, BindingResult bindingResult) {
