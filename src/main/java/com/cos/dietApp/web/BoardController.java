@@ -50,7 +50,7 @@ public class BoardController {
 	//용세
 	
 	// ---- 게시글 목록 보기
-	@GetMapping("/test/board")
+	@GetMapping("/board")
 	public String home(Model model, int menuId) {
 
 		List<Board> boardsEntity = boardRepository.mFindAll(menuId);
@@ -58,17 +58,6 @@ public class BoardController {
 		model.addAttribute("menuId", menuId);
 		return "wagle/list";
 	}
-	@GetMapping("/calorieDic")
-	public String calorieDic () {
-		
-		return "wagle/calorieDic";
-	}
-	@GetMapping("/recipe")
-	public String recipe () {
-		
-		return "wagle/recipe";
-	} 
-	//용세
 	
 
 	// ---- 게시글 상세보기
@@ -106,11 +95,22 @@ public class BoardController {
 		model.addAttribute("menuId", menuId);
 		return "wagle/saveForm";
 	}
-	
-	@GetMapping("/test/board/updateForm")
+	@GetMapping("/board/updateForm")
 	public String updateForm() {
 		return "wagle/updateForm";
 	}
+	
+	
+	@GetMapping("/calorieDic")
+	public String calorieDic () {
+		
+		return "wagle/calorieDic";
+	}
+	@GetMapping("/recipe")
+	public String recipe () {
+		
+		return "wagle/recipe";
+	} 
 	//규호
 	
 
