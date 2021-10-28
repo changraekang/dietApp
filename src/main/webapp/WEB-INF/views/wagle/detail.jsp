@@ -19,17 +19,37 @@
 	<hr />
 
 	<div>
+		<input type="hidden" id="menuId" value="${boardEntity.boardMenu.id}">
 		<span style="float:reft;">
-		<a href="#"  style="text-decoration: none; color: #666; background-color: #AAFFAA;
-			font-size: 24px;">전체글</a>
+		<a href="/board?menuId=${boardEntity.boardMenu.id}" class="btn btn-primary">전체글</a>
 		</span>
 		<span style="float:right;">
-		<a href="#"  style="text-decoration: none; color: #666; background-color: #AAFFAA;
-			font-size: 24px;">수정</a>
-		<a href="#"  style="text-decoration: none; color: #666; background-color: #AAFFAA;
-			font-size: 24px;">삭제</a>
+		<a href="/board/${boardEntity.id}/updateForm"  class="btn btn-primary">수정</a>
+		<a onclick="deleteById(${boardEntity.id})" class="btn btn-primary" style="background-color: #111111;">삭제</a>
 		</span>
 	</div>
+	
+	<script>
+		async function deleteById(id){
+			// 1. 비동기 함수 호출 -> 비동기를 잘처리하는 방법??????
+			let response = await fetch("http://localhost:8080/board/"+id, {
+				method: "delete"
+			}); // 약속 - 어음 (10초)
+			
+			// 2.코드
+			// json() 함수는 json형태의 문자열을 자바스크립트 오브젝트로 변환해준다.
+			let parseResponse = await response.json();
+			console.log(parseResponse);
+			
+			if(parseResponse.code == -1){
+				alert(parseResponse.msg);
+				location.href="/";
+			} else {
+				alert("삭제 성공");
+				location.href="/board?menuId="+document.querySelector('#menuId').value;
+			}	
+		}		
+	</script>
 	
 	<div class="card">
 		<div class="card-header">

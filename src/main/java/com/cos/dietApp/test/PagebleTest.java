@@ -1,5 +1,7 @@
 package com.cos.dietApp.test;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -19,11 +21,20 @@ public class PagebleTest {
 	
 	@GetMapping("/test/page")
 	public  Page<Board> test(){
-		int page=1;
+		System.out.println("페이징 시작");
+		int page=1, menuId=1;
 		PageRequest pageRequest = PageRequest.of(page, 5, Sort.by("id").descending());
+		Page<Board> boardsEntity = boardRepository.mFindAllPage(menuId, pageRequest);
 		
-		Page<Board> boardsEntity = boardRepository.findAll(pageRequest);
+		//Page<Board> boardsEntity = boardRepository.findAll(pageRequest);
 		return boardsEntity;
 	}
 
+	@GetMapping("/test/list")
+	public List<Board> list() {
+		int menuId=1;
+		List<Board> boardsEntity = boardRepository.mFindAll(menuId);
+		
+		return boardsEntity;
+	}
 }
