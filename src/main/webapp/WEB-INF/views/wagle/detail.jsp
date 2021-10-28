@@ -31,13 +31,10 @@
 	
 	<script>
 		async function deleteById(id){
-			// 1. 비동기 함수 호출 -> 비동기를 잘처리하는 방법??????
 			let response = await fetch("http://localhost:8080/board/"+id, {
 				method: "delete"
-			}); // 약속 - 어음 (10초)
+			});
 			
-			// 2.코드
-			// json() 함수는 json형태의 문자열을 자바스크립트 오브젝트로 변환해준다.
 			let parseResponse = await response.json();
 			console.log(parseResponse);
 			

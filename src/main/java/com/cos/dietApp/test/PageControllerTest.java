@@ -22,6 +22,7 @@ public class PageControllerTest {
 		
 		return "diary/diet";
 	}
+
 	
 	@GetMapping("/test/wagleFree")
 	public String wagleFree () {

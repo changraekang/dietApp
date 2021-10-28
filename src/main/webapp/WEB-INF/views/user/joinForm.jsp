@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%@page import="java.text.DecimalFormat" %>
 
 <!DOCTYPE html>
 <html>
@@ -160,7 +162,7 @@ input:focus {
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
 							</div>
-							<input type="text" class="form-control" placeholder="ID를 입력해주세요"
+							<input type="text" name="username" class="form-control" placeholder="ID를 입력해주세요"
 								required="required" maxlength="20">
 
 						</div>
@@ -168,7 +170,7 @@ input:focus {
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 							</div>
-							<input type="password" class="form-control"
+							<input type="password" name="password" class="form-control"
 								placeholder="PASSWORD를 입력해주세요" required="required">
 						</div>
 						<div class="input-group form-group">
@@ -176,14 +178,14 @@ input:focus {
 								<span class="input-group-text"><i
 									class="fas fa-user-circle"></i></span>
 							</div>
-							<input type="text" class="form-control" placeholder="이름을 입력해주세요"
+							<input type="text" name="uName" class="form-control" placeholder="이름을 입력해주세요"
 								required="required">
 						</div>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-phone"></i></span>
 							</div>
-							<input type="text" class="form-control"
+							<input type="text" name="uPhone" class="form-control"
 								placeholder="PHONE NUMBER를 입력해주세요" required="required">
 						</div>
 						<div class="input-group form-group">
@@ -191,7 +193,7 @@ input:focus {
 								<span class="input-group-text"><i
 									class="fas fa-address-book"></i></span>
 							</div>
-							<input type="email" class="form-control"
+							<input type="email" name="uEmail" class="form-control"
 								placeholder="EMAIL를 입력해주세요" required="required">
 						</div>
 						<div class="form-group">
@@ -207,11 +209,11 @@ input:focus {
 					</div>
 					<div class="card-body">
 						<div class="input-group form-group">
-							<input type="radio" id="male" name="gender" value="male">
+							<input type="radio" id="male" name="uGender" value="male">
 							<label for="male">
 							<i class="fas fa-male"> 남자</i>
 							</label>   
-							<input type="radio" id="female" name="gender" value="female">
+							<input type="radio" id="female" name="uGender" value="female">
 							<label for="female"> 
 							<i class="fas fa-female">여자</i>
 							</label>
@@ -220,22 +222,22 @@ input:focus {
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-weight"></i></span>
 							</div>
-							<input type="text" class="form-control" placeholder="몸무게를 입력해주세요"
-								required="required">
+							<input type="text" name="uWeight" id="weight" class="form-control" placeholder="몸무게를 입력해주세요"
+								required="required" >
 
 						</div>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-child"></i></span>
 							</div>
-							<input type="text" class="form-control" placeholder="키를 입력해주세요"
-								required="required">
+							<input type="text" name="uHeight" id="height" class="form-control" placeholder="키를 입력해주세요(cm)"
+								required="required" onchange= "printName();">
 						</div>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-dumbbell"></i></span>
 							</div>
-							<input type="text" class="form-control"
+							<input type="text" name="uMuscle" class="form-control"
 								placeholder="근육량을 입력해주세요(필수아님)">
 						</div>
 
@@ -243,8 +245,8 @@ input:focus {
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-child"></i></span>
 							</div>
-							<input type="text" class="form-control" placeholder="BMI"
-								readonly="readonly">
+							<input type="text" name="uBMI" class="form-control" id="bmi" placeholder="BMI"
+								 readonly="readonly">
 						</div>
 
 					</div>
@@ -252,5 +254,14 @@ input:focus {
 			</form>
 		</div>
 	</div>
+<script>
+function printName()  {
+    const height = document.getElementById('height').value;
+    const weight = document.getElementById('weight').value;
+    document.getElementById("bmi").value = weight / ((height/100) * (height/100));
+  }
+
+</script>	
+	
 </body>
 </html>
