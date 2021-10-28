@@ -29,5 +29,13 @@ public class BoardSaveReqDto {
 		board.setBoardMenu(boardMenu);
 		return board;
 	}
+
+	public Board toEntity() {
+		Board board = new Board();
+		board.setTitle(title);
+		board.setContent(content);
+		board.setThumbnail(thumbnail);
+		return board;
+	}
 }
 

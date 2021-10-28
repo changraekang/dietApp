@@ -32,7 +32,7 @@
 				thumbnail : tn,
 				menuId : document.querySelector('#menuId').value
 			};
-			let response = await fetch("http://localhost:8080/test/board", {
+			let response = await fetch("http://localhost:8080/board", {
 				method : "post",
 				body : JSON.stringify(boardSaveReqDto),
 				headers : {
@@ -43,10 +43,10 @@
 			let parseResponse = await response.json();
 			
 			if (parseResponse.code == 1) {
-				alert("업데이트 성공");
-				location.href = "/test/board?menuId=" + document.querySelector('#menuId').value;
+				alert("게시글이 저장되었습니다.");
+				location.href = "/board?menuId=" + document.querySelector('#menuId').value;
 			} else {
-				alert("업데이트 실패 - " + parseResponse.msg);
+				alert("게시글 저장이 실패하였습니다. - " + parseResponse.msg);
 			}
 		}
 
