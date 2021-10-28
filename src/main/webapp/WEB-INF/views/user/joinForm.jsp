@@ -164,7 +164,6 @@ input:focus {
 							</div>
 							<input type="text" name="username" class="form-control" placeholder="ID를 입력해주세요"
 								required="required" maxlength="20">
-
 						</div>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
