@@ -99,10 +99,10 @@ dropdown2 {
 		<li class="dropdown2 flex-fill"><a href="javascript:void(0)"
 			class="dropbtn " style= "text-decoration: none;">와글와글</a>
 			<div class="dropdown2-content flex-fill" style="width: 15.8%">
-				<a href="/board" style= "text-decoration: none;">자유게시판</a> 
-				<a href="/wagleQnA" style= "text-decoration: none;">건강 QnA</a>
+				<a href="/board?menuId=1" style= "text-decoration: none;">자유게시판</a> 
+				<a href="/board?menuId=2" style= "text-decoration: none;">건강 QnA</a>
 				<a href="/recipe" style= "text-decoration: none;">다이어트 Recipe</a> 
-				<a href="/wagleShowoff" style= "text-decoration: none;">다이어트 인증샷</a>
+				<a href="/board?menuId=3" style= "text-decoration: none;">다이어트 인증샷</a>
 			</div></li>
 		<li class="dropdown2 flex-fill"><a href="javascript:void(0)"
 			class="dropbtn" style= "text-decoration: none;">다이어트 다이어리</a>

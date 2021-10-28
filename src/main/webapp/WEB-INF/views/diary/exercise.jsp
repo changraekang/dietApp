@@ -8,91 +8,15 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	crossorigin="anonymous"></script>
 
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-	crossorigin="anonymous"></script>
-
-<link rel="stylesheet" href="css/main.min.css">
-<script src="js/main.js"></script>
-<script src="js/ko.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script>
-	document.addEventListener('DOMContentLoaded', function() {
-		var calendarEl = document.getElementById('calendar');
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			initialView : 'dayGridMonth',
-			selectable : true,
-			locale : 'ko',
-			height : 650,
-			dateClick : function(info) {
-				document.getElementById("date").value = info.dateStr;
-
-				events: [ /* event data here */]
-			},
-			initialDate : '2021-10-12',
-			/*  
-			calendar.addEvent({
-				title : i,
-				start : '2021-10-06',
-				end : '2021-10-07'
-			})
-
-			,
-			 */
-			dayMaxEventRows : true, // for all non-TimeGrid views
-			dayMaxEventRows : 3, // adjust to 6 only for timeGridWeek/timeGridDay
-
-			select : function(arg) {
-			
-			},
-
-			eventClick : function(arg) {
-				if (confirm('Are you sure you want to delete this event?')) {
-					arg.event.remove()
-				}
-			}
-
-		});
-
-		calendar.render();
-	});
-</script>
-<script>
-	function loadFile(input) {
-		var file = input.files[0]; //선택된 파일 가져오기
-		/*  
-		 */
-		//미리 만들어 놓은 div에 text(파일 이름) 추가
-		//새로운 이미지 div 추가
-		//document.getElementById('image-upload').style.visibility = 'hidden';
-		var newImage = document.createElement("img");
-		newImage.setAttribute("class", 'img');
-
-		//이미지 source 가져오기
-		newImage.src = URL.createObjectURL(file);
-
-		newImage.style.width = "100px";
-		newImage.style.height = "300px";
-		newImage.style.objectFit = "contain";
-
-		//이미지를 image-show div에 추가
-		//var container = document.getElementById('image-show');
-
-		$("#diaryphoto").attr("src", newImage.src);
-		document.getElementById('diaryphoto').style.visibility = 'visible';
-		//container.appendChild(newImage);
-	};
-</script>
 
 <style>
 #chooseFile {
+	visibility: hidden;
+}
+
+
+#diarysave{
 	visibility: hidden;
 }
 
@@ -102,6 +26,8 @@
 	height: 50%;
 	object-fit: cover;
 }
+
+
 </style>
 <style>
 body {
@@ -269,7 +195,7 @@ dropdown2 {
 					style="width: 50%; height: 30%">
 					<img id="diaryphoto" src="">
 				</div>
-				<button type="submit" class="btn btn-primary">일기저장</button>
+				<button type="submit" id="diarysave" class="btn btn-primary" onclick="calenderClick();" >일기저장</button>
 			</form>
 
 
@@ -290,7 +216,116 @@ dropdown2 {
 		<p>📝사업자번호: 051-****-1557</p>
 	</div>
 	</footer>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
 
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="css/main.min.css">
+<script src="js/main.js"></script>
+<script src="js/ko.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+let mealtime =  $("#mealtime input").on("click", function(event){
+	mealtime  = event.target.value;
+	});
+		
+	function calenderClick() {
+	    console.log('일기가 저장되었습니다.');
+		
+	}
+
+
+	document.addEventListener('DOMContentLoaded', function() {
+		var calendarEl = document.getElementById('calendar');
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			initialView : 'dayGridMonth',
+			selectable : true,
+			locale : 'ko',
+			height : 650,
+			dateClick : function(info) {
+				document.getElementById("date").value = info.dateStr;
+
+				events: [ /* event data here */]
+			},
+			initialDate : '2021-10-12',
+			/*  
+			calendar.addEvent({
+				title : i,
+				start : '2021-10-06',
+				end : '2021-10-07'
+			})
+
+			,
+			 */
+			dayMaxEventRows : true, // for all non-TimeGrid views
+			dayMaxEventRows : 3, // adjust to 6 only for timeGridWeek/timeGridDay
+
+			select : function(arg) {
+			
+			},
+
+			eventClick : function(arg) {
+				if (confirm('Are you sure you want to delete this event?')) {
+					arg.event.remove()
+				}
+			},
+			headerToolbar: {
+		        center: 'exercisediary'
+		      },
+			customButtons: {
+				exercisediary: {
+		          text: '일기저장',
+		          click: function() {
+		              calendar.addEvent({
+		                title: mealtime,
+		                start: document.getElementById("date").value,
+		                allDay: true
+		              });
+		             $("#diarysave").trigger("click");
+		           
+		          }
+		        }
+			}
+
+
+		});
+
+		calendar.render();
+	});
+</script>
+<script>
+	function loadFile(input) {
+		var file = input.files[0]; //선택된 파일 가져오기
+		/*  
+		 */
+		//미리 만들어 놓은 div에 text(파일 이름) 추가
+		//새로운 이미지 div 추가
+		//document.getElementById('image-upload').style.visibility = 'hidden';
+		var newImage = document.createElement("img");
+		newImage.setAttribute("class", 'img');
+
+		//이미지 source 가져오기
+		newImage.src = URL.createObjectURL(file);
+
+		newImage.style.width = "100px";
+		newImage.style.height = "300px";
+		newImage.style.objectFit = "contain";
+
+		//이미지를 image-show div에 추가
+		//var container = document.getElementById('image-show');
+
+		$("#diaryphoto").attr("src", newImage.src);
+		document.getElementById('diaryphoto').style.visibility = 'visible';
+		//container.appendChild(newImage);
+	};
+</script>
 
 </body>
 </html>

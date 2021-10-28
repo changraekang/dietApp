@@ -21,92 +21,7 @@
 
 
 <link rel="stylesheet" href="css/main.min.css">
-<script src="js/main.js"></script>
-<script src="js/ko.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-	var calendarEl = document.getElementById('calendar');
-	var calendar = new FullCalendar.Calendar(calendarEl, {
-		initialView : 'dayGridMonth',
-		selectable : true,
-		locale : 'ko',
-		height: 650,
-		dateClick : function(info) {
-			document.getElementById("date").value = info.dateStr;
-			  
-			
-			
-			events: [ /* event data here */]
-			
 
-		},
-		initialDate : '2021-10-12',
-		dayMaxEventRows : true, // for all non-TimeGrid views
-		dayMaxEventRows : 3, // adjust to 6 only for timeGridWeek/timeGridDay
-
-		select : function(arg) {
-		},
-
-		eventClick : function(arg) {
-			if (confirm('Are you sure you want to delete this event?')) {
-				arg.event.remove()
-			}
-		}
-
-	});
-
-	calendar.render();
-});
-</script>
-<script>
-function loadFile(input) {
-	var file = input.files[0]; //선택된 파일 가져오기
-	/*  
-	 */
-	//미리 만들어 놓은 div에 text(파일 이름) 추가
-	//새로운 이미지 div 추가
-	//document.getElementById('image-upload').style.visibility = 'hidden';
-	var newImage = document.createElement("img");
-	newImage.setAttribute("class", 'img');
-
-	//이미지 source 가져오기
-	newImage.src = URL.createObjectURL(file);
-
-	newImage.style.width = "100px";
-	newImage.style.height = "300px";
-	newImage.style.objectFit = "contain";
-
-	//이미지를 image-show div에 추가
-	//var container = document.getElementById('image-show');
-
-	$("#diaryphoto").attr("src", newImage.src);
-	document.getElementById('diaryphoto').style.visibility = 'visible';
-	//container.appendChild(newImage);
-};
-
-
-var i = 1;
-const add_textbox = () => {
-    	
-    if (i >= 5) {
-    	
-    	return alert("음식입력갯수를 초과하였습니다");
-      }
-    const box = document.getElementById("fooddiary");
-    const newP = document.createElement('p');
-    newP.innerHTML = "<input id='food"+ i +"' type='text' class='form-control' name='food"+ i +"'" + " placeholder='음식명을 입력해주세요' value='' required='required' style='width:85%;float:left'> <input type='button' value='삭제'style='width:15%'; onclick='remove(this)'>";
-    box.appendChild(newP);
-    i = i + 1;
-    
-   
-}
-const remove = (obj) => {
-	
-	obj.parentNode.firstChild.value = '';
-}
-
-</script>
 <style>
 body {
 	display: flex;
@@ -117,12 +32,19 @@ body {
 	visibility: hidden;
 }
 
+
+
+#diarysave{
+	visibility: hidden;
+}
+
 #diaryphoto {
 	visibility: hidden;
 	width: 100%;
 	height: 50%;
 	object-fit: cover;
 }
+
 </style>
 <style>
 #contextMenu {
@@ -274,14 +196,19 @@ dropdown2 {
 						required="required" readonly="readonly">
 				</div>
 				<br>
-				<div class="form-group">
+				<div id="mealtime" class="form-group">
 						<p>식사 시간을 입력해주세요:</p>
-					  <input type="radio" id="아침" name="mealtime" value="아침">  <label for="아침">아침</label>
+					  <input type="radio" id="아침" name="mealtime" value="아침" required >  <label for="아침">아침</label>
 					  <input type="radio" id="점심" name="mealtime" value="점심">  <label for="점심">점심</label>
 					  <input type="radio" id="저녁" name="mealtime" value="저녁">  <label for="저녁">저녁</label>
 					  <input type="radio" id="야식" name="mealtime"  value="야식">  <label for="야식">야식</label><br>
 
 				</div>
+				
+				<script>
+					
+				</script>
+				
 				<div class="form-group" id="diet" style="width: 100%;">
 					<table style="width: 100%;" id="fooddiary">
 						<tr>
@@ -311,7 +238,7 @@ dropdown2 {
 					style="width: 50%; height: 30%">
 					<img id="diaryphoto" src="">
 				</div>
-				<button type="submit" class="btn btn-primary">일기저장</button>
+				<button type="submit" id="diarysave" class="btn btn-primary" onclick="calenderClick();" >일기저장</button>
 			</form>
 
 
@@ -334,5 +261,129 @@ dropdown2 {
 
 
 
+
+
+<script src="js/main.js"></script>
+<script src="js/ko.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+let mealtime =  $("#mealtime input").on("click", function(event){
+mealtime  = event.target.value;
+});
+	
+function calenderClick() {
+    console.log('일기가 저장되었습니다.');
+	
+}
+document.addEventListener('DOMContentLoaded', function() {
+	var calendarEl = document.getElementById('calendar');
+	
+
+	var calendar = new FullCalendar.Calendar(calendarEl, {
+		initialView : 'dayGridMonth',
+		selectable : true,
+		locale : 'ko',
+		height: 650,
+		dateClick : function(info) {
+			calendar.on('dateClick', function(info) {
+			console.log('clicked on ' + info.dateStr);
+				});
+			
+			
+			document.getElementById("date").value = info.dateStr;
+			  
+			
+			
+			events: [ /* event data here */]
+			
+
+		},
+	     
+	            
+		initialDate : '2021-10-12',
+		dayMaxEventRows : true, // for all non-TimeGrid views
+		dayMaxEventRows : 3, // adjust to 6 only for timeGridWeek/timeGridDay
+
+		eventClick : function(arg) {
+			if (confirm('Are you sure you want to delete this event?')) {
+				arg.event.remove()
+			}
+		},
+		headerToolbar: {
+	        center: 'fooddiary'
+	      },
+		customButtons: {
+			fooddiary: {
+	          text: '일기저장',
+	          click: function() {
+	              calendar.addEvent({
+	                title: mealtime,
+	                start: document.getElementById("date").value,
+	                allDay: true
+	              });
+	             $("#diarysave").trigger("click");
+	           
+	          }
+	        }
+		}
+
+	});
+
+	calendar.render();
+});
+
+function diary_click() {
+
+}
+
+</script>
+<script>
+function loadFile(input) {
+	var file = input.files[0]; //선택된 파일 가져오기
+	/*  
+	 */
+	//미리 만들어 놓은 div에 text(파일 이름) 추가
+	//새로운 이미지 div 추가
+	//document.getElementById('image-upload').style.visibility = 'hidden';
+	var newImage = document.createElement("img");
+	newImage.setAttribute("class", 'img');
+
+	//이미지 source 가져오기
+	newImage.src = URL.createObjectURL(file);
+
+	newImage.style.width = "100px";
+	newImage.style.height = "300px";
+	newImage.style.objectFit = "contain";
+
+	//이미지를 image-show div에 추가
+	//var container = document.getElementById('image-show');
+
+	$("#diaryphoto").attr("src", newImage.src);
+	document.getElementById('diaryphoto').style.visibility = 'visible';
+	//container.appendChild(newImage);
+};
+
+
+var i = 1;
+const add_textbox = () => {
+    	
+    if (i >= 5) {
+    	
+    	return alert("음식입력갯수를 초과하였습니다");
+      }
+    const box = document.getElementById("fooddiary");
+    const newP = document.createElement('p');
+    newP.innerHTML = "<input id='food"+ i +"' type='text' class='form-control' name='food"+ i +"'" + " placeholder='음식명을 입력해주세요' value='' required='required' style='width:85%;float:left'> <input type='button' value='삭제'style='width:15%'; onclick='remove(this)'>";
+    box.appendChild(newP);
+    i = i + 1;
+    
+   
+}
+const remove = (obj) => {
+	
+	obj.parentNode.firstChild.value = '';
+}
+
+</script>
 </body>
 </html>

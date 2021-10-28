@@ -19,17 +19,34 @@
 	<hr />
 
 	<div>
+		<input type="hidden" id="menuId" value="${boardEntity.boardMenu.id}">
 		<span style="float:reft;">
-		<a href="#"  style="text-decoration: none; color: #666; background-color: #AAFFAA;
-			font-size: 24px;">전체글</a>
+		<a href="/board?menuId=${boardEntity.boardMenu.id}" class="btn btn-primary">전체글</a>
 		</span>
 		<span style="float:right;">
-		<a href="#"  style="text-decoration: none; color: #666; background-color: #AAFFAA;
-			font-size: 24px;">수정</a>
-		<a href="#"  style="text-decoration: none; color: #666; background-color: #AAFFAA;
-			font-size: 24px;">삭제</a>
+		<a href="/board/${boardEntity.id}/updateForm"  class="btn btn-primary">수정</a>
+		<a onclick="deleteById(${boardEntity.id})" class="btn btn-primary" style="background-color: #111111;">삭제</a>
 		</span>
 	</div>
+	
+	<script>
+		async function deleteById(id){
+			let response = await fetch("http://localhost:8080/board/"+id, {
+				method: "delete"
+			});
+			
+			let parseResponse = await response.json();
+			console.log(parseResponse);
+			
+			if(parseResponse.code == -1){
+				alert(parseResponse.msg);
+				location.href="/";
+			} else {
+				alert("삭제 성공");
+				location.href="/board?menuId="+document.querySelector('#menuId').value;
+			}	
+		}		
+	</script>
 	
 	<div class="card">
 		<div class="card-header">
