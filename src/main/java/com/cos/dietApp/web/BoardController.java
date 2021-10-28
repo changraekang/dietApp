@@ -70,7 +70,7 @@ public class BoardController {
 	}
 	
 
-	
+
 	@PostMapping("/board")
 	public @ResponseBody CMRespDto boardInsert(@Valid @RequestBody BoardSaveReqDto dto, BindingResult bindingResult) {
 		BoardMenu bm = boardMenuRepository.findById(Integer.parseInt(dto.getMenuId()))
