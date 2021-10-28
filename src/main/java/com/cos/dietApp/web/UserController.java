@@ -154,7 +154,7 @@ public class UserController {
 	
 	@PostMapping("/login") 
 	public String login(LoginReqDto loginDto) {
-		// 1. Get username, password
+		// 1. Get username, password 
 		System.out.println(loginDto.getUsername());
 		System.out.println(loginDto.getPassword());
 		
@@ -163,10 +163,10 @@ public class UserController {
 		User principal = userRepository.mLogin(loginDto.getUsername(), encPassword);
 
 		if(principal == null) {
-			System.out.println("로그인 안 됨:"+principal.getUsername());
+			System.out.println("로그인 되지 않았습니다:"+principal.getUsername());
 			return "redirect:/loginForm";
 		} else {
-			System.out.println("로그인 됨:"+principal.getUsername());
+			System.out.println("로그인 되었습니다:"+principal.getUsername());
 			session.setAttribute("principal", principal);
 		    return "redirect:/myBody";
 		} 
