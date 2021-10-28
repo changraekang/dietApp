@@ -159,7 +159,7 @@ public class UserController {
 		System.out.println(loginDto.getPassword());
 		
 		// 2. DB -> Select
-		String encPassword = SHA.encrypt(loginDto.getPassword(), null);
+		String encPassword = SHA.encrypt(loginDto.getPassword(), MyAlgorithm.SHA256);
 		User principal = userRepository.mLogin(loginDto.getUsername(), encPassword);
 
 		if(principal == null) {
@@ -168,7 +168,7 @@ public class UserController {
 		} else {
 			System.out.println("로그인 됨:"+principal.getUsername());
 			session.setAttribute("principal", principal);
-			return "redirect:/myBody";	
+		    return "redirect:/myBody";
 		} 
 	}
 }
