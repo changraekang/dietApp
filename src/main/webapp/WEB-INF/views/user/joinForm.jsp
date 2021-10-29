@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 	
 <%@page import="java.text.DecimalFormat" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -164,7 +163,6 @@ input:focus {
 							</div>
 							<input type="text" name="username" class="form-control" placeholder="ID를 입력해주세요"
 								required="required" maxlength="20">
-
 						</div>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
@@ -258,7 +256,13 @@ input:focus {
 function printName()  {
     const height = document.getElementById('height').value;
     const weight = document.getElementById('weight').value;
+    
     document.getElementById("bmi").value = weight / ((height/100) * (height/100));
+    
+   // let bmi = weight / ((height/100) * (height/100));
+   // let bmi = bmi.toFixed(2);
+   // document.getElementById("bmi").value = bmi;
+    
   }
 
 </script>	
