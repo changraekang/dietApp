@@ -31,10 +31,13 @@ public class User {
 	private String uEmail;
 	@Column(nullable = false, length = 20)
 	private String uGender;
-	
+	@Column(nullable = false, length = 20)
 	private int uWeight;
+	@Column(nullable = false, length = 20)
 	private int uHeight;
-	private int uMuscle;
+	@Column(nullable = true, length = 20)
+	private String uMuscle;
+	@Column(nullable = false, length = 20)
 	private double uBMI;
 
 }

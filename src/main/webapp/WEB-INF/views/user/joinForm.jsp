@@ -257,11 +257,9 @@ function printName()  {
     const height = document.getElementById('height').value;
     const weight = document.getElementById('weight').value;
     
-    document.getElementById("bmi").value = weight / ((height/100) * (height/100));
+    document.getElementById("bmi").value = (weight / ((height/100) * (height/100))).toFixed(2);
     
-   // let bmi = weight / ((height/100) * (height/100));
-   // let bmi = bmi.toFixed(2);
-   // document.getElementById("bmi").value = bmi;
+
     
   }
 

@@ -169,8 +169,9 @@ public class UserController {
 			System.out.println("로그인 되었습니다:"+principal.getUsername());
 			session.setAttribute("principal", principal);
 		    return "redirect:/myBody";
-		} 
+		}
 	}
+	
 }
 	
 
