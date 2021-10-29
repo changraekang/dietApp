@@ -21,6 +21,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<link rel="stylesheet" href="css/main.min.css">
+
 <title>Insert title here</title>
 <style>
 body {
@@ -34,6 +36,23 @@ ul {
 	overflow: hidden;
 	border: 1px solid #e7e7e7;
 	background-color: #f3f3f3;
+}
+
+#chooseFile {
+	visibility: hidden;
+}
+
+
+
+#diarysave{
+	visibility: hidden;
+}
+
+#diaryphoto {
+	visibility: hidden;
+	width: 100%;
+	height: 50%;
+	object-fit: cover;
 }
 
 li {
