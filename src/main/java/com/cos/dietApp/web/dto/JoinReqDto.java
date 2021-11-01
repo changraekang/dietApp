@@ -19,7 +19,7 @@ public class JoinReqDto {
 	
 	private int uWeight;
 	private int uHeight;
-	private int uMuscle;
+	private String uMuscle;
 	private int uFat;
 	private double uBMI;
 

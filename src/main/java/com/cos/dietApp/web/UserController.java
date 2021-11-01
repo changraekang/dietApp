@@ -69,6 +69,11 @@ public class UserController {
 		return "user/loginForm"; // ViewResolver
 	}
 	
+	@GetMapping("/loginFormTest")
+	public String loginFormTest() {
+		return "user/loginFormTest"; // ViewResolver
+	}
+	
 		
 	// 3. 있으면
 	// 4. Save to session
@@ -169,8 +174,15 @@ public class UserController {
 			System.out.println("로그인 되었습니다:"+principal.getUsername());
 			session.setAttribute("principal", principal);
 		    return "redirect:/myBody";
-		} 
+		}
 	}
+	
+	@GetMapping("/logout")
+	public String logout() {
+		session.invalidate();
+		return "redirect:/";
+	}
+	
 }
 	
 

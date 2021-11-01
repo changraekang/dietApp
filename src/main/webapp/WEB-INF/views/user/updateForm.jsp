@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@page import="java.text.DecimalFormat" %>
+
 <%@ include file="../layout/header.jsp" %>
 
 <div class="container">
@@ -79,6 +81,7 @@ function printName()  {
     const weight = document.getElementById('weight').value;
     document.getElementById("bmi").value = weight / ((height/100) * (height/100));
   }
+
 
 </script>
 
