@@ -132,7 +132,6 @@ public class BoardController {
 		boardEntity.setContent(dto.getContent());
 		boardEntity.setThumbnail(dto.getThumbnail());
 		
-		System.out.println("더티체킹?");
 		boardRepository.save(boardEntity);
 		return new CMRespDto<>(1, "업데이트 성공", null);
 	}
