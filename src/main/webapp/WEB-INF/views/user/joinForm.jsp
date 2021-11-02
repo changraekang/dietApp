@@ -207,7 +207,7 @@ input:focus {
 					</div>
 					<div class="card-body">
 						<div class="input-group form-group">
-							<input type="radio" id="male" name="uGender" value="male">
+							<input type="radio" id="male" name="uGender" value="male"  required="required">
 							<label for="male">
 							<i class="fas fa-male"> 남자</i>
 							</label>   
