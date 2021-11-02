@@ -118,10 +118,10 @@ dropdown2 {
 		<li class="dropdown2 flex-fill"><a href="javascript:void(0)"
 			class="dropbtn " style= "text-decoration: none;">와글와글</a>
 			<div class="dropdown2-content flex-fill" style="width: 15.8%">
-				<a href="/board" style= "text-decoration: none;">자유게시판</a> 
-				<a href="/wagleQnA" style= "text-decoration: none;">건강 QnA</a>
+				<a href="/board?menuId=1" style= "text-decoration: none;">자유게시판</a> 
+				<a href="/board?menuId=2" style= "text-decoration: none;">건강 QnA</a>
 				<a href="/recipe" style= "text-decoration: none;">다이어트 Recipe</a> 
-				<a href="/wagleShowoff" style= "text-decoration: none;">다이어트 인증샷</a>
+				<a href="/board?menuId=3" style= "text-decoration: none;">다이어트 인증샷</a>
 			</div></li>
 		<li class="dropdown2 flex-fill"><a href="javascript:void(0)"
 			class="dropbtn" style= "text-decoration: none;">다이어트 다이어리</a>
@@ -130,5 +130,11 @@ dropdown2 {
 			<a href="/diet" style= "text-decoration: none;">식단 일기</a>
 			</div></li>
 		<li class="flex-fill"><a href="/myBody" style= "text-decoration: none;">나의 Body</a></li>
-		<li class="flex-fill"><a href="/userupdate" style= "text-decoration: none;">회원정보</a></li>
+		<li class="dropdown2 flex-fill"><a href="javascript:void(0)"  class="droptbtn" style= "text-decoration: none;">회원정보</a>
+			<div class="dropdown2-content flex-fill" style="width: 15.8%">
+			<a href="/user/${sessionScope.principal.id}" style= "text-decoration: none;">회원정보</a> 
+			<a href="/logout" style= "text-decoration: none;">로그아웃</a>
+			</div>
+		</li>
+		
 	</ul>

@@ -14,9 +14,9 @@
 	<div class="box1">
 		<br><br><br>
 		<ul>
-			<li><h4><a href="/test/board?menuId=1" style= "text-decoration: none;">자유게시판</a></h4></li>
-			<li><h4><a href="/test/board?menuId=2" style= "text-decoration: none;">QnA게시판</a></h4></li>
-			<li><h4><a href="/test/board?menuId=3" style= "text-decoration: none;">인증게시판</a></h4></li>
+			<li><h4><a href="/board?menuId=1" style= "text-decoration: none;">자유게시판</a></h4></li>
+			<li><h4><a href="/board?menuId=2" style= "text-decoration: none;">QnA게시판</a></h4></li>
+			<li><h4><a href="/board?menuId=3" style= "text-decoration: none;">인증게시판</a></h4></li>
 		</ul>
 	</div>
 		
@@ -28,7 +28,7 @@
 			<div class="card">
 				<div class="card-body">
 					<!-- el표현식은 변수를 적으면 자동으로 get 함수를 사용해준다 -->
-					<a href="/test/board/${board.id }">
+					<a href="/board/${board.id }">
 					<img src="${board.thumbnail}">
 					<h4 class="card-title">${board.title }</h4>
 					</a>
@@ -38,7 +38,7 @@
 			<!-- 카드 글 끝 -->
 		</c:forEach>
 		<div align="right">
-			<h2><a href="/test/board/saveForm?menuId=${menuId}" style="text-decoration: none; color: #666; background-color: #AAFFAA">글쓰기</a></h2>
+			<h2><a href="/board/saveForm?menuId=${menuId}" class="btn btn-primary">글쓰기</a></h2>
 		</div>
 	</div>
 </div>
