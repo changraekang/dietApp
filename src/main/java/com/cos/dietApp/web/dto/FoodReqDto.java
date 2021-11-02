@@ -1,10 +1,11 @@
 package com.cos.dietApp.web.dto;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotBlank; 
 
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cos.dietApp.domain.diary.FoodDiary;
+import com.cos.dietApp.domain.user.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +27,7 @@ public class FoodReqDto {
 	@NotBlank
 	private String 	date;
 	
-	public FoodDiary toEntity() {
+	public FoodDiary toEntity ( User principal) {
 		FoodDiary foodD = new FoodDiary();
 		foodD.setFood(food);
 		foodD.setFood1(food1);
@@ -36,7 +37,7 @@ public class FoodReqDto {
 		foodD.setMealtime(mealtime);
 		foodD.setKcal(kcal);
 		foodD.setDate(date);
-		
+		foodD.setUser(principal);
 		
 		return foodD;
 	}

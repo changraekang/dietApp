@@ -1,11 +1,16 @@
 package com.cos.dietApp.domain.diary;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.springframework.web.multipart.MultipartFile;
+
+import com.cos.dietApp.domain.user.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,5 +32,11 @@ public class FoodDiary {
 		private String 	kcal;
 		private String 	mealtime; // 아침,점심,저녁
 		private String 	date;	//식사 날짜
+		
+		@JoinColumn(name = "userId")
+		@ManyToOne(fetch = FetchType.EAGER) 
+		private User user;
+		
+		
 	
 }

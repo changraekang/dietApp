@@ -3,6 +3,7 @@ package com.cos.dietApp.web.dto;
 import javax.validation.constraints.NotBlank;
 
 import com.cos.dietApp.domain.diary.ExerciseDiary;
+import com.cos.dietApp.domain.user.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,13 +25,15 @@ public class ExerciseReqDto {
 	private String 	date; // 운동한 날짜
 	
 	
-	public ExerciseDiary toEntity() {
+	public ExerciseDiary toEntity( User principal) {
+		
 		ExerciseDiary exerciseD = new ExerciseDiary();
 		exerciseD.setExercise(Exercise);
 		exerciseD.setTime(time);
 		exerciseD.setKcal(kcal);
 		exerciseD.setDate(date);
-		
+		System.out.println(principal + "이름");
+		exerciseD.setUser(principal);
 		
 		return exerciseD;
 	}
