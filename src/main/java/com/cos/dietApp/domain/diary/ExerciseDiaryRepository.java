@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 public interface ExerciseDiaryRepository extends JpaRepository<ExerciseDiary, String> {
 
 	
-	@Query(value = "select * from user where userId = :userId" , nativeQuery = true)
-	List<ExerciseDiary> mExerciseList( String userId );
+	@Query(value = "select * from exercisediary where userId = :userId ORDER BY date desc " , nativeQuery = true)
+	List<ExerciseDiary> mExerciseList( int userId );
 }

@@ -60,14 +60,16 @@ public class DietController {
 	}
 	
 	@GetMapping("/exercise/{id}/list")
-	public String exerciseList ( @PathVariable int id , Model model) {
+	public String exerciseList (  Model model , @PathVariable int id ) {
 		
-		return "diary/exerciselist";
+		model.addAttribute("exercisesEntity", diaryService.운동일기보기(id));
+		return "diary/exerciseList";
 	}
 	@GetMapping("/diet/{id}/list")
-	public String dietList () {
+	public String dietList ( Model model , @PathVariable int id ) {
 		
-		return "diary/dietlist";
+		model.addAttribute("foodsEntity", diaryService.식단일기보기(id));
+		return "diary/dietList";
 	}
 	
 	//용세
