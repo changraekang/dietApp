@@ -18,8 +18,8 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td>John</td>
-				<td>86kg</td>
+				<td>${sessionScope.principal.id}</td>
+				<td></td>
 				<td>72kg</td>
 			</tr>
 		</tbody>
