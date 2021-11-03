@@ -4,9 +4,12 @@ import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cos.dietApp.web.dto.CMRespDto;
+import com.cos.dietApp.web.dto.FoodApiReqDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -37,19 +40,22 @@ public class CalorieSearch {
 	
 	@GetMapping("/test/cal")
 	public String apiDataTest(Model model) {
-		CMRespDto<JSONObject> calorie = new CMRespDto<>(1, "성공", calorieAPITest.calorie("바나나", "1"));
-		model.addAttribute("calorie", calorie);
+//		FoodApiReqDto dto = new FoodApiReqDto("바나나","1");
+//		CMRespDto<JSONObject> calorie = new CMRespDto<>(1, "성공", calorieAPITest.calorie(dto));
+//		model.addAttribute("calorie", calorie);
 		
 		return "test/apitest";
 	}
 	@GetMapping("/test/api")
 	public @ResponseBody CMRespDto<JSONObject> apiTest() {
-		
-		return new CMRespDto<>(1, "성공", calorieAPITest.calorie("바나나", "1"));
+		FoodApiReqDto dto = new FoodApiReqDto("바나나","1");
+		return new CMRespDto<>(1, "성공", calorieAPITest.calorie(dto));
 	}
 	
-	@GetMapping("/test/food/getapi")
-	public @ResponseBody CMRespDto<JSONObject> getApiTest(String foodstr, String page) {
-		return new CMRespDto<>(1, "성공", calorieAPITest.calorie(foodstr, page));
+	@PostMapping("/test/food/getapi")
+	public @ResponseBody CMRespDto<JSONObject> getApiTest(Model model, @RequestBody FoodApiReqDto dto) {
+		System.out.println("경로 호출됨");
+		
+		return new CMRespDto<>(1, "성공", calorieAPITest.calorie(dto));
 	}
 }
