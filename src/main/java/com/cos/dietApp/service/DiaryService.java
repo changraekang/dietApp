@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cos.dietApp.domain.diary.ExerciseDiaryRepository;
 import com.cos.dietApp.domain.diary.FoodDiaryRepository;
+import com.cos.dietApp.domain.user.User;
 import com.cos.dietApp.web.dto.ExerciseReqDto;
 import com.cos.dietApp.web.dto.FoodReqDto;
 
@@ -48,15 +49,22 @@ public class DiaryService {
 	 */
 
 	@Transactional
-	public void 운동일기(@Valid ExerciseReqDto dto) {
+	public void 운동일기(@Valid ExerciseReqDto dto , User principal) {
 
-		exerciseDiaryRepository.save(dto.toEntity());
+		exerciseDiaryRepository.save(dto.toEntity(principal));
 
 	}
 	@Transactional
-	public void 식단일기 (@Valid FoodReqDto dto) {
+	public void 식단일기 (@Valid FoodReqDto dto, User principal) {
 		
-		foodDiaryRepository.save(dto.toEntity());
+		foodDiaryRepository.save(dto.toEntity(principal));
 		
 	}
+	@Transactional
+	public void 운동일기보기(@Valid ExerciseReqDto dto, String id) {
+		
+		exerciseDiaryRepository.mExerciseList(id);
+		
+	}
+
 }
