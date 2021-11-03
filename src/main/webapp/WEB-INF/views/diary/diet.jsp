@@ -23,9 +23,16 @@
 <link rel="stylesheet" href="css/main.min.css">
 
 <style>
+
+
 body {
 	display: flex;
 	flex-direction: column;
+}
+#todaydate {
+
+ text-align: center;
+ vertical-align:middle;
 }
 
 #chooseFile {
@@ -35,6 +42,9 @@ body {
 
 
 #diarysave{
+	visibility: hidden;
+}
+#diarylist{
 	visibility: hidden;
 }
 
@@ -193,8 +203,9 @@ dropdown2 {
 	<div class="container m_tm_20" style="height: 100%;">
 
 		<div id="calendar" style="float: left; width: 66%; height: 200px;"></div>
-						<br> <br> <br>
-						
+				<div id = "todaydate" >
+				</div>
+				<br>
 		<div id="diary" style="float: left; width: 34%; height: 650px;">
 		<form class="upload-form" action="/food" method="post" enctype="multipart/form-data">
 				<div class="form-group">
@@ -245,6 +256,7 @@ dropdown2 {
 					<img id="diaryphoto" src="">
 				</div>
 				<button type="submit" id="diarysave" class="btn btn-primary" onclick="calenderClick();" >일기저장</button>
+				<a id = "diarylist" href="/diet/${sessionScope.principal.id}/list" >식단일기리스트</a> 
 			</form>
 
 
@@ -276,6 +288,15 @@ dropdown2 {
 let mealtime =  $("#mealtime input").on("click", function(event){
 mealtime  = event.target.value;
 });
+
+let today = new Date();   
+
+let year = today.getFullYear(); // 년도
+let month = today.getMonth() + 1;  // 월
+let date = today.getDate();  // 날짜
+
+$("#todaydate").append("<h3>"+ year+"년"+month+"월"+ date+"일"+"</h3>");
+
 	
 function calenderClick() {
     console.log('일기가 저장되었습니다.');
@@ -316,9 +337,20 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 		},
 		headerToolbar: {
+			start:'list',
 	        center: 'fooddiary'
 	      },
 		customButtons: {
+			list : {
+				text: '리스트보기',
+				click: function() {
+					$('#diarylist').get(0).click();
+					$("#diarylist").trigger("click");
+				}
+				
+				
+			},
+				
 			fooddiary: {
 	          text: '일기저장',
 	          click: function() {
