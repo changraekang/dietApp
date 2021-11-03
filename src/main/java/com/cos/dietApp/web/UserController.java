@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -107,22 +106,26 @@ public class UserController {
 	
 	
 	@PostMapping("/login") 
-	public String login(LoginReqDto loginDto) {
+	public @ResponseBody String login(@Valid LoginReqDto loginDto, BindingResult bindingResult) {
 		// 1. Get username, password 
 		System.out.println(loginDto.getUsername());
 		System.out.println(loginDto.getPassword());
 		
 		// 2. DB -> Select
 		String encPassword = SHA.encrypt(loginDto.getPassword(), MyAlgorithm.SHA256);
-		User principal = userRepository.mLogin(loginDto.getUsername(), encPassword);
-
-		if(principal == null) {
-			System.out.println("로그인 되지 않았습니다:"+principal.getUsername());
-			return "redirect:/loginForm";
+		if (bindingResult.hasErrors()) {
+			Map<String, String> errorMap = new HashMap<>();
+			for (FieldError error : bindingResult.getFieldErrors()) {
+				errorMap.put(error.getField(), error.getDefaultMessage());
+			}
+			return Script.back(errorMap.toString());
+		}
+		User userEntity = userRepository.mLogin(loginDto.getUsername(), encPassword);
+		if(userEntity == null) {
+			return Script.back("아이디 혹은 비밀번호를 잘못 입력하였습니다.");
 		} else {
-			System.out.println("로그인 되었습니다:"+principal.getUsername());
-			session.setAttribute("principal", principal);
-		    return "redirect:/myBody/" + principal.getId();
+			session.setAttribute("principal", userEntity);
+			return Script.href("/myBody/" + userEntity.getId() , "로그인 성공");
 		}
 	}
 	

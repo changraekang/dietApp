@@ -1,6 +1,7 @@
 package com.cos.dietApp.service;
 
 import java.nio.file.Files; 
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -17,6 +18,7 @@ import com.cos.dietApp.domain.diary.ExerciseDiaryRepository;
 import com.cos.dietApp.domain.diary.FoodDiary;
 import com.cos.dietApp.domain.diary.FoodDiaryRepository;
 import com.cos.dietApp.domain.user.User;
+import com.cos.dietApp.handler.ex.MyNotFoundException;
 import com.cos.dietApp.web.dto.ExerciseReqDto;
 import com.cos.dietApp.web.dto.FoodReqDto;
 
@@ -72,6 +74,10 @@ public class DiaryService {
 		return exerciseDiaries;
 		
 	}
+	public ExerciseDiary 운동일기상세보기 (int id ) {
+		ExerciseDiary exerciseDiaryEntity = exerciseDiaryRepository.findById(id).orElseThrow(() -> new MyNotFoundException(id + "를 못 찾았어요"));
+		return exerciseDiaryEntity;
+	}
 	public List<FoodDiary> 식단일기보기( int id) {
 		
 		List<FoodDiary> foodDiaries = foodDiaryRepository.mFoodList(id); 
@@ -81,4 +87,8 @@ public class DiaryService {
 		
 	}
 
+	public FoodDiary 식단일기상세보기 (int id ) {
+		FoodDiary foodDiaryEntity = foodDiaryRepository.findById(id).orElseThrow(() -> new MyNotFoundException(id + "를 못 찾았어요"));
+		return foodDiaryEntity;
+	}
 }

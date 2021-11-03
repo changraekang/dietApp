@@ -71,6 +71,18 @@ public class DietController {
 		model.addAttribute("foodsEntity", diaryService.식단일기보기(id));
 		return "diary/dietList";
 	}
+	@GetMapping("/exercise/diary/{id}")
+	public String exerciseDiary (  Model model , @PathVariable int id ) {
+		
+		model.addAttribute("exercisesEntity", diaryService.운동일기상세보기(id));
+		return "diary/exerciseList";
+	}
+	@GetMapping("diet/1/diary/{id}")
+	public String dietDiary ( Model model , @PathVariable int id ) {
+		
+		model.addAttribute("foodsEntity", diaryService.식단일기상세보기(id));
+		return "diary/dietDetail";
+	}
 	
 	//용세
 	//규호

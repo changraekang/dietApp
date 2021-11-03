@@ -15,8 +15,9 @@
 		<div class="card">
 			<div class="card-body">
 				<!-- el표현식은 변수명을 적으면 자동으로 get함수를 호출해준다 -->
-				<h4 class="card-title">${food.mealtime}</h4>
-				<a href="/board/${board.id}" class="btn btn-primary">상세보기</a>
+				<h4 class="card-title">${food.mealtime}( ${ food.kcal}kcal)</h4>
+				<p>${food.date} </p>
+				<a href="diary/${food.id}" class="btn btn-primary">상세보기</a>
 			</div>
 		</div>
 		<br />

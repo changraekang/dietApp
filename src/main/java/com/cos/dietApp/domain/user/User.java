@@ -39,5 +39,9 @@ public class User {
 	private String uMuscle;
 	@Column(nullable = false, length = 20)
 	private double uBMI;
-
+	@Column(nullable = true, length = 20)
+	private int gWeight; //목표무게
+	@Column(nullable = true, length = 20)
+	private String gPeriod; //목표날짜
+	
 }
