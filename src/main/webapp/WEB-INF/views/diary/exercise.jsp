@@ -14,6 +14,9 @@
 #chooseFile {
 	visibility: hidden;
 }
+#diarylist{
+	visibility: hidden;
+}
 
 
 #diarysave{
@@ -26,7 +29,11 @@
 	height: 50%;
 	object-fit: cover;
 }
+#todaydate {
 
+ text-align: center;
+ vertical-align:middle;
+}
 
 </style>
 <style>
@@ -166,9 +173,12 @@ dropdown2 {
 	</div>
 	<div class="container m_tm_20" style="height: 100%;">
 		<div id="calendar" style="float: left; width: 66%; "></div>
-								<br> <br> <br>
+				<div id = "todaydate" >
+				</div>
+				<br>
 		<div id="diary" style="float: left; width: 34%; height: 650px;">
 			<form class="upload-form" action="/exercise" method="post" enctype="multipart/form-data">
+				
 				<div class="form-group">
 					<input type="text" id="date" name="date" class="form-control"
 						required="required" readonly="readonly">
@@ -203,6 +213,7 @@ dropdown2 {
 					<img id="diaryphoto" src="">
 				</div>
 				<button type="submit" id="diarysave" class="btn btn-primary" onclick="calenderClick();" >일기저장</button>
+				<a id = "diarylist" href="/exercise/${sessionScope.principal.id}/list" >운동일기리스트</a>
 			</form>
 
 
@@ -247,7 +258,14 @@ let mealtime =  $("#mealtime input").on("click", function(event){
 	    console.log('일기가 저장되었습니다.');
 		
 	}
+	let today = new Date();   
 
+	let year = today.getFullYear(); // 년도
+	let month = today.getMonth() + 1;  // 월
+	let date = today.getDate();  // 날짜
+	let day = today.getDay();  // 요일
+	
+	$("#todaydate").append("<h3>"+ year+"년"+month+"월"+ date+"일"+"</h3>");
 
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
@@ -284,9 +302,19 @@ let mealtime =  $("#mealtime input").on("click", function(event){
 				}
 			},
 			headerToolbar: {
+				start:'list',
 		        center: 'exercisediary'
 		      },
 			customButtons: {
+				list : {
+					text: '리스트보기',
+					click: function() {
+						$('#diarylist').get(0).click();
+						$("#diarylist").trigger("click");
+					}
+					
+					
+				},
 				exercisediary: {
 		          text: '일기저장',
 		          click: function() {

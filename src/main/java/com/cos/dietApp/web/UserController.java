@@ -120,8 +120,8 @@ public class UserController {
 			return "redirect:/loginForm";
 
 		} else {
-			session.setAttribute("principal", userEntity);
-			return Script.href("/myBody/" + userEntity.getId() , "로그인 성공");
+			session.setAttribute("principal", principal);
+			return Script.href("/myBody/" + principal.getId() , "로그인 성공");
 		}
 	}
 	
