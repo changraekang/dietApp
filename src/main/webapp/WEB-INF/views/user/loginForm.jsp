@@ -262,6 +262,7 @@ form{
 	  <div class="form-group">
 	    <input type="password" name="password" class="form-control" placeholder="Enter password" required="required">
 	  </div>
+	  <a href="/joinForm" class="btn float-center join_btn">회원가입</a>
 	  <button type="submit" id="login-button" class="btn btn-primary">로그인</button>
 	</form>
 </div>

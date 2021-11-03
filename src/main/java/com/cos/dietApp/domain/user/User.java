@@ -38,6 +38,6 @@ public class User {
 	@Column(nullable = true, length = 20)
 	private String uMuscle;
 	@Column(nullable = false, length = 20)
-	private double uBMI;
+	private String uBMI;
 
 }
