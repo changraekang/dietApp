@@ -18,6 +18,7 @@
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <style>
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
@@ -126,6 +127,7 @@ margin-left: 4px;
 </head>
 
 <body>
+
 <div class="container">
 	<div class="d-flex justify-content-center h-100">
 		<div class="card">
@@ -152,9 +154,10 @@ margin-left: 4px;
 					</div>
 				</form>
 			</div>
+			<a href="/test/calorieDic">이동</a>
 			<div class="card-footer">
 				<div class="d-flex justify-content-center links">
-					아직 회원이 아니십니까?<a href="/test/joinForm" class="btn float-right join_btn">회원가입</a>
+					아직 회원이 아니십니까?<a href="/joinForm" class="btn float-right join_btn">회원가입</a>
 				</div>
 			</div>
 		</div>

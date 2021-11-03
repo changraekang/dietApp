@@ -2,6 +2,7 @@ package com.cos.dietApp.domain.board;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,7 +32,7 @@ public class Board {
 	private String thumbnail;
 	
 	@JoinColumn(name = "menuId")
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private BoardMenu boardMenu;
 	
 	

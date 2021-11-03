@@ -3,9 +3,9 @@
 
 
 <%@ include file="../layout/header.jsp" %>
+
 <%
-	response.sendRedirect("http://localhost:5000/");
-	//request.getRequestDispatcher("/board?page=0").forward(request, response);
+	response.sendRedirect("http://localhost:5000");
 %>
 
 
