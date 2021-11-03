@@ -34,4 +34,7 @@ public class Board {
 	@JoinColumn(name = "menuId")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private BoardMenu boardMenu;
+	
+	
+
 }

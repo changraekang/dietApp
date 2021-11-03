@@ -19,11 +19,10 @@ public class JoinReqDto {
 	
 	private int uWeight;
 	private int uHeight;
-	private int uMuscle;
-	private int uFat;
+	private String uMuscle;
 	private double uBMI;
 
-	
+
 	public User toEntity() {
 		User user = new User();
 		user.setUsername(username);
@@ -36,7 +35,8 @@ public class JoinReqDto {
 		user.setUWeight(uWeight);
 		user.setUHeight(uHeight);
 		user.setUMuscle(uMuscle);
-		user.setUBMI(uBMI);
+		user.setUBMI(String.format("%.2f",uBMI));
+		
 		
 		return user;
 		

@@ -31,10 +31,19 @@ public class User {
 	private String uEmail;
 	@Column(nullable = false, length = 20)
 	private String uGender;
-	
+	@Column(nullable = false, length = 20)
 	private int uWeight;
+	@Column(nullable = false, length = 20)
 	private int uHeight;
-	private int uMuscle;
-	private double uBMI;
+	@Column(nullable = true, length = 20)
+	private String uMuscle;
+	@Column(nullable = false, length = 20)
+  private String uBMI;
+	@Column(nullable = true, length = 20)
+	private int gWeight; //목표무게
+	@Column(nullable = true, length = 20)
+	private String gPeriod; //목표날짜
+	
+
 
 }

@@ -21,6 +21,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<link rel="stylesheet" href="css/main.min.css">
+
 <title>Insert title here</title>
 <style>
 body {
@@ -34,6 +36,23 @@ ul {
 	overflow: hidden;
 	border: 1px solid #e7e7e7;
 	background-color: #f3f3f3;
+}
+
+#chooseFile {
+	visibility: hidden;
+}
+
+
+
+#diarysave{
+	visibility: hidden;
+}
+
+#diaryphoto {
+	visibility: hidden;
+	width: 100%;
+	height: 50%;
+	object-fit: cover;
 }
 
 li {
@@ -111,5 +130,11 @@ dropdown2 {
 			<a href="/diet" style= "text-decoration: none;">식단 일기</a>
 			</div></li>
 		<li class="flex-fill"><a href="/myBody" style= "text-decoration: none;">나의 Body</a></li>
-		<li class="flex-fill"><a href="/userupdate" style= "text-decoration: none;">회원정보</a></li>
+		<li class="dropdown2 flex-fill"><a href="javascript:void(0)"  class="droptbtn" style= "text-decoration: none;">회원정보</a>
+			<div class="dropdown2-content flex-fill" style="width: 15.8%">
+			<a href="/user/${sessionScope.principal.id}" style= "text-decoration: none;">회원정보</a> 
+			<a href="/logout" style= "text-decoration: none;">로그아웃</a>
+			</div>
+		</li>
+		
 	</ul>

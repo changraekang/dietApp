@@ -135,23 +135,30 @@ dropdown2 {
 </head>
 <body>
 	<ul class="nav justify-content-around bg-light">
-		<li class="flex-fill"><a class="" href="/news">News</a></li>
-		<li class="flex-fill"><a href="/calorieDic">칼로리 사전</a></li>
-
+		<li class="flex-fill"><a class="" href="/news" style= "text-decoration: none;">News</a></li>
+		<li class="flex-fill"><a href="/calorieDic" style= "text-decoration: none;">칼로리 사전</a> </li>
 		<li class="dropdown2 flex-fill"><a href="javascript:void(0)"
-			class="dropbtn ">와글와글</a>
+			class="dropbtn " style= "text-decoration: none;">와글와글</a>
 			<div class="dropdown2-content flex-fill" style="width: 15.8%">
-				<a href="/wagleFree">자유게시판</a> <a href="/wagleQnA">건강
-					QnA</a> <a href="/recipe">다이어트 Recipe</a> <a
-					href="/wagleShowoff">다이어트 인증샷</a>
+				<a href="/board?menuId=1" style= "text-decoration: none;">자유게시판</a> 
+				<a href="/board?menuId=2" style= "text-decoration: none;">건강 QnA</a>
+				<a href="/recipe" style= "text-decoration: none;">다이어트 Recipe</a> 
+				<a href="/board?menuId=3" style= "text-decoration: none;">다이어트 인증샷</a>
 			</div></li>
 		<li class="dropdown2 flex-fill"><a href="javascript:void(0)"
-			class="dropbtn">다이어트 다이어리</a>
+			class="dropbtn" style= "text-decoration: none;">다이어트 다이어리</a>
 			<div class="dropdown2-content flex-fill" style="width: 19.5%">
-				<a href="/exercise">운동 일기</a> <a href="/diet">식단 일기</a>
+			<a href="/exercise" style= "text-decoration: none;">운동 일기</a> 
+			<a href="/diet" style= "text-decoration: none;">식단 일기</a>
 			</div></li>
-		<li class="flex-fill"><a href="/myBody">나의 Body</a></li>
-		<li class="flex-fill"><a href="/userupdate">회원정보</a></li>
+		<li class="flex-fill"><a href="/myBody" style= "text-decoration: none;">나의 Body</a></li>
+		<li class="dropdown2 flex-fill"><a href="javascript:void(0)"  class="droptbtn" style= "text-decoration: none;">회원정보</a>
+			<div class="dropdown2-content flex-fill" style="width: 15.8%">
+			<a href="/user/${sessionScope.principal.id}" style= "text-decoration: none;">회원정보</a> 
+			<a href="/logout" style= "text-decoration: none;">로그아웃</a>
+			</div>
+		</li>
+		
 	</ul>
 	<div class="jumbotron text-center"
 		style="height: 200px; position: relative">

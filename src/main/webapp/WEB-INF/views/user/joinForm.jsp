@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 	
 <%@page import="java.text.DecimalFormat" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -133,6 +132,18 @@ input:focus {
 	background-color: #32AFFF;
 }
 
+.cancel_btn {
+	color: black;
+	background-color: #72C8FF;
+	height: 35px;
+	width: 100px;
+}
+
+.cancel_btn:hover {
+	color: black;
+	background-color: #32AFFF;
+}
+
 .links {
 	color: black;
 }
@@ -164,7 +175,6 @@ input:focus {
 							</div>
 							<input type="text" name="username" class="form-control" placeholder="ID를 입력해주세요"
 								required="required" maxlength="20">
-
 						</div>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
@@ -199,6 +209,8 @@ input:focus {
 						<div class="form-group">
 							<input type="submit" value="Join"
 								class="btn float-right Join_btn">
+							<a href="/" type="button" value="Cancel" 
+								name="btnCancel" id="btnCancel" class="btn float-right Cancel_btn">Cancel</a>
 						</div>
 					</div>
 				</div>
@@ -209,7 +221,7 @@ input:focus {
 					</div>
 					<div class="card-body">
 						<div class="input-group form-group">
-							<input type="radio" id="male" name="uGender" value="male">
+							<input type="radio" id="male" name="uGender" value="male"  required="required">
 							<label for="male">
 							<i class="fas fa-male"> 남자</i>
 							</label>   
@@ -222,8 +234,8 @@ input:focus {
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-weight"></i></span>
 							</div>
-							<input type="text" name="uWeight" id="weight" class="form-control" placeholder="몸무게를 입력해주세요"
-								required="required" >
+							<input type="text" name="uWeight" id="weight" class="form-control" placeholder="몸무게를 입력해주세요(kg)"
+								required="required" maxlength="3">
 
 						</div>
 						<div class="input-group form-group">
@@ -231,14 +243,14 @@ input:focus {
 								<span class="input-group-text"><i class="fas fa-child"></i></span>
 							</div>
 							<input type="text" name="uHeight" id="height" class="form-control" placeholder="키를 입력해주세요(cm)"
-								required="required" onchange= "printName();">
+								required="required" onchange= "printName();" maxlength="3">
 						</div>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-dumbbell"></i></span>
 							</div>
 							<input type="text" name="uMuscle" class="form-control"
-								placeholder="근육량을 입력해주세요(필수아님)">
+								placeholder="근육량을 입력해주세요(kg 필수아님)" maxlength="3">
 						</div>
 
 						<div class="input-group form-group">
@@ -258,7 +270,9 @@ input:focus {
 function printName()  {
     const height = document.getElementById('height').value;
     const weight = document.getElementById('weight').value;
-    document.getElementById("bmi").value = weight / ((height/100) * (height/100));
+    
+    document.getElementById("bmi").value = (weight / ((height/100) * (height/100))).toFixed(2);
+    
   }
 
 </script>	
