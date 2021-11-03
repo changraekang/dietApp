@@ -74,15 +74,6 @@ public class BoardController {
 		return "wagle/detail"; // ViewResolver
 	}
 	
-	// ---- 게시글 상세보기 테스트중
-	@GetMapping("/test/board/{id}")
-	public @ResponseBody Board testdetail(@PathVariable int id, Model model) {
-		Board boardEntity = boardRepository.findById(id)
-				.orElseThrow(() -> new MyNotFoundException(id + "번은 없는 게시글입니다") );
-		model.addAttribute("boardEntity", boardEntity);
-		return boardEntity; // ViewResolver
-	}
-	
 	// ---- 게시글 쓰기
 	@PostMapping("/board")
 	public @ResponseBody CMRespDto boardInsert(@Valid @RequestBody BoardSaveReqDto dto, BindingResult bindingResult) {
@@ -153,11 +144,6 @@ public class BoardController {
 		return new CMRespDto<>(1, "업데이트 성공", null);
 	}
 	
-	@GetMapping("/calorieDic")
-	public String calorieDic () {
-		
-		return "wagle/calorieDic";
-	}
 	@GetMapping("/recipe")
 	public String recipe () {
 		
