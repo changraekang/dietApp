@@ -30,6 +30,12 @@ public class UserController {
 
 	private final UserRepository userRepository;
 	private final HttpSession session;
+
+	// DI
+//	public UserController(UserRepository userRepository, HttpSession session) {
+//		this.userRepository = userRepository;
+//		this.session = session;
+//	}
 	
 		//창래
 		@GetMapping("/myBody/{id}")
@@ -39,19 +45,7 @@ public class UserController {
 			// Validation 체크 불필요 자신의 session 만 가져오기 때문
 			return "user/userBody";
 		}
-		
-		@GetMapping("/userupdate")
-		public String userupdate () {
-			
-			return "user/updateForm";
-		}
-		
-//		@GetMapping("/joinForm")
-//		public String join () {
-//			
-//			return "user/joinForm";
-//		}
-		
+
 		@GetMapping("/")
 		public String main () {
 			
@@ -80,7 +74,7 @@ public class UserController {
 		
 
 	@PostMapping("/join")
-	public @ResponseBody String join(@Valid JoinReqDto dto, BindingResult bindingResult) { // username=love&password=1234&email=love@nate.com으로 데이터가 들어온다
+	public @ResponseBody String join(@Valid JoinReqDto dto, BindingResult bindingResult) { // username= &password= &email=으로 데이터가 들어온다
 		
 		// 1. 유효성 검사 실패 - 자바스크립트 응답(경고창 띄우고 뒤로가기)
 		if(bindingResult.hasErrors()) {
@@ -108,21 +102,23 @@ public class UserController {
 	@PostMapping("/login") 
 	public @ResponseBody String login(@Valid LoginReqDto loginDto, BindingResult bindingResult) {
 		// 1. Get username, password 
+		System.out.println("==========================================");
 		System.out.println(loginDto.getUsername());
 		System.out.println(loginDto.getPassword());
+		System.out.println("==========================================");
 		
 		// 2. DB -> Select
 		String encPassword = SHA.encrypt(loginDto.getPassword(), MyAlgorithm.SHA256);
-		if (bindingResult.hasErrors()) {
-			Map<String, String> errorMap = new HashMap<>();
-			for (FieldError error : bindingResult.getFieldErrors()) {
-				errorMap.put(error.getField(), error.getDefaultMessage());
-			}
-			return Script.back(errorMap.toString());
-		}
-		User userEntity = userRepository.mLogin(loginDto.getUsername(), encPassword);
-		if(userEntity == null) {
-			return Script.back("아이디 혹은 비밀번호를 잘못 입력하였습니다.");
+
+		User principal = userRepository.mLogin(loginDto.getUsername(), encPassword);
+		System.out.println("==========================================");
+		System.out.println(principal);
+		System.out.println("==========================================");
+
+		if(principal == null) {
+			System.out.println("로그인 되지 않았습니다:");
+			return "redirect:/loginForm";
+
 		} else {
 			session.setAttribute("principal", userEntity);
 			return Script.href("/myBody/" + userEntity.getId() , "로그인 성공");
@@ -135,10 +131,23 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+	// 회원정보페이지-----------------------------
+	@GetMapping("user/{username}")
+	public String userInfo(@PathVariable String username) {
+		// 기본은 userRepository.findById(id)로 DB에서 가져와야함
+		// 편법은 세션에서 값을 가져올 수도 있다 - 인증과 권한 필요 없음
+		// 세션에 있는 값을 쓸거라서 모델에 담아 갈 필요가 없다(로그인을 했다)
+		
+		return "user/updateForm";
+	}
 }
-	
 
 
+//	@GetMapping("/userupdate")
+//	public String userupdate () {
+//		
+//		return "user/updateForm";
+//	}
 
 
 
