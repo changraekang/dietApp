@@ -154,7 +154,7 @@ margin-left: 4px;
 					</div>
 				</form>
 			</div>
-			<a href="/test/calorieDic">이동</a>
+			<a href="/myBody">이동</a>
 			<div class="card-footer">
 				<div class="d-flex justify-content-center links">
 					아직 회원이 아니십니까?<a href="/joinForm" class="btn float-right join_btn">회원가입</a>

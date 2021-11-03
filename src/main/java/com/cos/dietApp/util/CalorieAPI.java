@@ -1,4 +1,4 @@
-package com.cos.dietApp.test;
+package com.cos.dietApp.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Component
-public class CalorieAPITest {
+public class CalorieAPI {
 	
 	public JSONObject calorie(FoodApiReqDto dto) {
     	StringBuilder sb = new StringBuilder();
