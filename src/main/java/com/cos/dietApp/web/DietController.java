@@ -60,14 +60,28 @@ public class DietController {
 	}
 	
 	@GetMapping("/exercise/{id}/list")
-	public String exerciseList ( @PathVariable int id , Model model) {
+	public String exerciseList (  Model model , @PathVariable int id ) {
 		
-		return "diary/exerciselist";
+		model.addAttribute("exercisesEntity", diaryService.운동일기보기(id));
+		return "diary/exerciseList";
 	}
 	@GetMapping("/diet/{id}/list")
-	public String dietList () {
+	public String dietList ( Model model , @PathVariable int id ) {
 		
-		return "diary/dietlist";
+		model.addAttribute("foodsEntity", diaryService.식단일기보기(id));
+		return "diary/dietList";
+	}
+	@GetMapping("/exercise/diary/{id}")
+	public String exerciseDiary (  Model model , @PathVariable int id ) {
+		
+		model.addAttribute("exercisesEntity", diaryService.운동일기상세보기(id));
+		return "diary/exerciseList";
+	}
+	@GetMapping("diet/1/diary/{id}")
+	public String dietDiary ( Model model , @PathVariable int id ) {
+		
+		model.addAttribute("foodsEntity", diaryService.식단일기상세보기(id));
+		return "diary/dietDetail";
 	}
 	
 	//용세

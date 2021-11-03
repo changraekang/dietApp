@@ -18,8 +18,8 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td>${sessionScope.principal.id}</td>
-				<td></td>
+				<td>${sessionScope.principal.UName}</td>
+				<td>${sessionScope.principal.UWeight} kg</td>
 				<td>72kg</td>
 			</tr>
 		</tbody>
@@ -61,7 +61,7 @@
 <div class="container mt-3">
   <h2>목표체중 도달</h2>
   <div class="progress">
-    <div class="progress-bar" style="width:70%"></div>
+    <div class="progress-bar" style="width:80%"></div>
   </div>
 </div>
 <%@ include file="../layout/footer.jsp"%>

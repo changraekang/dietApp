@@ -1,7 +1,13 @@
 package com.cos.dietApp.domain.diary;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
-public interface FoodDiaryRepository extends JpaRepository<FoodDiary, String>{
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+public interface FoodDiaryRepository extends JpaRepository<FoodDiary, Integer>{
 		
+	@Query(value = "select * from foodDiary where userId = :userId ORDER BY date desc" , nativeQuery = true)
+	List<FoodDiary> mFoodList (int userId);
+
 }

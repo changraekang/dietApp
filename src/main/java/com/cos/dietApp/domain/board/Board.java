@@ -33,4 +33,7 @@ public class Board {
 	@JoinColumn(name = "menuId")
 	@ManyToOne
 	private BoardMenu boardMenu;
+	
+	
+
 }
