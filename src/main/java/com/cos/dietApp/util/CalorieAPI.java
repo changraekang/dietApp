@@ -25,8 +25,6 @@ public class CalorieAPI {
     	JSONObject jo = null;
     	HttpURLConnection conn = null;
     	BufferedReader rd = null;
-    	System.out.println("dto foodstr : " + dto.getFoodstr());
-    	System.out.println("dto page : " + dto.getPage());
         try {
         	String sKey = "GEenzrfqpLS1IKjRAxv02SvRSzD7cSYwrFkcbZsI95GFYEIXoFnsSBkzMRDsuFdb6XWcFhUfaHPZyLexeJngeQ%3D%3D";
         	StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1471000/FoodNtrIrdntInfoService1/getFoodNtrItdntList1"); /*URL*/

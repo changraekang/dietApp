@@ -20,7 +20,13 @@ public class FoodApiTest {
 	
 	@GetMapping("/test/api/{page}")
 	public @ResponseBody CMRespDto<JSONObject> apiTest(@PathVariable String page) {
-		FoodApiReqDto dto = new FoodApiReqDto("샌드위치",page);
+		FoodApiReqDto dto = new FoodApiReqDto("바나나",page);
 		return new CMRespDto<>(1, "성공", calorieAPI.calorie(dto));
+	}
+	
+	@GetMapping("/test/cal")
+	public String calorieDic () {
+		
+		return "test/cal";
 	}
 }
