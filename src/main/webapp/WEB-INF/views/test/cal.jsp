@@ -19,30 +19,30 @@
 }
 </style>
 <div class="container">
-	<input type="text" id="foodstr" name="foodstr" placeholder="Enter food">
-	<input type="button" onclick="foodsearch()" value="검색">
+	<input type="text" id="foodstr" placeholder="Enter food">
+	<input type="button" onclick="foodsave()" value="검색">
+	<input type="hidden" id="foodstrsave">
 
 	<div>
 		<table id="foodtable">
 		</table>
 	</div>
-	<ul class="pagination">
-		<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-		<li class="page-item"><a class="page-link" href="#">1</a></li>
-		<li class="page-item"><a class="page-link" href="#">2</a></li>
-		<li class="page-item"><a class="page-link" href="#">3</a></li>
-		<li class="page-item"><a class="page-link" href="#">Next</a></li>
-	</ul>
+	<div id="paging">
+
+	</div>
 </div>
 
 <script>
-	async function foodsearch() {
+	function foodsave() {
+		document.querySelector('#foodstrsave').value = document.querySelector('#foodstr').value
+		foodsearch(1);
+	}
+	async function foodsearch(pagenum) {
 		let foodApiReqDto = {
-			foodstr : document.querySelector('#foodstr').value,
-			page : "1"
+			foodstr : document.querySelector('#foodstrsave').value,
+			page : pagenum
 		};
-		let response = await
-		fetch("http://localhost:8080/calorieDic/getapi", {
+		let response = await fetch("http://localhost:8080/calorieDic/getapi", {
 			method : "post",
 			body : JSON.stringify(foodApiReqDto),
 			headers : {
@@ -50,8 +50,7 @@
 			}
 		});
 
-		let parseResponse = await
-		response.json();
+		let parseResponse = await response.json();
 
 		if (parseResponse.code == 1) {
 			let i = 0;
@@ -86,19 +85,59 @@
 				table.innerHTML += html;
 				i++;
 			}
-			lastpagenum = Math.ceil(data.totalCount/5);
-			
-			pagecal(15,lastpagenum)
+			let nowpagenum = 1;
+			let totalCount = data.totalCount;
+			pagecal(nowpagenum, totalCount)
 			
 		} else {
 			alert("검색에 실패하였습니다.");
 		}
 	}
 	
-	function pagecal(nowpage, lastpage){
-		prepage = Math.ceil(nowpage/10)*10 - 10;
-		nextpage = Math.ceil(nowpage/10)*10 + 1;
-		alert(prepage + ' : ' + nextpage);
+	async function pagecal(nowpagenum, totalCount){
+		let pageReqDto = {
+			nowPage : nowpagenum,
+			totalCount : totalCount
+		};
+		let pageResponse = await fetch("http://localhost:8080/pagecal", {
+			method : "post",
+			body : JSON.stringify(pageReqDto),
+			headers : {
+				"Content-Type" : "application/json; charset=utf-8"
+			}
+		});
+
+		let page = await pageResponse.json();
+		let html = '<ul class="pagination">';
+		let endPage = page.nextPage - 1;
+		if(endPage > page.lastPage){
+			endPage = lastpage;
+		}
+		if(page.nowPage != 1){
+			html += '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="gopage(1)">처음</a></li>';
+		}
+		if(page.prePage != 0){
+			html += '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="gopage(' + page.prePage + ')">이전</a></li>';
+		}
+		for(let i = page.prePage+1 ; i < endPage ; i++){
+			if(i == page.nowpage){
+				html += '<li class="page-item">' + i +'</li>';				
+			} else {
+				html += '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="gopage(' + i + ')">' + i +'</a></li>';
+			}
+		}
+		if(page.nextPage <= page.lastPage) {
+			html += '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="gopage(' + page.nextPage +')">다음</a></li>';
+		}
+		if(page.nowPage != page.lastPage) {
+			html += '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="gopage(' + page.lastPage + ')">마지막</a></li>';
+		}
+		html += '</ul>';
+		document.querySelector('#paging').innerHTML = html;
+	}
+	
+	function gopage(pagenum){
+		foodsearch(pagenum);
 	}
 </script>
 
