@@ -14,35 +14,35 @@
        <input type="password" name="password" id="password" value="${sessionScope.principal.password}" class="form-control" placeholder="password"  maxlength="20">
      </div>
      <div class="form-group">
-       <input type="text"  name="uName" id="name" value="${sessionScope.principal.UName}" class="form-control" placeholder="your name"  maxlength="20">
+       <input type="text"  name="UName" id="name" value="${sessionScope.principal.UName}" class="form-control" placeholder="your name"  maxlength="20">
      </div>
      <div class="form-group">
-       <input type="text" name="uPhone" id="phone" value="${sessionScope.principal.UPhone}" class="form-control" placeholder="Enter phone"  maxlength="50">
+       <input type="text" name="UPhone" id="phone" value="${sessionScope.principal.UPhone}" class="form-control" placeholder="Enter phone"  maxlength="50">
      </div>
      <div class="form-group">
-       <input type="email" name="uEmail" id="email" value="${sessionScope.principal.UEmail}"  class="form-control" placeholder="Enter email" maxlength="100">
+       <input type="email" name="UEmail" id="email" value="${sessionScope.principal.UEmail}"  class="form-control" placeholder="Enter email" maxlength="100">
      </div>
      <div class="input-group form-group">
-                     <input type="radio" id="male" name="uGender" value="${sessionScope.principal.UGender}">
+                     <input type="radio" id="male" name="UGender" value="${sessionScope.principal.UGender}">
                      <label for="male">
                      <i class="fas fa-male"> 남자</i>
                      </label>   
-                     <input type="radio" id="female" name="uGender" value="${sessionScope.principal.UGender}">
+                     <input type="radio" id="female" name="UGender" value="${sessionScope.principal.UGender}">
                      <label for="female"> 
                      <i class="fas fa-female">여자</i>
                      </label>
                   </div>
      <div class="form-group">
-       <input type="text" name="uWeight" id="weight" value="${sessionScope.principal.UWeight}"  class="form-control" placeholder="Enter weight">
+       <input type="text" name="UWeight" id="weight" value="${sessionScope.principal.UWeight}"  class="form-control" placeholder="Enter weight">
      </div>
      <div class="form-group">
-       <input type="text" name="uHeight" id="height" value="${sessionScope.principal.UHeight}"  class="form-control" placeholder="Enter height">
+       <input type="text" name="UHeight" id="height" value="${sessionScope.principal.UHeight}"  class="form-control" placeholder="Enter height">
      </div>
      <div class="form-group">
-       <input type="text" name="uMuscle" id="muscle" value="${sessionScope.principal.UMuscle}"  class="form-control" placeholder="Enter muscle">
+       <input type="text" name="UMuscle" id="muscle" value="${sessionScope.principal.UMuscle}"  class="form-control" placeholder="Enter muscle">
      </div>
      <div class="form-group">
-       <input type="text" name="uBMI" id="BMI" value="${sessionScope.principal.UBMI}"  class="form-control" placeholder="your BMI" readonly="readonly">
+       <input type="text" name="UBMI" id="BMI" value="${sessionScope.principal.UBMI}"  class="form-control" placeholder="your BMI" readonly="readonly">
      </div>
      
      <button type="submit" class="btn btn-primary">회원수정</button>
