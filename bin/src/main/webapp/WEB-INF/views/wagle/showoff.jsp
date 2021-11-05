@@ -3,6 +3,6 @@
 
 
 <%@ include file="../layout/header.jsp" %>
-<h2>자랑질</h2>
+<h2>레시피</h2>
 
 <%@ include file="../layout/footer.jsp" %>

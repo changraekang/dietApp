@@ -101,6 +101,7 @@ public class UserController {
 	
 	@PostMapping("/login") 
 	public @ResponseBody String login(@Valid LoginReqDto loginDto, BindingResult bindingResult) {
+<<<<<<< HEAD
 		
 		System.out.println("에러사이즈:"+bindingResult.getFieldErrors().size());
 		
@@ -115,6 +116,8 @@ public class UserController {
 			return Script.back(errorMap.toString());
 		}
 		
+=======
+>>>>>>> 3d20e0b9729d20e11e6823cb35323bb0b44d7038
 		// 1. Get username, password 
 		System.out.println("==========================================");
 		System.out.println(loginDto.getUsername());
@@ -123,7 +126,11 @@ public class UserController {
 		
 		// 2. DB -> Select
 		String encPassword = SHA.encrypt(loginDto.getPassword(), MyAlgorithm.SHA256);
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> 3d20e0b9729d20e11e6823cb35323bb0b44d7038
 		User principal = userRepository.mLogin(loginDto.getUsername(), encPassword);
 		System.out.println("==========================================");
 		System.out.println(principal);
@@ -131,11 +138,19 @@ public class UserController {
 
 		if(principal == null) {
 			System.out.println("로그인 되지 않았습니다:");
+<<<<<<< HEAD
 			return "redirect:/";
+=======
+			return "redirect:/loginForm";
+
+>>>>>>> 3d20e0b9729d20e11e6823cb35323bb0b44d7038
 		} else {
-			System.out.println("로그인 되었습니다:"+principal.getUsername());
 			session.setAttribute("principal", principal);
+<<<<<<< HEAD
 		    return "redirect:/myBody" + principal.getId();
+=======
+			return Script.href("/myBody/" + principal.getId() , "로그인 성공");
+>>>>>>> 3d20e0b9729d20e11e6823cb35323bb0b44d7038
 		}
 	}
 	

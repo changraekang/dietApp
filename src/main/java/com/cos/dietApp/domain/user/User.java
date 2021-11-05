@@ -37,7 +37,18 @@ public class User {
 	private int uHeight;
 	@Column(nullable = true, length = 5)
 	private String uMuscle;
+<<<<<<< HEAD
 	@Column(nullable = false, length = 5)
 	private String uBMI;
+=======
+	@Column(nullable = false, length = 20)
+  private String uBMI;
+	@Column(nullable = true, length = 20)
+	private int gWeight; //목표무게
+	@Column(nullable = true, length = 20)
+	private String gPeriod; //목표날짜
+	
+
+>>>>>>> 3d20e0b9729d20e11e6823cb35323bb0b44d7038
 
 }

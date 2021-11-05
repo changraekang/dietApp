@@ -18,15 +18,15 @@ import lombok.RequiredArgsConstructor;
 public class PagebleTest {
 	
 	private final BoardRepository boardRepository;
-	
+	//@PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable
 	@GetMapping("/test/page")
-	public  Page<Board> test(){
+	public  Page<Board> test( ){
 		System.out.println("페이징 시작");
 		int page=1, menuId=1;
 		PageRequest pageRequest = PageRequest.of(page, 5, Sort.by("id").descending());
-		Page<Board> boardsEntity = boardRepository.mFindAllPage(menuId, pageRequest);
+		Page<Board> boardsEntity = boardRepository.findAll(pageRequest);
 		
-		//Page<Board> boardsEntity = boardRepository.findAll(pageRequest);
+		//Page<Board> boardsEntity = boardRepository.findAll(menuId, pageRequest);
 		return boardsEntity;
 	}
 

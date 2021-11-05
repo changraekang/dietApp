@@ -14,6 +14,9 @@
 #chooseFile {
 	visibility: hidden;
 }
+#diarylist{
+	visibility: hidden;
+}
 
 
 #diarysave{
@@ -26,7 +29,11 @@
 	height: 50%;
 	object-fit: cover;
 }
+#todaydate {
 
+ text-align: center;
+ vertical-align:middle;
+}
 
 </style>
 <style>
@@ -135,23 +142,30 @@ dropdown2 {
 </head>
 <body>
 	<ul class="nav justify-content-around bg-light">
-		<li class="flex-fill"><a class="" href="/news">News</a></li>
-		<li class="flex-fill"><a href="/calorieDic">칼로리 사전</a></li>
-
+		<li class="flex-fill"><a class="" href="/news" style= "text-decoration: none;">News</a></li>
+		<li class="flex-fill"><a href="/calorieDic" style= "text-decoration: none;">칼로리 사전</a> </li>
 		<li class="dropdown2 flex-fill"><a href="javascript:void(0)"
-			class="dropbtn ">와글와글</a>
+			class="dropbtn " style= "text-decoration: none;">와글와글</a>
 			<div class="dropdown2-content flex-fill" style="width: 15.8%">
-				<a href="/wagleFree">자유게시판</a> <a href="/wagleQnA">건강
-					QnA</a> <a href="/recipe">다이어트 Recipe</a> <a
-					href="/wagleShowoff">다이어트 인증샷</a>
+				<a href="/board?menuId=1" style= "text-decoration: none;">자유게시판</a> 
+				<a href="/board?menuId=2" style= "text-decoration: none;">건강 QnA</a>
+				<a href="/recipe" style= "text-decoration: none;">다이어트 Recipe</a> 
+				<a href="/board?menuId=3" style= "text-decoration: none;">다이어트 인증샷</a>
 			</div></li>
 		<li class="dropdown2 flex-fill"><a href="javascript:void(0)"
-			class="dropbtn">다이어트 다이어리</a>
+			class="dropbtn" style= "text-decoration: none;">다이어트 다이어리</a>
 			<div class="dropdown2-content flex-fill" style="width: 19.5%">
-				<a href="/exercise">운동 일기</a> <a href="/diet">식단 일기</a>
+			<a href="/exercise" style= "text-decoration: none;">운동 일기</a> 
+			<a href="/diet" style= "text-decoration: none;">식단 일기</a>
 			</div></li>
-		<li class="flex-fill"><a href="/myBody">나의 Body</a></li>
-		<li class="flex-fill"><a href="/userupdate">회원정보</a></li>
+		<li class="flex-fill"><a href="/myBody" style= "text-decoration: none;">나의 Body</a></li>
+		<li class="dropdown2 flex-fill"><a href="javascript:void(0)"  class="droptbtn" style= "text-decoration: none;">회원정보</a>
+			<div class="dropdown2-content flex-fill" style="width: 15.8%">
+			<a href="/user/${sessionScope.principal.id}" style= "text-decoration: none;">회원정보</a> 
+			<a href="/logout" style= "text-decoration: none;">로그아웃</a>
+			</div>
+		</li>
+		
 	</ul>
 	<div class="jumbotron text-center"
 		style="height: 200px; position: relative">
@@ -159,9 +173,12 @@ dropdown2 {
 	</div>
 	<div class="container m_tm_20" style="height: 100%;">
 		<div id="calendar" style="float: left; width: 66%; "></div>
-								<br> <br> <br>
+				<div id = "todaydate" >
+				</div>
+				<br>
 		<div id="diary" style="float: left; width: 34%; height: 650px;">
 			<form class="upload-form" action="/exercise" method="post" enctype="multipart/form-data">
+				
 				<div class="form-group">
 					<input type="text" id="date" name="date" class="form-control"
 						required="required" readonly="readonly">
@@ -196,6 +213,7 @@ dropdown2 {
 					<img id="diaryphoto" src="">
 				</div>
 				<button type="submit" id="diarysave" class="btn btn-primary" onclick="calenderClick();" >일기저장</button>
+				<a id = "diarylist" href="/exercise/${sessionScope.principal.id}/list" >운동일기리스트</a>
 			</form>
 
 
@@ -240,7 +258,14 @@ let mealtime =  $("#mealtime input").on("click", function(event){
 	    console.log('일기가 저장되었습니다.');
 		
 	}
+	let today = new Date();   
 
+	let year = today.getFullYear(); // 년도
+	let month = today.getMonth() + 1;  // 월
+	let date = today.getDate();  // 날짜
+	let day = today.getDay();  // 요일
+	
+	$("#todaydate").append("<h3>"+ year+"년"+month+"월"+ date+"일"+"</h3>");
 
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
@@ -277,9 +302,19 @@ let mealtime =  $("#mealtime input").on("click", function(event){
 				}
 			},
 			headerToolbar: {
+				start:'list',
 		        center: 'exercisediary'
 		      },
 			customButtons: {
+				list : {
+					text: '리스트보기',
+					click: function() {
+						$('#diarylist').get(0).click();
+						$("#diarylist").trigger("click");
+					}
+					
+					
+				},
 				exercisediary: {
 		          text: '일기저장',
 		          click: function() {

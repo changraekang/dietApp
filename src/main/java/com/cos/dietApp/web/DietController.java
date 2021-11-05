@@ -1,6 +1,6 @@
 package com.cos.dietApp.web;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession; 
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cos.dietApp.domain.user.User;
+import com.cos.dietApp.handler.ex.MyNotFoundException;
 import com.cos.dietApp.service.DiaryService;
 import com.cos.dietApp.util.Script;
 import com.cos.dietApp.web.dto.FoodReqDto;
@@ -60,14 +61,49 @@ public class DietController {
 	}
 	
 	@GetMapping("/exercise/{id}/list")
-	public String exerciseList ( @PathVariable int id , Model model) {
+	public String exerciseList (  Model model , @PathVariable int id ) {
+		User principal = (User) session.getAttribute("principal");
 		
-		return "diary/exerciselist";
+		if (principal == null ) {
+			throw new MyNotFoundException("인증이 되지 않습니다.");
+			
+		}
+		model.addAttribute("exercisesEntity", diaryService.운동일기보기(id));
+		return "diary/exerciseList";
 	}
 	@GetMapping("/diet/{id}/list")
-	public String dietList () {
+	public String dietList ( Model model , @PathVariable int id ) {
+		User principal = (User) session.getAttribute("principal");
 		
-		return "diary/dietlist";
+		if (principal == null ) {
+			throw new MyNotFoundException("인증이 되지 않습니다.");
+			
+		}
+		model.addAttribute("foodsEntity", diaryService.식단일기보기(id));
+		return "diary/dietList";
+	}
+	@GetMapping("/exercise/{id}")
+	public String exerciseDiary (  Model model , @PathVariable int id ) {
+		User principal = (User) session.getAttribute("principal");
+		
+		if (principal == null ) {
+			throw new MyNotFoundException("인증이 되지 않습니다.");
+			
+		}
+		model.addAttribute("exercisesEntity", diaryService.운동일기상세보기(id));
+		return "diary/exerciseDetail";
+	}
+	@GetMapping("/diet/{id}")
+	public String dietDiary ( Model model , @PathVariable int id ) {
+		User principal = (User) session.getAttribute("principal");
+		
+		if (principal == null ) {
+			throw new MyNotFoundException("인증이 되지 않습니다.");
+			
+		}
+		
+		model.addAttribute("foodsEntity", diaryService.식단일기상세보기(id));
+		return "diary/dietDetail";
 	}
 	
 	//용세
