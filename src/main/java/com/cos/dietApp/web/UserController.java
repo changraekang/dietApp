@@ -71,10 +71,10 @@ public class UserController {
 		return "user/loginFormTest"; // ViewResolver
 	}
 	
-		
+
 
 	@PostMapping("/join")
-	public @ResponseBody String join(@Valid JoinReqDto dto, BindingResult bindingResult) { // username= &password= &email=으로 데이터가 들어온다
+	public @ResponseBody String join(@Valid JoinReqDto joinDto, BindingResult bindingResult) { // username= &password= &email=으로 데이터가 들어온다
 		
 		// 1. 유효성 검사 실패 - 자바스크립트 응답(경고창 띄우고 뒤로가기)
 		if(bindingResult.hasErrors()) {
@@ -87,13 +87,13 @@ public class UserController {
 			return Script.back(errorMap.toString());
 		}
 		
-		String encPassword = SHA.encrypt(dto.getPassword(), MyAlgorithm.SHA256);
+		String encPassword = SHA.encrypt(joinDto.getPassword(), MyAlgorithm.SHA256);
        
-        dto.setPassword(encPassword);		
-
+		joinDto.setPassword(encPassword);		
+		
 		// 2. 정상 - 로그인 페이지
 		// User 객체에 데이터를 넣고 User 객체로 받기
-		userRepository.save(dto.toEntity());
+		userRepository.save(joinDto.toEntity());
 		
 		return Script.href("/"); //리다이렉션(http상태코드: 300)
 	}
@@ -101,6 +101,23 @@ public class UserController {
 	
 	@PostMapping("/login") 
 	public @ResponseBody String login(@Valid LoginReqDto loginDto, BindingResult bindingResult) {
+<<<<<<< HEAD
+		
+		System.out.println("에러사이즈:"+bindingResult.getFieldErrors().size());
+		
+		// 1. 유효성 검사 실패 - 자바스크립트 응답(경고창 띄우고 뒤로가기)
+		if(bindingResult.hasErrors()) {
+			Map<String, String> errorMap = new HashMap<>();
+			for(FieldError error : bindingResult.getFieldErrors()) {
+				errorMap.put(error.getField(), error.getDefaultMessage());
+				System.out.println("필드 : " + error.getField());
+				System.out.println("메세지 : " + error.getDefaultMessage());
+			}
+			return Script.back(errorMap.toString());
+		}
+		
+=======
+>>>>>>> 3d20e0b9729d20e11e6823cb35323bb0b44d7038
 		// 1. Get username, password 
 		System.out.println("==========================================");
 		System.out.println(loginDto.getUsername());
@@ -109,7 +126,11 @@ public class UserController {
 		
 		// 2. DB -> Select
 		String encPassword = SHA.encrypt(loginDto.getPassword(), MyAlgorithm.SHA256);
+<<<<<<< HEAD
+		
+=======
 
+>>>>>>> 3d20e0b9729d20e11e6823cb35323bb0b44d7038
 		User principal = userRepository.mLogin(loginDto.getUsername(), encPassword);
 		System.out.println("==========================================");
 		System.out.println(principal);
@@ -117,11 +138,19 @@ public class UserController {
 
 		if(principal == null) {
 			System.out.println("로그인 되지 않았습니다:");
+<<<<<<< HEAD
+			return "redirect:/";
+=======
 			return "redirect:/loginForm";
 
+>>>>>>> 3d20e0b9729d20e11e6823cb35323bb0b44d7038
 		} else {
 			session.setAttribute("principal", principal);
+<<<<<<< HEAD
+		    return "redirect:/myBody" + principal.getId();
+=======
 			return Script.href("/myBody/" + principal.getId() , "로그인 성공");
+>>>>>>> 3d20e0b9729d20e11e6823cb35323bb0b44d7038
 		}
 	}
 	

@@ -3,6 +3,13 @@
 
 <%@ include file="../layout/header.jsp" %>
 
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login Page</title>
+
 <style>
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
 
@@ -252,15 +259,17 @@ form{
   100% { transform: translateY(-700px) rotate(600deg); }
 }
 </style>
+</head>
 
+<body>
 <div class="wrapper">
 <div class="container">
 	<form action="/login"  method="post">
 	  <div class="form-group">
-	    <input type="text" name="username" class="form-control" placeholder="Enter username" required="required">
+	    <input type="text" name="username" class="form-control" placeholder="Enter username" required="required"  maxlength="20">
 	  </div>
 	  <div class="form-group">
-	    <input type="password" name="password" class="form-control" placeholder="Enter password" required="required">
+	    <input type="password" name="password" id="pw" class="form-control" placeholder="Enter password" required="required">
 	  </div>
 	  <a href="/joinForm" class="btn float-center join_btn">회원가입</a>
 	  <button type="submit" id="login-button" class="btn btn-primary">로그인</button>
@@ -281,9 +290,38 @@ form{
 	</ul>
 </div>
 
+<script>
+   function check_pw(){
+	 
+    var pw = document.getElementById('pw').value;
+    var SC = ["!","@","#","$","%"];
+    var check_SC = 0;
 
+    if(pw.length < 6 || pw.length>20){
+        window.alert('비밀번호는 6글자 이상, 20글자 이하만 이용 가능합니다.');
+        document.getElementById('pw').value='';
+    }
+    for(var i=0;i<SC.length;i++){
+        if(pw.indexOf(SC[i]) != -1){
+            check_SC = 1;
+        }
+    }
+    if(check_SC == 0){
+        window.alert('!,@,#,$,% 의 특수문자가 들어가 있지 않습니다.')
+        document.getElementById('pw').value='';
+    } 
+       if(document.getElementById('pw').value !='' && document.getElementById('pw2').value!=''){
+        if(document.getElementById('pw').value==document.getElementById('pw2').value){
+            document.getElementById('check').innerHTML='비밀번호가 일치합니다.'
+            document.getElementById('check').style.color='blue';
+        }
+        else{
+            document.getElementById('check').innerHTML='비밀번호가 일치하지 않습니다.';
+            document.getElementById('check').style.color='red'; 
+        }
+    }
+</script>
+</body>
+</html>
 
 <%@ include file="../layout/footer.jsp" %>
-
-
-    

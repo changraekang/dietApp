@@ -180,15 +180,8 @@ input:focus {
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 							</div>
-							<input type="password" name="password" id="pw" class="form-control"
+							<input type="password" name="password" class="form-control"
 								placeholder="PASSWORD를 입력해주세요" required="required" maxlength="20">
-						</div>
-						<div class="input-group form-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text"><i class="fas fa-key"></i></span>
-							</div>
-							<input type="password" name="password" id="pw2" class="form-control"
-								placeholder="PASSWORD를 다시 입력해주세요" required="required" maxlength="20">
 						</div>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
@@ -196,14 +189,14 @@ input:focus {
 									class="fas fa-user-circle"></i></span>
 							</div>
 							<input type="text" name="uName" class="form-control" placeholder="이름을 입력해주세요"
-								required="required" maxlength="20">
+								required="required">
 						</div>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-phone"></i></span>
 							</div>
 							<input type="text" name="uPhone" class="form-control"
-								placeholder="PHONE NUMBER를 입력해주세요" required="required" maxlength="20">
+								placeholder="PHONE NUMBER를 입력해주세요" required="required">
 						</div>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
@@ -211,7 +204,7 @@ input:focus {
 									class="fas fa-address-book"></i></span>
 							</div>
 							<input type="email" name="uEmail" class="form-control"
-								placeholder="EMAIL를 입력해주세요" required="required" maxlength="50">
+								placeholder="EMAIL를 입력해주세요" required="required">
 						</div>
 						<div class="form-group">
 							<input type="submit" value="Join"
@@ -265,7 +258,7 @@ input:focus {
 								<span class="input-group-text"><i class="fas fa-child"></i></span>
 							</div>
 							<input type="text" name="uBMI" class="form-control" id="bmi" placeholder="BMI"
-								 readonly="readonly" maxlength="5">
+								 readonly="readonly">
 						</div>
 
 					</div>
@@ -273,50 +266,16 @@ input:focus {
 			</form>
 		</div>
 	</div>
-	<script>
-		function printName()  {
-		    const height = document.getElementById('height').value;
-		    const weight = document.getElementById('weight').value;
-		    
-		    document.getElementById("bmi").value = (weight / ((height/100) * (height/100))).toFixed(2);
-		    
-		  }
-	
-           function check_pw(){
- 
-            var pw = document.getElementById('pw').value;
-            var SC = ["!","@","#","$","%"];
-            var check_SC = 0;
- 
-            if(pw.length < 6 || pw.length>20){
-                window.alert('비밀번호는 6글자 이상, 20글자 이하만 이용 가능합니다.');
-                document.getElementById('pw').value='';
-            }
-            for(var i=0;i<SC.length;i++){
-                if(pw.indexOf(SC[i]) != -1){
-                    check_SC = 1;
-                }
-            }
-            if(check_SC == 0){
-                window.alert('!,@,#,$,% 의 특수문자가 들어가 있지 않습니다.')
-                document.getElementById('pw').value='';
-            }
-            if(document.getElementById('pw').value !='' && document.getElementById('pw2').value!=''){
-                if(document.getElementById('pw').value==document.getElementById('pw2').value){
-                    document.getElementById('check').innerHTML='비밀번호가 일치합니다.'
-                    document.getElementById('check').style.color='blue';
-                }
-                else{
-                    document.getElementById('check').innerHTML='비밀번호가 일치하지 않습니다.';
-                    document.getElementById('check').style.color='red';
-                }
-            }
-        } 
-    </script>
-    <style>
-        td{padding:5px;}
-    </style>
+<script>
+function printName()  {
+    const height = document.getElementById('height').value;
+    const weight = document.getElementById('weight').value;
+    
+    document.getElementById("bmi").value = (weight / ((height/100) * (height/100))).toFixed(2);
+    
+  }
 
+</script>	
 	
 </body>
 </html>
