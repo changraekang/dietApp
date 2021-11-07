@@ -12,4 +12,5 @@ public class PageRespDto {
 	private int lastPage;
 	private int prePage;
 	private int nextPage;
+	private int endPage;
 }

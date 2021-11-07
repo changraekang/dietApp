@@ -34,16 +34,6 @@ public class FoodApiTest {
 		return "test/cal";
 	}
 	
-	@PostMapping("/pagecal")
-	public @ResponseBody PageRespDto pagecal(@RequestBody PageReqDto dto) {
-		int pageten = (int) (Math.ceil(dto.getNowPage() / 10.0) * 10);
-		int nowPage = dto.getNowPage();
-		int lastPage = (int) Math.ceil(dto.getTotalCount() / 10.0);
-		int prePage = pageten - 10;
-		int nextPage = pageten + 1;
-		PageRespDto pageRespDto = new PageRespDto (nowPage, lastPage, prePage, nextPage);
 
-		return pageRespDto;
-	}
 
 }
