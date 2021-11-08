@@ -19,7 +19,9 @@
 			<li><h4><a href="/board?menuId=3" style= "text-decoration: none;">인증게시판</a></h4></li>
 		</ul>
 	</div>
-		
+	
+	
+	
 	<div class="box2">
 	<h2>게시글 리스트</h2>
 		<!-- boardsEntity -> pageScope에 있음. -->

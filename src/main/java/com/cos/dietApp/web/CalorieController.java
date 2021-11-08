@@ -48,8 +48,6 @@ public class CalorieController {
 	
 	@PostMapping("/calorieDic/getapi")
 	public @ResponseBody CMRespDto<JSONObject> getApiTest(Model model, @RequestBody FoodApiReqDto dto) {
-		System.out.println("경로 호출됨");
-		
 		return new CMRespDto<>(1, "성공", calorieAPI.calorie(dto));
 	}
 }

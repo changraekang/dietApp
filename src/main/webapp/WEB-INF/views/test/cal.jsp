@@ -85,8 +85,9 @@
 				table.innerHTML += html;
 				i++;
 			}
+			let nowpagenum = 1;
 			let totalCount = data.totalCount;
-			pagecal(pagenum, totalCount)
+			pagecal(nowpagenum, totalCount)
 			
 		} else {
 			alert("검색에 실패하였습니다.");
@@ -108,19 +109,27 @@
 
 		let page = await pageResponse.json();
 		let html = '<ul class="pagination">';
-		if(page.prePage != 0){
+		let endPage = page.nextPage - 1;
+		if(endPage > page.lastPage){
+			endPage = lastpage;
+		}
+		if(page.nowPage != 1){
 			html += '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="gopage(1)">처음</a></li>';
+		}
+		if(page.prePage != 0){
 			html += '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="gopage(' + page.prePage + ')">이전</a></li>';
 		}
-		for(let i = page.prePage+1 ; i <= page.endPage ; i++){
-			if(i == page.nowPage){
-				html += '<li class="page-item active"><a class="page-link">' + i +'</a></li>';				
+		for(let i = page.prePage+1 ; i < endPage ; i++){
+			if(i == page.nowpage){
+				html += '<li class="page-item">' + i +'</li>';				
 			} else {
 				html += '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="gopage(' + i + ')">' + i +'</a></li>';
 			}
 		}
 		if(page.nextPage <= page.lastPage) {
 			html += '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="gopage(' + page.nextPage +')">다음</a></li>';
+		}
+		if(page.nowPage != page.lastPage) {
 			html += '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="gopage(' + page.lastPage + ')">마지막</a></li>';
 		}
 		html += '</ul>';

@@ -25,15 +25,13 @@ public class CalorieAPI {
     	JSONObject jo = null;
     	HttpURLConnection conn = null;
     	BufferedReader rd = null;
-    	System.out.println("dto foodstr : " + dto.getFoodstr());
-    	System.out.println("dto page : " + dto.getPage());
         try {
         	String sKey = "GEenzrfqpLS1IKjRAxv02SvRSzD7cSYwrFkcbZsI95GFYEIXoFnsSBkzMRDsuFdb6XWcFhUfaHPZyLexeJngeQ%3D%3D";
         	StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1471000/FoodNtrIrdntInfoService1/getFoodNtrItdntList1"); /*URL*/
         	urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + sKey); /*Service Key*/
         	urlBuilder.append("&" + URLEncoder.encode("desc_kor","UTF-8") + "=" + URLEncoder.encode(dto.getFoodstr(), "UTF-8")); /*식품이름*/
         	urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode(dto.getPage(), "UTF-8")); /*페이지번호*/
-        	urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("5", "UTF-8")); /*한 페이지 결과 수*/
+        	urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과 수*/
         //	urlBuilder.append("&" + URLEncoder.encode("bgn_year","UTF-8") + "=" + URLEncoder.encode("2017", "UTF-8")); /*구축년도*/
         //	urlBuilder.append("&" + URLEncoder.encode("animal_plant","UTF-8") + "=" + URLEncoder.encode("(유)돌코리아", "UTF-8")); /*가공업체*/
         //	urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + URLEncoder.encode("인증키 (URL Encode)", "UTF-8")); /*공공데이터포털에서 발급받은 인증키*/
