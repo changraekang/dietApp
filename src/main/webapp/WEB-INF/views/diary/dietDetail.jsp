@@ -51,16 +51,26 @@
 	</div>
 	<hr />
 	<div>
-		<div>${foodsEntity.food}  ${foodsEntity.food1}  ${foodsEntity.food2}  ${foodsEntity.food3}  ${foodsEntity.food4}</div>
+		<div id="food">${foodsEntity.food}  ${foodsEntity.food1}  ${foodsEntity.food2}  ${foodsEntity.food3}  ${foodsEntity.food4}</div>
 	</div>
-	<div>
-		<div>${foodsEntity.kcal } kcal</div>
+	<div id = "kcal">
+		<div> </div>
 	</div>
 	<hr />
 </div>
 
 
+<script>
+$("#food").css({ "font-size": "200%"});
+var kcal = ${foodsEntity.kcal };
 
+
+function kcalWithComma(kcal) {
+    return kcal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+document.getElementById("kcal").innerHTML = kcalWithComma(kcal) + "kcal";
+
+</script>
 
 
 <%@ include file="../layout/footer.jsp"%>

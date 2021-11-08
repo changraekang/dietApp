@@ -12,6 +12,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cos.dietApp.service.UserService;
@@ -128,6 +129,10 @@ public class UserController {
 		
 		return "user/updateForm";
 	}
+	// 회원정보수정
+	//@PutMapping("/user/{id}")
+	
+	
 }
 
 

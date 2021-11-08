@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
+import com.cos.dietApp.domain.user.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,28 +18,35 @@ import lombok.NoArgsConstructor;
 public class UserUpdateDto {
 	
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id; // PK
-	@Column(nullable = false, length = 20, unique = true)
-	private String username; // ID
-	@Column(nullable = false, length = 1000)
-	private String password;
-	@Column(nullable = false, length = 20)
 	private String uName; // 실명
-	@Column(nullable = false, length = 20)
 	private String uPhone;
-	@Column(nullable = false, length = 50)
 	private String uEmail;
-	@Column(nullable = false, length = 20)
 	private String uGender;
-	@Column(nullable = false, length = 3)
 	private int uWeight;
-	@Column(nullable = false, length = 3)
 	private int uHeight;
-	@Column(nullable = true, length = 5)
 	private String uMuscle;
-	@Column(nullable = false, length = 5)
 	private String uBMI;
+	private int gWeight; //목표무게
+	private String gPeriod; //목표날짜
+
+	public User toEntity() {
+		User user = new User ();
+		user.setUName(uName);
+		user.setUPhone(uPhone);
+		user.setUEmail(uEmail);
+		user.setUGender(uGender);
+		
+		user.setUWeight(uWeight);
+		user.setUHeight(uHeight);
+		user.setUMuscle(uMuscle);
+		user.setUBMI(String.format("%.2f",uBMI));
+		user.setGWeight(gWeight);
+		user.setGPeriod(gPeriod);
+		
+		
+		
+		return user;
+	}
+	
 
 }
