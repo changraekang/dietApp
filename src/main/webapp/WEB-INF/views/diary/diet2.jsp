@@ -203,7 +203,6 @@ dropdown2 {
 	<div class="container m_tm_20" style="height: 100%;">
 
 		<div id="calendar" style="float: left; width: 66%; height: 200px;"></div>
-			
 				<div id = "todaydate" >
 				</div>
 				<br>
@@ -241,7 +240,7 @@ dropdown2 {
 				</div>
 
 				<div class="form-group">
-					<input id="kcal" type="text" class="form-control" name='kcal'  placeholder="kcal"
+					<input type="text" class="form-control" name='kcal'  placeholder="kcal"
 						required="required" maxlength="20">
 				</div>
 				<div class="image-upload" id="image-upload">
@@ -337,7 +336,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				arg.event.remove()
 			}
 		},
-		  headerToolbar: { 
+		headerToolbar: {
 			start:'list',
 	        center: 'fooddiary'
 	      },
@@ -351,11 +350,12 @@ document.addEventListener('DOMContentLoaded', function() {
 				
 				
 			},
+				
 			fooddiary: {
 	          text: '일기저장',
 	          click: function() {
 	              calendar.addEvent({
-	                title: mealtime + " " + document.getElementById("kcal").value+"kcal",
+	                title: mealtime,
 	                start: document.getElementById("date").value,
 	                allDay: true
 	              });
@@ -363,8 +363,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	           
 	          }
 	        }
-		 		
-		} 
+		}
 
 	});
 
