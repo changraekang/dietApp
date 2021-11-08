@@ -129,7 +129,7 @@ dropdown2 {
 			<a href="/exercise" style= "text-decoration: none;">운동 일기</a> 
 			<a href="/diet" style= "text-decoration: none;">식단 일기</a>
 			</div></li>
-		<li class="flex-fill"><a href="/myBody" style= "text-decoration: none;">나의 Body</a></li>
+		<li class="flex-fill"><a href="/myBody/${sessionScope.principal.id}" style= "text-decoration: none;">나의 Body</a></li>
 		<li class="dropdown2 flex-fill"><a href="javascript:void(0)"  class="droptbtn" style= "text-decoration: none;">회원정보</a>
 			<div class="dropdown2-content flex-fill" style="width: 15.8%">
 			<a href="/user/${sessionScope.principal.id}" style= "text-decoration: none;">회원정보</a> 
