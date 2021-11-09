@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cos.dietApp.domain.user.User;
 import com.cos.dietApp.handler.ex.MyAPINotFoundException;
+import com.cos.dietApp.service.DiaryService;
 import com.cos.dietApp.service.UserService;
 import com.cos.dietApp.util.Script;
 import com.cos.dietApp.web.dto.CMRespDto;
@@ -36,7 +38,7 @@ public class UserController {
 	// DI
 	private final UserService	userService;
 	private final HttpSession session;
-
+	private final DiaryService diaryService;
 
 	// Main
 	@GetMapping("/")
@@ -47,7 +49,11 @@ public class UserController {
 	
 	//  userBody
 	@GetMapping("/myBody/{id}")
-	public String myBody ( @PathVariable int id) {
+	public String myBody (  Model model, @PathVariable int id) {
+		
+		
+		model.addAttribute("exercisesEntity", diaryService.운동kcal(id));
+		model.addAttribute("foodsEntity", diaryService.식단kcal(id));
 		// 기본은 userRepository.findById(id) -> DB에서 가져와야 함
 		// 우회적으로 session value 를 가져올 수 있다
 		// Validation 체크 불필요 자신의 session 만 가져오기 때문

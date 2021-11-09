@@ -101,7 +101,7 @@ async function update(event, id){
     		  uMuscle: 123,
     		  uBMI: 123,
     		  gPeriod: 123,
-    		  gWeight: 123 
+    		  gWeight: 123,
       };
 		console.log(userUpdateDto+"콘솔");
 

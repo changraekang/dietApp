@@ -10,4 +10,6 @@ public interface ExerciseDiaryRepository extends JpaRepository<ExerciseDiary, In
 	
 	@Query(value = "select * from exercisediary where userId = :userId ORDER BY date desc " , nativeQuery = true)
 	List<ExerciseDiary> mExerciseList( int userId );
+	
+
 }

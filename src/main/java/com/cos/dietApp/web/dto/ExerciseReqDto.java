@@ -16,7 +16,7 @@ public class ExerciseReqDto {
 	
 	@NotBlank
 	private String 	Exercise;
-	private String 	kcal;
+	private int 	kcal;
 	@NotBlank
 	private String 	time; // 운동시간
 	private String 	file;

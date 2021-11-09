@@ -39,7 +39,7 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td>280kcal</td>
+					<td>${exercisesEntity }kcal</td>
 					<td>450kcal</td>
 					<td>170kcal</td>
 				</tr>
@@ -55,7 +55,7 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td>2850kcal</td>
+					<td>${foodsEntity }kcal</td>
 					<td>2250kcal</td>
 					<td>600kcal</td>
 				</tr>

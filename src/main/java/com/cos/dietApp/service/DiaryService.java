@@ -1,15 +1,13 @@
 package com.cos.dietApp.service;
 
-import java.nio.file.Files; 
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID; 
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +19,7 @@ import com.cos.dietApp.domain.user.User;
 import com.cos.dietApp.handler.ex.MyNotFoundException;
 import com.cos.dietApp.web.dto.ExerciseReqDto;
 import com.cos.dietApp.web.dto.FoodReqDto;
+import com.cos.dietApp.web.dto.kcalDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,7 +28,57 @@ import lombok.RequiredArgsConstructor;
 public class DiaryService {
 	private final FoodDiaryRepository foodDiaryRepository;
 	private final ExerciseDiaryRepository exerciseDiaryRepository;
+	private final EntityManager em; // Repository는 EntityManager를 구현해서 만들어져 있는 구현체
 
+	
+	@Transactional(readOnly = true)
+	public double 식단kcal(int id){
+		
+		// 쿼리 준비
+		StringBuffer sb = new StringBuffer();
+		sb.append("SELECT  round(AVG(kcal)) as kcal ");
+		sb.append(" from foodDiary where userId = ? "); // 세미콜론 첨부하면 안됨
+		
+		// 1.물음표 principalId
+		
+		// 쿼리 완성
+		Query query = em.createNativeQuery(sb.toString())
+				.setParameter(1, id);
+		
+		
+		
+		// 쿼리 실행 (qlrm 라이브러리 필요 = DTO에 DB결과를 매핑하기 위해서)
+		JpaResultMapper result = new JpaResultMapper();
+		kcalDTO kcalDto =  result.uniqueResult(query, kcalDTO.class);
+		System.out.println(kcalDto.getKcal().doubleValue());
+
+		return kcalDto.getKcal().doubleValue();
+	}
+	@Transactional(readOnly = true)
+	public double 운동kcal(int id){
+		
+		// 쿼리 준비
+		StringBuffer sb = new StringBuffer();
+		sb.append("SELECT  round(AVG(kcal)) as kcal ");
+		sb.append(" from exercisediary where userId = ? "); // 세미콜론 첨부하면 안됨
+		
+		// 1.물음표 principalId
+		
+		// 쿼리 완성
+		Query query = em.createNativeQuery(sb.toString())
+				.setParameter(1, id);
+		
+		
+		
+		// 쿼리 실행 (qlrm 라이브러리 필요 = DTO에 DB결과를 매핑하기 위해서)
+		JpaResultMapper result = new JpaResultMapper();
+		kcalDTO kcalDto =  result.uniqueResult(query, kcalDTO.class);
+		System.out.println(kcalDto.getKcal().doubleValue());
+		return kcalDto.getKcal().doubleValue();
+	}
+	
+	
+	
 	/*
 	@Value("${file.path}")
 	private String uploadFolder;
@@ -78,6 +127,7 @@ public class DiaryService {
 		ExerciseDiary exerciseDiaryEntity = exerciseDiaryRepository.findById(id).orElseThrow(() -> new MyNotFoundException(id + "를 못 찾았어요"));
 		return exerciseDiaryEntity;
 	}
+
 	public List<FoodDiary> 식단일기보기( int id) {
 		
 		List<FoodDiary> foodDiaries = foodDiaryRepository.mFoodList(id); 
@@ -91,4 +141,5 @@ public class DiaryService {
 		FoodDiary foodDiaryEntity = foodDiaryRepository.findById(id).orElseThrow(() -> new MyNotFoundException(id + "를 못 찾았어요"));
 		return foodDiaryEntity;
 	}
+
 }

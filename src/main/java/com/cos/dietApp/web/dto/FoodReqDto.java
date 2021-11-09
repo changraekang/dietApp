@@ -21,7 +21,7 @@ public class FoodReqDto {
 	private String 	food2;
 	private String 	food3;
 	private String 	food4;
-	private String 	kcal;
+	private int 	kcal;
 	@NotBlank
 	private String 	mealtime; // 아침,점심,저녁
 	@NotBlank
