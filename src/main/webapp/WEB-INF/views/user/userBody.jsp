@@ -66,7 +66,7 @@
 <div class="container mt-3">
 	<h2>목표체중 도달</h2>
 	<div class="progress">
-		<div class="progress-bar" style="width: 80%"></div>
+		<div id="progress" class="progress-bar" style="width: 70%"></div>
 	</div>
 </div>
 <input type="text" id="uGender" style="visibility: hidden"
@@ -109,6 +109,11 @@
 		break;
 	}
 	}
+if 	(${sessionScope.principal.GWeight} !=0 ){
+let weightper = (${sessionScope.principal.UWeight}/${sessionScope.principal.GWeight})*100;
+alert(weightper);
+	
+}
 	
 </script>
 <%@ include file="../layout/footer.jsp"%>
