@@ -43,7 +43,14 @@ public class UserService {
 		if (principal.getId() != userEntity.getId()) {
 			throw new MyAPINotFoundException("회원정보를 수정할 권한이 없습니다");
 		}
-		
+		System.out.println(dto.getGPeriod());
+		System.out.println(dto.getGWeight());
+		System.out.println(dto.getUBMI());
+		System.out.println(dto.getUEmail());
+		System.out.println(dto.getUGender());
+		System.out.println(dto.getUName());
+		System.out.println(dto.getUPhone());
+		System.out.println(dto.getUWeight());
 		principal.setUName(dto.getUName());
 		principal.setUPhone(dto.getUPhone());
 		principal.setUEmail(dto.getUEmail());
@@ -54,7 +61,7 @@ public class UserService {
 		principal.setUBMI(dto.getUBMI());
 		principal.setGWeight(dto.getGWeight());
 		principal.setGPeriod(dto.getGPeriod());
-	
+		userRepository.save(principal);
 	}
 	
 	
