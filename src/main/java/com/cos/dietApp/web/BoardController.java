@@ -1,11 +1,14 @@
 package com.cos.dietApp.web;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,8 +27,10 @@ import com.cos.dietApp.domain.boardmenu.BoardMenu;
 import com.cos.dietApp.domain.boardmenu.BoardMenuRepository;
 import com.cos.dietApp.handler.ex.MyAPINotFoundException;
 import com.cos.dietApp.handler.ex.MyNotFoundException;
+import com.cos.dietApp.util.PageCalc;
 import com.cos.dietApp.web.dto.BoardSaveReqDto;
 import com.cos.dietApp.web.dto.CMRespDto;
+import com.cos.dietApp.web.dto.PageRespDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -35,40 +40,27 @@ public class BoardController {
 	
 	private final BoardRepository boardRepository;
 	private final BoardMenuRepository boardMenuRepository;
+	private final PageCalc calc;
 	
 	//창래
-	@GetMapping("/wagleFree")
-	public String wagleFree () {
-		
-		return "wagle/Free";
-	}
-	@GetMapping("/wagleQnA")
-	public String wagleQnA () {
-		
-		return "wagle/QnA";
-	}
-	@GetMapping("/wagleShowoff")
-	public String wagleShowoff () {
-		
-		return "wagle/showoff";
-	}
 	//용세
 	
 	// ---- 게시글 목록 보기
 	@GetMapping("/board")
-	public String home(Model model, int menuId) {
-
-		List<Board> boardsEntity = boardRepository.mFindAll(menuId);
+	public String home(Model model, int menuId, @PageableDefault(page=0, size=10, sort="id", direction = Sort.Direction.DESC) Pageable pageRequest) {
 		BoardMenu boardMenu = boardMenuRepository.findById(menuId).get();
+		Page<Board> boardsEntity = boardRepository.findByBoardMenu(boardMenu, pageRequest);
+		
+		int nowPage = pageRequest.getPageNumber() + 1;
+		int lastPage = boardsEntity.getTotalPages();
+		PageRespDto page = calc.pagecal(nowPage, lastPage);
+		System.out.println(page);
 		model.addAttribute("boardsEntity", boardsEntity);
 		model.addAttribute("menuId", menuId);
 		model.addAttribute("boardMenu", boardMenu);
+		model.addAttribute("page", page);
 		
-		
-		if(menuId != 3)
-			return "wagle/list";
-		else
-			return "wagle/showoff";
+		return "wagle/list";
 	}
 	
 

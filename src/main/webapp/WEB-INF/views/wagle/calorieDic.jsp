@@ -99,7 +99,7 @@
 			nowPage : nowpagenum,
 			totalCount : totalCount
 		};
-		let pageResponse = await fetch("http://localhost:8080/pagecal", {
+		let pageResponse = await fetch("http://localhost:8080/calorieDic/pagecal", {
 			method : "post",
 			body : JSON.stringify(pageReqDto),
 			headers : {
