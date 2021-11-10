@@ -276,7 +276,7 @@ dropdown2 {
 
 				events: [ /* event data here */]
 			},
-			initialDate : '2021-10-12',
+			initialDate :today,
 			/*  
 			calendar.addEvent({
 				title : i,
