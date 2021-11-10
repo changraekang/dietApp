@@ -4,14 +4,16 @@ import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cos.dietApp.util.CalorieAPI;
+import com.cos.dietApp.util.PageCalc;
 import com.cos.dietApp.web.dto.CMRespDto;
 import com.cos.dietApp.web.dto.FoodApiReqDto;
+import com.cos.dietApp.web.dto.PageReqDto;
+import com.cos.dietApp.web.dto.PageRespDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class CalorieController {
 
 	private final CalorieAPI calorieAPI;
+	private final PageCalc calc;
 /*
 	항목명		항목 설명			크기	
 	resultCode	결과코드			4
@@ -49,5 +52,12 @@ public class CalorieController {
 	@PostMapping("/calorieDic/getapi")
 	public @ResponseBody CMRespDto<JSONObject> getApiTest(Model model, @RequestBody FoodApiReqDto dto) {
 		return new CMRespDto<>(1, "성공", calorieAPI.calorie(dto));
+	}
+	
+	@PostMapping("/calorieDic/pagecal")
+	public @ResponseBody PageRespDto apipage(@RequestBody PageReqDto dto) {
+		
+		PageRespDto pageRespDto = calc.pagecal(dto.getNowPage(), dto.getTotalCount());
+		return pageRespDto;
 	}
 }
