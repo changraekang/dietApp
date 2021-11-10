@@ -59,9 +59,16 @@ public class BoardController {
 	public String home(Model model, int menuId) {
 
 		List<Board> boardsEntity = boardRepository.mFindAll(menuId);
+		BoardMenu boardMenu = boardMenuRepository.findById(menuId).get();
 		model.addAttribute("boardsEntity", boardsEntity);
 		model.addAttribute("menuId", menuId);
-		return "wagle/list";
+		model.addAttribute("boardMenu", boardMenu);
+		
+		
+		if(menuId != 3)
+			return "wagle/list";
+		else
+			return "wagle/showoff";
 	}
 	
 

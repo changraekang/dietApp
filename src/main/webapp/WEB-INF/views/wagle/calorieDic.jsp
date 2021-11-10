@@ -3,7 +3,6 @@
 
 
 <%@ include file="../layout/header.jsp"%>
-<h2>칼로리사전</h2>
 <style>
 #foodtable tr td {
 	border: black 1px solid;
@@ -18,7 +17,9 @@
 	border-collapse: collapse;
 }
 </style>
+
 <div class="container">
+	<h2>칼로리사전</h2>
 	<input type="text" id="foodstr" placeholder="Enter food">
 	<input type="button" onclick="foodsave()" value="검색">
 	<input type="hidden" id="foodstrsave">

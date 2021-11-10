@@ -23,7 +23,7 @@
 	
 	
 	<div class="box2">
-	<h2>게시글 리스트</h2>
+	<h2>${boardMenu.menu} 게시판</h2>
 		<!-- boardsEntity -> pageScope에 있음. -->
 	 	<c:forEach var="board" items="${boardsEntity}">
 			<!-- 카드 글 시작 -->
@@ -31,8 +31,7 @@
 				<div class="card-body">
 					<!-- el표현식은 변수를 적으면 자동으로 get 함수를 사용해준다 -->
 					<a href="/board/${board.id }">
-					<img src="${board.thumbnail}">
-					<h4 class="card-title">${board.title }</h4>
+					<h4 class="card-title">${board.title}<c:if test="${!empty board.thumbnail}"><img src="/image/paint"></c:if></h4>
 					</a>
 				</div>
 			</div>
