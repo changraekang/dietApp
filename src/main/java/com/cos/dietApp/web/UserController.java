@@ -6,7 +6,9 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cos.dietApp.domain.user.User;
 import com.cos.dietApp.handler.ex.MyAPINotFoundException;
+import com.cos.dietApp.service.DiaryService;
 import com.cos.dietApp.service.UserService;
 import com.cos.dietApp.util.Script;
 import com.cos.dietApp.web.dto.CMRespDto;
@@ -36,7 +39,7 @@ public class UserController {
 	// DI
 	private final UserService	userService;
 	private final HttpSession session;
-
+	private final DiaryService diaryService;
 
 	// Main
 	@GetMapping("/")
@@ -47,7 +50,13 @@ public class UserController {
 	
 	//  userBody
 	@GetMapping("/myBody/{id}")
-	public String myBody ( @PathVariable int id) {
+	public String myBody (  Model model, @PathVariable int id) {
+		
+		
+		
+		model.addAttribute("daysCalcurate",userService.날짜계산(id));
+		model.addAttribute("exercisesEntity", diaryService.운동kcal(id));
+		model.addAttribute("foodsEntity", diaryService.식단kcal(id));
 		// 기본은 userRepository.findById(id) -> DB에서 가져와야 함
 		// 우회적으로 session value 를 가져올 수 있다
 		// Validation 체크 불필요 자신의 session 만 가져오기 때문
@@ -64,20 +73,21 @@ public class UserController {
 	//회원가입	
 	@PostMapping("/join")
 	public @ResponseBody String join(@Valid JoinReqDto joinDto, BindingResult bindingResult) { // username= &password= &email=으로 데이터가 들어온다
-		
 		// 1. 유효성 검사 실패 - 자바스크립트 응답(경고창 띄우고 뒤로가기)
 		if(bindingResult.hasErrors()) {
+			System.out.println("바인딩에러");
+			
 			Map<String, String> errorMap = new HashMap<>();
 			for(FieldError error : bindingResult.getFieldErrors()) {
 				errorMap.put(error.getField(), error.getDefaultMessage());
 				System.out.println("필드 : " + error.getField());
 				System.out.println("메세지 : " + error.getDefaultMessage());
 			}
-			return Script.back(errorMap.toString());
+			return Script.back("회원가입 정보를 확인하세요");
 		}
 		userService.회원가입(joinDto);
 		
-		return Script.href("/"); //리다이렉션(http상태코드: 300)
+		return Script.href("/","회원가입을 축하합니다"); //리다이렉션(http상태코드: 300)
 	}
 	
 	@GetMapping("/joinForm")
@@ -153,6 +163,9 @@ public class UserController {
 		if (principal == null) {
 			throw new MyAPINotFoundException("인증이 되지 않습니다");
 		}
+		
+		
+		
 		userService.회원정보수정(principal, id, dto);
 		session.setAttribute("principal", principal);	
 		return new CMRespDto<>(1, "업데이트 성공", null);

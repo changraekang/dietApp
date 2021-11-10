@@ -24,7 +24,7 @@ public class ExerciseDiary {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int 	id;
 	private String 	Exercise;
-	private String 	kcal;
+	private int 	kcal;
 	private String 	file;
 	private String 	time; // 운동시간
 	private String 	date; // 운동한 날짜

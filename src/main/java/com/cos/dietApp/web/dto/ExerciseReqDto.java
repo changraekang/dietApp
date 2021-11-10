@@ -1,5 +1,6 @@
 package com.cos.dietApp.web.dto;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 
 import com.cos.dietApp.domain.diary.ExerciseDiary;
@@ -16,7 +17,8 @@ public class ExerciseReqDto {
 	
 	@NotBlank
 	private String 	Exercise;
-	private String 	kcal;
+	@Column(nullable = false, length = 4)
+	private int 	kcal;
 	@NotBlank
 	private String 	time; // 운동시간
 	private String 	file;

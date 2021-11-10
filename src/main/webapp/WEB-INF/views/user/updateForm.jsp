@@ -12,97 +12,85 @@
 				placeholder="username" maxlength="20" readonly="readonly">
 		</div>
 		<div class="form-group">
-			목표몸무게: <input type="text" id="gweight"
-				value= "${sessionScope.principal.GWeight}" class="form-control" placeholder="">
+			목표몸무게: <input type="text" id="goalWeight"
+				value= "${sessionScope.principal.goalWeight}" class="form-control" placeholder="">
 		</div>
 		<div class="form-group">
-			목표날짜: <input type="date" id="gperiod"
-				value="get" class="form-control"
+			목표날짜: <input type="date" id="goalPeriod"
+				value="${sessionScope.principal.goalPeriod}" class="form-control"
 				placeholder="">
 		</div>
 		<div class="form-group">
 			이름: <input type="text"  id="name"
-				value="${sessionScope.principal.UName}" class="form-control"
+				value="${sessionScope.principal.name}" class="form-control"
 				placeholder="your name" maxlength="20">
 		</div>
 		<div class="form-group">
 			전화번호: <input type="text" id="phone"
-				value="${sessionScope.principal.UPhone}" class="form-control"
+				value="${sessionScope.principal.userPhone}" class="form-control"
 				placeholder="Enter phone" maxlength="50">
 		</div>
 		<div class="form-group">
 			Email: <input type="email"  id="email"
-				value="${sessionScope.principal.UEmail}" class="form-control"
+				value="${sessionScope.principal.userEmail}" class="form-control"
 				placeholder="Enter email" maxlength="100">
 		</div>
-		<div class="input-group form-group" id=gender>
-			성별: <input type="radio" id="male"  > <label
-				for="male"> <i class="fas fa-male"> 남자</i>
-			</label>   <input type="radio" id="female"> <label
-				for="female"> <i class="fas fa-female">여자</i>
-			</label>
-		</div>
+		
 		<div class="form-group">
-			몸무게: <input type="text"  id="weight"
-				value="${sessionScope.principal.UWeight}" class="form-control"
+			몸무게: <input type="text"  id="weight" onkeyup="printName();"
+				value="${sessionScope.principal.userWeight}" class="form-control"
 				placeholder="Enter weight">
 		</div>
 		<div class="form-group">
-			키 : <input type="text" id="height"
-				value="${sessionScope.principal.UHeight}" class="form-control"
+			키 : <input type="text" id="height" onkeyup="printName();"
+				value="${sessionScope.principal.userHeight}" class="form-control"
 				placeholder="Enter height">
 		</div>
 		<div class="form-group">
-			근육량: <input type="text" id="muscle"
-				value="${sessionScope.principal.UMuscle}" class="form-control"
-				placeholder="Enter muscle">
-		</div>
-		<div class="form-group">
 			BMI지수: <input type="text" id="BMI"
-				value="${sessionScope.principal.UBMI}" class="form-control"
+				value="${sessionScope.principal.userBMI}" class="form-control"
 				placeholder="your BMI" readonly="readonly">
 		</div>
 		
 
 		<button type="submit" class="btn btn-primary">회원수정</button>
 	</form>
-		<input type="text" id="uGender" style="visibility: hidden"
-			value="${sessionScope.principal.UGender}">
-</div>
 
+</div>
+<script>
+		function printName()  {
+		    const height = document.getElementById('height').value;
+		    const weight = document.getElementById('weight').value;
+		    
+		    document.getElementById("bmi").value = (weight / ((height/100) * (height/100))).toFixed(2);
+		    
+		  }
+	
+    </script>
 <script>
 let a = new Date();
+let c =  ${sessionScope.principal.goalPeriod}// 2021-11-05
 console.log(a);
-document.getElementById('gperiod').value= new Date().toISOString().substring(0, 10);
-let gender =document.getElementById("uGender").value;
-console.log(gender);
-switch (gender) {
-case "male": 
-	document.getElementById("male").checked = true;
-	break;
-case "female":
-	document.getElementById("female").checked = true;
-	break;
+console.log(c);
+/*
+if (${sessionScope.principal.goalPeriod}.equals(null)){
+document.getElementById('goalPeriod').value= new Date().toISOString().substring(0, 10);
 }
-let bmi = document.querySelector("#BMI").value;
-let muscle = document.querySelector("#muscle").value;
-console.log(bmi);
-console.log(muscle);
+*/
+
 async function update(event, id){ 
       event.preventDefault();
-      console.log(event);
       let userUpdateDto = {
-    		  uName: 123,
-    		  uPhone: 123,
-    		  uEmail: 123,
-    		  uGender: 123,
-    		  uWeight: 123,
-    		  uHeight: 123,
-    		  uMuscle: 123,
-    		  uBMI: 123,
-    		  gPeriod: 123,
-    		  gWeight: 123 
+    		  name: document.querySelector("#name").value,
+              userPhone: document.querySelector("#phone").value,
+              userEmail: document.querySelector("#email").value,
+              userWeight: document.querySelector("#weight").value,
+              userHeight: document.querySelector("#height").value,
+              userBMI: document.querySelector("#BMI").value,
+              goalPeriod: document.querySelector("#goalPeriod").value,
+              goalWeight: document.querySelector("#goalWeight").value 
       };
+		console.log(userUpdateDto.Name+"이름");
 		console.log(userUpdateDto+"콘솔");
 
       let response = await fetch("http://localhost:8080/user/"+id, {
@@ -116,7 +104,7 @@ async function update(event, id){
       let parseResponse = await response.json();
       if(parseResponse.code == 1){
          alert("업데이트 성공");
-         location.href = "/";
+         location.href = "/myBody/"+id;
       }else{
          alert("업데이트 실패 : "+parseResponse.msg);
       }
@@ -126,7 +114,7 @@ async function update(event, id){
 function printName()  {
     const height = document.getElementById('height').value;
     const weight = document.getElementById('weight').value;
-    document.getElementById("BMI").value = weight / ((height/100) * (height/100));
+    document.getElementById("BMI").value = (weight / ((height/100) * (height/100))).toFixed(2);
   }
 
 </script>
