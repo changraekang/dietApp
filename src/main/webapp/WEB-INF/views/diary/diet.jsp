@@ -230,19 +230,14 @@ dropdown2 {
 				<div class="form-group" id="diet" style="width: 100%;">
 					<table style="width: 100%;" id="fooddiary">
 						<tr>
-							<td><input id='food' name='food' type='text' class='form-control'
-								placeholder='음식명을 입력해주세요' required='required'
-								style='width: 100%; float: right'></td>
-							<td><input type="button" value="+" onclick="add_textbox()"
+							<td><input type="button" value="음식 추가" onclick="add_textbox()"
 								style="float: left"></td>
 						</tr>
 					</table>
-
 				</div>
 
 				<div class="form-group">
-					<input id="kcal" type="text" class="form-control" name='kcal'  placeholder="kcal"
-						required="required" maxlength="20">
+					오늘 총 칼로리 : <span id="totalkcal"></span>kcal
 				</div>
 				<div class="image-upload" id="image-upload">
 
@@ -410,19 +405,30 @@ const add_textbox = () => {
     	
     	return alert("음식입력갯수를 초과하였습니다");
       }
-    const box = document.getElementById("fooddiary");
-    const newP = document.createElement('p');
-    newP.innerHTML = "<input id='food"+ i +"' type='text' class='form-control' name='food"+ i +"'" + " placeholder='음식명을 입력해주세요' value='' required='required' style='width:85%;float:left'> <input type='button' value='삭제'style='width:15%'; onclick='remove(this)'>";
-    box.appendChild(newP);
-    i = i + 1;
-    
-   
+    var pop = window.open("/test/popup","pop","width=800,height=600, scrollbars=yes, resizable=yes");
+}
+function calorieCallBack(food){
+	const box = document.getElementById('fooddiary');
+	const newP = document.createElement('p');
+	newP.setAttribute('id','foodinsert' + i);
+	newP.innerHTML = food.name + ' ' + food.gram + '(g) - <span id="kcal' + i + '">' + food.kcal + '</span>(kcal)';
+	box.appendChild(newP);
+	i = i + 1;
+	kcalcalc();
 }
 const remove = (obj) => {
-	
 	obj.parentNode.firstChild.value = '';
+	kcalcalc();
 }
-
+function kcalcalc(){
+	let totalkcal = 0;
+	for(let j = 1 ; j < i ; j++){
+		totalkcal += parseInt($('#kcal' + j).text());
+		console.log(totalkcal);
+	}
+	$('#totalkcal').text(totalkcal);
+}
+kcalcalc();
 </script>
 </body>
 </html>
