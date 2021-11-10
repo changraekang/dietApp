@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cos.dietApp.handler.ex.MyAPINotFoundException;
 import com.cos.dietApp.handler.ex.MyNotFoundException;
+import com.cos.dietApp.handler.ex.MyNotFoundUsernameException;
 import com.cos.dietApp.util.Script;
 import com.cos.dietApp.web.dto.CMRespDto;
 // @ControllerAdvice 는 1. ExceptionHandling 2. @Controller의 기능까지 수행
@@ -17,6 +18,11 @@ public class GlobalExceptionHandler {
 	public @ResponseBody String error1(MyNotFoundException e) {
 		System.out.println("오류 : " + e.getMessage());
 		return Script.href("/", e.getMessage());
+	}
+	@ExceptionHandler(value = MyNotFoundUsernameException.class)
+	public @ResponseBody String error1(MyNotFoundUsernameException e) {
+		System.out.println("오류 : " + e.getMessage());
+		return Script.back( e.getMessage());
 	}
 	   
 	@ExceptionHandler(value = MyAPINotFoundException.class)

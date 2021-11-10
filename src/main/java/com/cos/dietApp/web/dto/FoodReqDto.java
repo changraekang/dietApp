@@ -1,5 +1,6 @@
 package com.cos.dietApp.web.dto;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotBlank; 
 
 import org.springframework.web.multipart.MultipartFile;
@@ -21,7 +22,8 @@ public class FoodReqDto {
 	private String 	food2;
 	private String 	food3;
 	private String 	food4;
-	private String 	kcal;
+	@Column(nullable = false, length = 4)
+	private int 	kcal;
 	@NotBlank
 	private String 	mealtime; // 아침,점심,저녁
 	@NotBlank

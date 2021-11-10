@@ -9,5 +9,6 @@ public interface FoodDiaryRepository extends JpaRepository<FoodDiary, Integer>{
 		
 	@Query(value = "select * from foodDiary where userId = :userId ORDER BY date desc" , nativeQuery = true)
 	List<FoodDiary> mFoodList (int userId);
+	
 
 }
