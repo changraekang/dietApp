@@ -159,6 +159,9 @@ public class UserController {
 		if (principal == null) {
 			throw new MyAPINotFoundException("인증이 되지 않습니다");
 		}
+		
+		
+		
 		userService.회원정보수정(principal, id, dto);
 		session.setAttribute("principal", principal);	
 		return new CMRespDto<>(1, "업데이트 성공", null);

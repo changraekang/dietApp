@@ -171,14 +171,14 @@ input:focus {
 					<div class="card-body">
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text"><i class="fas fa-user"></i></span>
+								<span class="input-group-text"><i class="fas fa-user"></i>*</span>
 							</div>
 							<input type="text" name="username" class="form-control" placeholder="ID를 입력해주세요"
 								required="required" maxlength="20">
 						</div>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text"><i class="fas fa-key"></i></span>
+								<span class="input-group-text"><i class="fas fa-key"></i>*</span>
 							</div>
 							<input type="password" name="password" id="pw" class="form-control"
 								placeholder="PASSWORD를 입력해주세요" required="required" maxlength="20">
@@ -186,24 +186,24 @@ input:focus {
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i
-									class="fas fa-user-circle"></i></span>
+									class="fas fa-user-circle"></i>*</span>
 							</div>
-							<input type="text" name="uName" class="form-control" placeholder="이름을 입력해주세요"
+							<input type="text" name="Name" class="form-control" placeholder="이름을 입력해주세요"
 								required="required" maxlength="20">
 						</div>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text"><i class="fas fa-phone"></i></span>
+								<span class="input-group-text"><i class="fas fa-phone"></i>*</span>
 							</div>
-							<input type="text" name="uPhone" class="form-control"
+							<input type="text" name="userPhone" class="form-control"
 								placeholder="PHONE NUMBER를 입력해주세요" required="required" maxlength="20">
 						</div>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i
-									class="fas fa-address-book"></i></span>
+									class="fas fa-address-book"></i>*</span>
 							</div>
-							<input type="email" name="uEmail" class="form-control"
+							<input type="email" name="userEmail" class="form-control"
 								placeholder="EMAIL를 입력해주세요" required="required" maxlength="50">
 						</div>
 						<div class="form-group">
@@ -221,43 +221,43 @@ input:focus {
 					</div>
 					<div class="card-body">
 						<div class="input-group form-group">
-							<input type="radio" id="male" name="uGender" value="male"  required="required">
+							<input type="radio" id="male" name="userGender" value="male"  required="required">
 							<label for="male">
 							<i class="fas fa-male"> 남자</i>
 							</label>   
-							<input type="radio" id="female" name="uGender" value="female">
+							<input type="radio" id="female" name="userGender" value="female">
 							<label for="female"> 
 							<i class="fas fa-female">여자</i>
 							</label>
 						</div>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text"><i class="fas fa-weight"></i></span>
+								<span class="input-group-text"><i class="fas fa-weight"></i>*</span>
 							</div>
-							<input type="text" name="uWeight" id="weight" class="form-control" placeholder="몸무게를 입력해주세요(kg)"
+							<input type="text" name="userWeight" id="weight" class="form-control" placeholder="몸무게를 입력해주세요(kg)"
 								required="required" maxlength="3">
 
 						</div>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text"><i class="fas fa-child"></i></span>
+								<span class="input-group-text"><i class="fas fa-child"></i>*</span>
 							</div>
-							<input type="text" name="uHeight" id="height" class="form-control" placeholder="키를 입력해주세요(cm)"
+							<input type="text" name="userHeight" id="height" class="form-control" placeholder="키를 입력해주세요(cm)"
 								required="required" onchange= "printName();" maxlength="3">
 						</div>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-dumbbell"></i></span>
 							</div>
-							<input type="text" name="uMuscle" class="form-control"
-								placeholder="근육량을 입력해주세요(kg 필수아님)" maxlength="5">
+							<input type="text" name="goalWeight" class="form-control"
+								placeholder="목표몸무게를 입력해주세요(kg)" maxlength="5">
 						</div>
 
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-child"></i></span>
 							</div>
-							<input type="text" name="uBMI" class="form-control" id="bmi" placeholder="BMI"
+							<input type="text" name="userBMI" class="form-control" id="bmi" placeholder="BMI"
 								 readonly="readonly" maxlength="5">
 						</div>
 

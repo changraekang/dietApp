@@ -183,13 +183,13 @@ dropdown2 {
 					<input type="text" id="date" name="date" class="form-control"
 						required="required" readonly="readonly">
 				</div>
-				<div class="form-group" id="exercise" style="width: 100%;">
+				<div class="form-group"  style="width: 100%;">
 					<input id="exercise" name="exercise"  type="text" class="form-control"
 						placeholder="오늘의 운동을 입력해주세요" required="required"
-						style="width: 100%; float: right">
+						style="width: 100%; float: right"  >
 
 				</div>
-				<div class="form-group" id="exercise" style="width:100%;">
+				<div class="form-group"  style="width:100%;">
 					<input id="time"  name="time" type="text" class="form-control"
 						placeholder="분" required="required"
 						style="width: 100%; float: right">
@@ -250,10 +250,7 @@ dropdown2 {
 <script src="js/ko.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
-let mealtime =  $("#mealtime input").on("click", function(event){
-	mealtime  = event.target.value;
-	});
-		
+
 	function calenderClick() {
 	    console.log('일기가 저장되었습니다.');
 		
@@ -319,7 +316,7 @@ let mealtime =  $("#mealtime input").on("click", function(event){
 		          text: '일기저장',
 		          click: function() {
 		              calendar.addEvent({
-		                title: mealtime,
+		                title: document.getElementById('exercise').value,
 		                start: document.getElementById("date").value,
 		                allDay: true
 		              });
@@ -336,6 +333,7 @@ let mealtime =  $("#mealtime input").on("click", function(event){
 	});
 </script>
 <script>
+	
 	function loadFile(input) {
 		var file = input.files[0]; //선택된 파일 가져오기
 		/*  

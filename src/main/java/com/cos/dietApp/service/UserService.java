@@ -32,6 +32,12 @@ public class UserService {
 	public void 회원가입(JoinReqDto joinDto) {
 		String encPassword = SHA.encrypt(joinDto.getPassword(), MyAlgorithm.SHA256);
 		joinDto.setPassword(encPassword);
+		double weight = joinDto.getUserWeight();
+		double height = joinDto.getUserHeight();
+		double bmi =Math.round((weight / ((height/100) * (height/100))) * 100) / 100.0;
+		
+		joinDto.setUserBMI(bmi);
+		System.out.println(bmi);
 		userRepository.save(joinDto.toEntity());
 	}
 	
@@ -43,24 +49,22 @@ public class UserService {
 		if (principal.getId() != userEntity.getId()) {
 			throw new MyAPINotFoundException("회원정보를 수정할 권한이 없습니다");
 		}
-		System.out.println(dto.getGPeriod());
-		System.out.println(dto.getGWeight());
-		System.out.println(dto.getUBMI());
-		System.out.println(dto.getUEmail());
-		System.out.println(dto.getUGender());
-		System.out.println(dto.getUName());
-		System.out.println(dto.getUPhone());
-		System.out.println(dto.getUWeight());
-		principal.setUName(dto.getUName());
-		principal.setUPhone(dto.getUPhone());
-		principal.setUEmail(dto.getUEmail());
-		principal.setUGender(dto.getUGender());
-		principal.setUWeight(dto.getUWeight());
-		principal.setUHeight(dto.getUHeight());
-		principal.setUMuscle(dto.getUMuscle());
-		principal.setUBMI(dto.getUBMI());
-		principal.setGWeight(dto.getGWeight());
-		principal.setGPeriod(dto.getGPeriod());
+		System.out.println(dto.getName());
+		System.out.println(dto.getUserEmail());
+		System.out.println(dto.getUserWeight());
+		System.out.println(dto.getUserHeight());
+		principal.setName(dto.getName());
+		principal.setUserPhone(dto.getUserPhone());
+		principal.setUserEmail(dto.getUserEmail());
+		principal.setUserWeight(dto.getUserWeight());
+		principal.setUserHeight(dto.getUserHeight());
+		double weight = dto.getUserWeight();
+		double height = dto.getUserHeight();
+		double bmi =Math.round((weight / ((height/100) * (height/100))) * 100) / 100.0;
+		
+		principal.setUserBMI(bmi);
+		principal.setGoalWeight(dto.getGoalWeight());
+		principal.setGoalPeriod(dto.getGoalPeriod());
 		userRepository.save(principal);
 	}
 	

@@ -49,10 +49,14 @@ public class DiaryService {
 		
 		// 쿼리 실행 (qlrm 라이브러리 필요 = DTO에 DB결과를 매핑하기 위해서)
 		JpaResultMapper result = new JpaResultMapper();
-		kcalDTO kcalDto =  result.uniqueResult(query, kcalDTO.class);
-		System.out.println(kcalDto.getKcal().doubleValue());
+		try {
+			kcalDTO kcalDto =  result.uniqueResult(query, kcalDTO.class);
+			return kcalDto.getKcal().doubleValue();
+			
+		} catch (Exception e) {
+			return 0.0;
 
-		return kcalDto.getKcal().doubleValue();
+		}
 	}
 	@Transactional(readOnly = true)
 	public double 운동kcal(int id){
@@ -72,9 +76,15 @@ public class DiaryService {
 		
 		// 쿼리 실행 (qlrm 라이브러리 필요 = DTO에 DB결과를 매핑하기 위해서)
 		JpaResultMapper result = new JpaResultMapper();
-		kcalDTO kcalDto =  result.uniqueResult(query, kcalDTO.class);
-		System.out.println(kcalDto.getKcal().doubleValue());
-		return kcalDto.getKcal().doubleValue();
+		try {
+			kcalDTO kcalDto =  result.uniqueResult(query, kcalDTO.class);
+			return kcalDto.getKcal().doubleValue();
+			
+		} catch (Exception e) {
+			return 0.0;
+
+		}
+			
 	}
 	
 	
@@ -104,7 +114,7 @@ public class DiaryService {
 
 	@Transactional
 	public void 운동일기(@Valid ExerciseReqDto dto , User principal) {
-
+		
 		exerciseDiaryRepository.save(dto.toEntity(principal));
 
 	}

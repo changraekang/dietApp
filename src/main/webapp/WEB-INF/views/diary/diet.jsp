@@ -359,7 +359,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	                start: document.getElementById("date").value,
 	                allDay: true
 	              });
-	             $("#diarysave").trigger("click");
+	            // $("#diarysave").trigger("click");
 	           
 	          }
 	        }

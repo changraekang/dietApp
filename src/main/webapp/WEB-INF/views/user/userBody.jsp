@@ -19,10 +19,10 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td>${sessionScope.principal.UName}</td>
-					<td>${sessionScope.principal.UWeight}kg</td>
-					<td>${sessionScope.principal.GWeight}kg</td>
-					<td>D- ${sessionScope.principal.GWeight}</td>
+					<td>${sessionScope.principal.name}</td>
+					<td>${sessionScope.principal.userWeight}kg</td>
+					<td>${sessionScope.principal.goalWeight}kg</td>
+					<td>D- </td>
 				</tr>
 				<tr>
 					<td colspan="4">목표체중과 날짜는 회원정보 수정에서 입력해주세요</td>
@@ -66,15 +66,14 @@
 <div class="container mt-3">
 	<h2>목표체중 도달</h2>
 	<div class="progress">
-		<div id="progress" class="progress-bar" style="width: 70%"></div>
+		<div id="progress" class="progress-bar" style="width: 0%"></div>
 	</div>
 </div>
-<input type="text" id="uGender" style="visibility: hidden"
-			value="${sessionScope.principal.UGender}">
+<input type="text" id="userGender" style="visibility: hidden"
+			value="${sessionScope.principal.userGender}">
 <script>
-	var bmi = ${sessionScope.principal.UBMI};
-	let gender =document.getElementById("uGender").value;
-	//var gender = "male";
+	var bmi = ${sessionScope.principal.userBMI};
+	let gender =document.getElementById("userGender").value;
 	if (gender === "male"){
 		
 	switch (true) {
@@ -109,9 +108,9 @@
 		break;
 	}
 	}
-if 	(${sessionScope.principal.GWeight} !=0 ){
-let weightper = (${sessionScope.principal.UWeight}/${sessionScope.principal.GWeight})*100;
-alert(weightper);
+if 	(${sessionScope.principal.goalWeight} !=0 ){
+let weightper = ((${sessionScope.principal.userWeight}/${sessionScope.principal.goalWeight})*100).toFixed(0);
+$("#progress").css("width", weightper+"%");
 	
 }
 	
