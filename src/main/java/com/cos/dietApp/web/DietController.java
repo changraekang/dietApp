@@ -107,6 +107,11 @@ public class DietController {
 	}
 	
 	//용세
+	@GetMapping("/diet/foodAdd")
+	public String popuptest(){
+		
+		return "popup/foodAdd";
+	}
 	//규호
 	
 }

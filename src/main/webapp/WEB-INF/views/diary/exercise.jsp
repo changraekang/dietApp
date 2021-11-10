@@ -279,7 +279,7 @@ let mealtime =  $("#mealtime input").on("click", function(event){
 
 				events: [ /* event data here */]
 			},
-			initialDate : '2021-10-12',
+			initialDate :today,
 			/*  
 			calendar.addEvent({
 				title : i,

@@ -323,7 +323,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		},
 	     
 	            
-		initialDate : '2021-10-12',
+		initialDate : today,
 		dayMaxEventRows : true, // for all non-TimeGrid views
 		dayMaxEventRows : 3, // adjust to 6 only for timeGridWeek/timeGridDay
 
@@ -405,7 +405,7 @@ const add_textbox = () => {
     	
     	return alert("음식입력갯수를 초과하였습니다");
       }
-    var pop = window.open("/test/popup","pop","width=800,height=600, scrollbars=yes, resizable=yes");
+    var pop = window.open("/diet/foodAdd","pop","width=800,height=600, scrollbars=yes, resizable=yes");
 }
 function calorieCallBack(food){
 	const box = document.getElementById('fooddiary');
@@ -429,6 +429,7 @@ function kcalcalc(){
 	$('#totalkcal').text(totalkcal);
 }
 kcalcalc();
+
 </script>
 </body>
 </html>
