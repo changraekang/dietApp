@@ -1,21 +1,24 @@
 package com.cos.dietApp.web;
 
-import javax.servlet.http.HttpSession; 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cos.dietApp.domain.user.User;
 import com.cos.dietApp.handler.ex.MyNotFoundException;
 import com.cos.dietApp.service.DiaryService;
 import com.cos.dietApp.util.Script;
-import com.cos.dietApp.web.dto.FoodReqDto;
+import com.cos.dietApp.web.dto.CMRespDto;
 import com.cos.dietApp.web.dto.ExerciseReqDto;
+import com.cos.dietApp.web.dto.FoodReqDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,12 +31,12 @@ public class DietController {
 	
 	//창래
 	@PostMapping("/food")
-	public @ResponseBody String food( @Valid FoodReqDto dto ) {
+	public @ResponseBody CMRespDto food(@Valid @RequestBody FoodReqDto dto, BindingResult bindingResult) {
 		User principal = (User) session.getAttribute("principal");
-
+		System.out.println(dto);
 		diaryService.식단일기(dto, principal);
 		
-		return Script.href("/diet");
+		return new CMRespDto(1, "성공", null);
 	}
 	
 	@PostMapping("/exercise")
