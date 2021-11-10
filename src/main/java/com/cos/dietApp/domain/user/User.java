@@ -1,10 +1,13 @@
 package com.cos.dietApp.domain.user;
 
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,8 +41,8 @@ public class User {
 	@Column(nullable = false, length = 7)
 	private double userBMI;
 	@Column(nullable = true, length = 3)
-	private int goalWeight; //목표무게
-	@Column(nullable = true, length = 20)
+	private double goalWeight; //목표무게
+	@NotBlank
 	private String goalPeriod; //목표날짜
 	
 

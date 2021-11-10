@@ -22,7 +22,7 @@
 					<td>${sessionScope.principal.name}</td>
 					<td>${sessionScope.principal.userWeight}kg</td>
 					<td>${sessionScope.principal.goalWeight}kg</td>
-					<td>D- </td>
+					<td>D-${daysCalcurate} 일</td>
 				</tr>
 				<tr>
 					<td colspan="4">목표체중과 날짜는 회원정보 수정에서 입력해주세요</td>
@@ -39,9 +39,9 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td>${exercisesEntity }kcal</td>
-					<td>450kcal</td>
-					<td>170kcal</td>
+					<td>${exercisesEntity } kcal</td>
+					<td id = "exerciseKcal" ></td>
+					<td id = "goalKcal"></td>
 				</tr>
 			</tbody>
 		</table>
@@ -56,15 +56,15 @@
 			<tbody>
 				<tr>
 					<td>${foodsEntity }kcal</td>
-					<td>2250kcal</td>
-					<td>600kcal</td>
+					<td id= "needFoodKcal"></td>
+					<td id= "goalFoodKcal"></td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 </div>
 <div class="container mt-3">
-	<h2>목표체중 도달</h2>
+	<h2 id= "goal">목표체중 도달</h2>
 	<div class="progress">
 		<div id="progress" class="progress-bar" style="width: 0%"></div>
 	</div>
@@ -72,10 +72,33 @@
 <input type="text" id="userGender" style="visibility: hidden"
 			value="${sessionScope.principal.userGender}">
 <script>
+let weight = ${sessionScope.principal.userWeight};
+let goalWeight = ${sessionScope.principal.goalWeight};
+let calWeight = weight - goalWeight;
+console.log(calWeight);
+let minusKcal = calWeight * 7000;
+console.log(minusKcal);
+let calKcal = minusKcal / ${daysCalcurate} ;
+console.log(calKcal);
+let foodKacl = (calKcal * 0.72).toFixed(0);
+let exerciseKcal = (calKcal * 0.32).toFixed(0);
+document.getElementById('exerciseKcal').innerText=exerciseKcal + "kcal"; 
+document.getElementById('goalKcal').innerText=${exercisesEntity } - exerciseKcal + "kcal"; 
+
+
+	
+
+
+
+
+
 	var bmi = ${sessionScope.principal.userBMI};
 	let gender =document.getElementById("userGender").value;
 	if (gender === "male"){
-		
+		let needFoodKcal = 2500 - foodKacl;
+		document.getElementById('needFoodKcal').innerText=needFoodKcal + "kcal"; 
+		document.getElementById('goalFoodKcal').innerText=needFoodKcal -${foodsEntity }   + "kcal"; 
+		console.log(needFoodKcal+"권장");
 	switch (true) {
 	case (bmi < 18.6):
 		document.getElementById("body").src = "/image/남자1.jpg";
@@ -93,6 +116,11 @@
 	}		
 	
 	} else {
+		let needFoodKcal = 2000 - foodKacl;
+		document.getElementById('needFoodKcal').innerText=needFoodKcal + "kcal"; 
+		document.getElementById('goalFoodKcal').innerText=needFoodKcal - ${foodsEntity }   + "kcal"; 
+
+		console.log(needFoodKcal+"권장");
 	switch (true) {
 	case (bmi < 18.6):
 		document.getElementById("body").src = "/image/여자1.jpg";
@@ -109,8 +137,9 @@
 	}
 	}
 if 	(${sessionScope.principal.goalWeight} !=0 ){
-let weightper = ((${sessionScope.principal.userWeight}/${sessionScope.principal.goalWeight})*100).toFixed(0);
+let weightper = ((${sessionScope.principal.goalWeight}/${sessionScope.principal.userWeight})*100).toFixed(0);
 $("#progress").css("width", weightper+"%");
+document.getElementById('goal').innerText="목표체중도달 " + weightper + "%"; 
 	
 }
 	

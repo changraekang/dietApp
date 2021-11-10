@@ -17,7 +17,7 @@
 		</div>
 		<div class="form-group">
 			목표날짜: <input type="date" id="goalPeriod"
-				value="get" class="form-control"
+				value="${sessionScope.principal.goalPeriod}" class="form-control"
 				placeholder="">
 		</div>
 		<div class="form-group">
@@ -37,12 +37,12 @@
 		</div>
 		
 		<div class="form-group">
-			몸무게: <input type="text"  id="weight"
+			몸무게: <input type="text"  id="weight" onkeyup="printName();"
 				value="${sessionScope.principal.userWeight}" class="form-control"
 				placeholder="Enter weight">
 		</div>
 		<div class="form-group">
-			키 : <input type="text" id="height"
+			키 : <input type="text" id="height" onkeyup="printName();"
 				value="${sessionScope.principal.userHeight}" class="form-control"
 				placeholder="Enter height">
 		</div>
@@ -55,13 +55,28 @@
 
 		<button type="submit" class="btn btn-primary">회원수정</button>
 	</form>
-		
-</div>
 
+</div>
+<script>
+		function printName()  {
+		    const height = document.getElementById('height').value;
+		    const weight = document.getElementById('weight').value;
+		    
+		    document.getElementById("bmi").value = (weight / ((height/100) * (height/100))).toFixed(2);
+		    
+		  }
+	
+    </script>
 <script>
 let a = new Date();
+let c =  ${sessionScope.principal.goalPeriod}// 2021-11-05
 console.log(a);
+console.log(c);
+/*
+if (${sessionScope.principal.goalPeriod}.equals(null)){
 document.getElementById('goalPeriod').value= new Date().toISOString().substring(0, 10);
+}
+*/
 
 async function update(event, id){ 
       event.preventDefault();
@@ -99,7 +114,7 @@ async function update(event, id){
 function printName()  {
     const height = document.getElementById('height').value;
     const weight = document.getElementById('weight').value;
-    document.getElementById("BMI").value = weight / ((height/100) * (height/100));
+    document.getElementById("BMI").value = (weight / ((height/100) * (height/100))).toFixed(2);
   }
 
 </script>

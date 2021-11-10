@@ -14,13 +14,17 @@ import com.cos.dietApp.web.dto.JoinReqDto;
 // DAO
 // @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-	
+	 
 	@Query(value = "insert into user (username, password, uName, uPhone, uEmail, uWeight, uHeight, uMuscle, uBMI) values(:username,:password,:uName,:uPhone,:uEmail, :uWeight, :Height, :uMuscle, :uBMI)", nativeQuery = true)
 	void join(String username, String password, String uName, String uPhone, String uEmail);
 	
 	@Query(value = "SELECT * FROM user WHERE username = :username AND password = :password", nativeQuery = true)
 	User mLogin(String username, String password);
 	
+	@Query(value = "SELECT * FROM user WHERE id = :id ", nativeQuery = true)
+	User mDate(int id);
+	
+	User findByUsername(String username);
 }
 
 

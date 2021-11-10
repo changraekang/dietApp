@@ -1,6 +1,8 @@
 package com.cos.dietApp.web.dto;
 
 
+
+
 import com.cos.dietApp.domain.user.User;
 
 import lombok.AllArgsConstructor;
@@ -19,7 +21,7 @@ public class UserUpdateDto {
 	private double userWeight;
 	private double userHeight;
 	private double userBMI;
-	private int goalWeight; //목표무게
+	private double goalWeight; //목표무게
 	private String goalPeriod; //목표날짜
 
 	public User toEntity() {

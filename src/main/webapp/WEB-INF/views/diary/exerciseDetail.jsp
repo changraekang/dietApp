@@ -51,7 +51,7 @@
 	</div>
 	<hr />
 	<div>
-		<div id="time">${exercisesEntity.time}</div>
+		<div id="time">${exercisesEntity.time} 분</div>
 	</div>
 	<div id = "kcal">
 		<div></div>

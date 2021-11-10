@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -52,6 +53,8 @@ public class UserController {
 	public String myBody (  Model model, @PathVariable int id) {
 		
 		
+		
+		model.addAttribute("daysCalcurate",userService.날짜계산(id));
 		model.addAttribute("exercisesEntity", diaryService.운동kcal(id));
 		model.addAttribute("foodsEntity", diaryService.식단kcal(id));
 		// 기본은 userRepository.findById(id) -> DB에서 가져와야 함
@@ -70,20 +73,21 @@ public class UserController {
 	//회원가입	
 	@PostMapping("/join")
 	public @ResponseBody String join(@Valid JoinReqDto joinDto, BindingResult bindingResult) { // username= &password= &email=으로 데이터가 들어온다
-		
 		// 1. 유효성 검사 실패 - 자바스크립트 응답(경고창 띄우고 뒤로가기)
 		if(bindingResult.hasErrors()) {
+			System.out.println("바인딩에러");
+			
 			Map<String, String> errorMap = new HashMap<>();
 			for(FieldError error : bindingResult.getFieldErrors()) {
 				errorMap.put(error.getField(), error.getDefaultMessage());
 				System.out.println("필드 : " + error.getField());
 				System.out.println("메세지 : " + error.getDefaultMessage());
 			}
-			return Script.back(errorMap.toString());
+			return Script.back("회원가입 정보를 확인하세요");
 		}
 		userService.회원가입(joinDto);
 		
-		return Script.href("/"); //리다이렉션(http상태코드: 300)
+		return Script.href("/","회원가입을 축하합니다"); //리다이렉션(http상태코드: 300)
 	}
 	
 	@GetMapping("/joinForm")

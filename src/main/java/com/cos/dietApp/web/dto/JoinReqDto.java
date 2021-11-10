@@ -1,5 +1,7 @@
 package com.cos.dietApp.web.dto;
 
+import javax.validation.constraints.NotBlank;
+
 import com.cos.dietApp.domain.user.User;
 
 import lombok.AllArgsConstructor;
@@ -10,6 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class JoinReqDto {
+	
+	
 	private String username;
 	private String password;
 	private String Name;
@@ -18,7 +22,10 @@ public class JoinReqDto {
 	private String userGender;
 	
 	private double userWeight;
+	private double goalWeight;
 	private double userHeight;
+	@NotBlank
+	private String goalPeriod;
 	private double userBMI;
 	
 	
@@ -32,7 +39,9 @@ public class JoinReqDto {
 		user.setUserEmail(userEmail);
 		user.setUserGender(userGender);
 		user.setUserWeight(userWeight);
+		user.setGoalWeight(goalWeight);
 		user.setUserHeight(userHeight);
+		user.setGoalPeriod(goalPeriod);
 		user.setUserBMI(userBMI);
 		
 		return user;
