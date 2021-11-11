@@ -219,7 +219,7 @@ dropdown2 {
 					  <input type="radio" id="아침" name="mealtime" value="아침" required >  <label for="아침">아침</label>
 					  <input type="radio" id="점심" name="mealtime" value="점심">  <label for="점심">점심</label>
 					  <input type="radio" id="저녁" name="mealtime" value="저녁">  <label for="저녁">저녁</label>
-					  <input type="radio" id="야식" name="mealtime"  value="야식">  <label for="야식">야식</label><br>
+					  <input type="radio" id="야식" name="mealtime" value="야식">  <label for="야식">야식</label><br>
 
 				</div>
 				
@@ -251,7 +251,7 @@ dropdown2 {
 					style="width: 50%; height: 30%">
 					<img id="diaryphoto" src="">
 				</div>
-				<button type="submit" id="diarysave" class="btn btn-primary" onclick="calenderClick();" >일기저장</button>
+				<button type="submit" id="diarysave" class="btn btn-primary" onclick="calenderClick(event);" >일기저장</button>
 				<a id = "diarylist" href="/diet/${sessionScope.principal.id}/list" >식단일기리스트</a> 
 			</form>
 
@@ -291,11 +291,44 @@ let year = today.getFullYear(); // 년도
 let month = today.getMonth() + 1;  // 월
 let date = today.getDate();  // 날짜
 
-$("#todaydate").append("<h3>"+ year+"년"+month+"월"+ date+"일"+"</h3>");
+$("#date").val(year+"-"+month+"-"+ date);
 
+let foodin = 0;
+async function calenderClick(event) {
+	event.preventDefault();
+	let foodReqDto = {
+			kcal : parseInt(document.querySelector('#totalkcal').textContent),
+			mealtime : document.querySelector('input[name="mealtime"]:checked').value,
+			date : document.querySelector('#date').value
+	}
+	for(let j = 1; j <= 5 ; j++) {
+		let food = document.querySelector('#food'+j);
+		if(food == null) {
+			break;
+		}
+		foodin++;
+	}
+	if(foodin >= 1) foodReqDto.food1 = document.querySelector('#food1').textContent;
+	if(foodin >= 2) foodReqDto.food2 = document.querySelector('#food2').textContent;
+	if(foodin >= 3) foodReqDto.food3 = document.querySelector('#food3').textContent;
+	if(foodin >= 4) foodReqDto.food4 = document.querySelector('#food4').textContent;
+	if(foodin >= 5) foodReqDto.food5 = document.querySelector('#food5').textContent;
 	
-function calenderClick() {
-    console.log('일기가 저장되었습니다.');
+	console.log(foodReqDto);
+    let response = await fetch("http://localhost:8080/food", {
+        method: "post",
+        body: JSON.stringify(foodReqDto),
+        headers: {
+           "Content-Type": "application/json; charset=utf-8"
+        }
+     });
+     
+     let parseResponse = await response.json();
+     if(parseResponse.code == 1){
+        alert("식단 저장 성공");
+     }else{
+        alert("식단 저장 실패 : "+parseResponse.msg);
+     }
 	
 }
 document.addEventListener('DOMContentLoaded', function() {
@@ -347,18 +380,16 @@ document.addEventListener('DOMContentLoaded', function() {
 				
 			},
 			fooddiary: {
-	          text: '일기저장',
-	          click: function() {
-	              calendar.addEvent({
-	                title: mealtime + " " + document.getElementById("kcal").value+"kcal",
-	                start: document.getElementById("date").value,
-	                allDay: true
-	              });
-	             $("#diarysave").trigger("click");
-	           
-	          }
-	        }
-		 		
+				text: '일기저장',
+				click: function() {
+					calendar.addEvent({
+	                	title: mealtime + " " + document.querySelector("#totalkcal").textContent+"kcal",
+						start: document.getElementById("date").value,
+						allDay: true
+					});
+					$("#diarysave").trigger("click");
+				}
+			}
 		} 
 
 	});
@@ -411,7 +442,7 @@ function calorieCallBack(food){
 	const box = document.getElementById('fooddiary');
 	const newP = document.createElement('p');
 	newP.setAttribute('id','foodinsert' + i);
-	newP.innerHTML = food.name + ' ' + food.gram + '(g) - <span id="kcal' + i + '">' + food.kcal + '</span>(kcal)';
+	newP.innerHTML = '<span id="food' + i + '">' + food.name + '</span> ' + food.gram + '(g) - <span id="kcal' + i + '">' + food.kcal + '</span>(kcal)';
 	box.appendChild(newP);
 	i = i + 1;
 	kcalcalc();
@@ -424,7 +455,6 @@ function kcalcalc(){
 	let totalkcal = 0;
 	for(let j = 1 ; j < i ; j++){
 		totalkcal += parseInt($('#kcal' + j).text());
-		console.log(totalkcal);
 	}
 	$('#totalkcal').text(totalkcal);
 }
