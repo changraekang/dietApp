@@ -77,7 +77,7 @@ public class UserService {
 		
 	}
 	public User 로그인(LoginReqDto loginDto) {
-		return userRepository.mLogin(loginDto.getUsername(), SHA.encrypt(loginDto.getPassword(), MyAlgorithm.SHA256));
+		return userRepository.findByUsernameAndPassword(loginDto.getUsername(), SHA.encrypt(loginDto.getPassword(), MyAlgorithm.SHA256));
 	}
 	
 	@Transactional(rollbackFor = MyNotFoundException.class)
