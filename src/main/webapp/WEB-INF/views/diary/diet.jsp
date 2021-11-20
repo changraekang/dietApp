@@ -198,8 +198,9 @@ dropdown2 {
 	</div>
 
 
-
+	<input type="hidden" id="userId" value="${sessionScope.principal.id}">
 	<!-- 달력 + 입력 부분 -->
+	
 	<div class="container m_tm_20" style="height: 100%;">
 
 		<div id="calendar" style="float: left; width: 66%; height: 200px;"></div>
@@ -294,6 +295,7 @@ let date = today.getDate();  // 날짜
 $("#date").val(year+"-"+month+"-"+ date);
 
 let foodin = 0;
+// 식단 DB에 저장 
 async function calenderClick(event) {
 	event.preventDefault();
 	let foodReqDto = {
@@ -342,19 +344,12 @@ document.addEventListener('DOMContentLoaded', function() {
 		height: 650,
 		dateClick : function(info) {
 			calendar.on('dateClick', function(info) {
-			console.log('clicked on ' + info.dateStr);
-				});
-			
-			
-			document.getElementById("date").value = info.dateStr;
-			  
-			
-			
-			events: [ /* event data here */]
-			
+				console.log('clicked on ' + info.dateStr);
+			});
 
+			document.getElementById("date").value = info.dateStr;
+			events: [ /* event data here */]
 		},
-	     
 	            
 		initialDate : today,
 		dayMaxEventRows : true, // for all non-TimeGrid views
@@ -365,10 +360,10 @@ document.addEventListener('DOMContentLoaded', function() {
 				arg.event.remove()
 			}
 		},
-		  headerToolbar: { 
+		headerToolbar: { 
 			start:'list',
-	        center: 'fooddiary'
-	      },
+			center: 'fooddiary'
+		},
 		customButtons: {
 			list : {
 				text: '리스트보기',
@@ -376,21 +371,19 @@ document.addEventListener('DOMContentLoaded', function() {
 					$('#diarylist').get(0).click();
 					$("#diarylist").trigger("click");
 				}
-				
-				
 			},
 			fooddiary: {
 				text: '일기저장',
 				click: function() {
 					calendar.addEvent({
-	                	title: mealtime + " " + document.querySelector("#totalkcal").textContent+"kcal",
+						title: mealtime + " " + document.querySelector("#totalkcal").textContent+"kcal",
 						start: document.getElementById("date").value,
 						allDay: true
 					});
 					$("#diarysave").trigger("click");
 				}
 			}
-		} 
+		}
 
 	});
 
@@ -401,12 +394,9 @@ function diary_click() {
 
 }
 
-</script>
-<script>
 function loadFile(input) {
 	var file = input.files[0]; //선택된 파일 가져오기
-	/*  
-	 */
+
 	//미리 만들어 놓은 div에 text(파일 이름) 추가
 	//새로운 이미지 div 추가
 	//document.getElementById('image-upload').style.visibility = 'hidden';
@@ -430,14 +420,14 @@ function loadFile(input) {
 
 
 var i = 1;
+// 음식 추각 클릭
 const add_textbox = () => {
-    	
     if (i >= 5) {
-    	
     	return alert("음식입력갯수를 초과하였습니다");
       }
     var pop = window.open("/diet/foodAdd","pop","width=800,height=600, scrollbars=yes, resizable=yes");
 }
+// 칼로리 데이터 가져오기
 function calorieCallBack(food){
 	const box = document.getElementById('fooddiary');
 	const newP = document.createElement('p');
@@ -451,6 +441,7 @@ const remove = (obj) => {
 	obj.parentNode.firstChild.value = '';
 	kcalcalc();
 }
+// 총 칼로리 계산
 function kcalcalc(){
 	let totalkcal = 0;
 	for(let j = 1 ; j < i ; j++){
@@ -459,6 +450,31 @@ function kcalcalc(){
 	$('#totalkcal').text(totalkcal);
 }
 kcalcalc();
+
+// DB에서 식단 가져오기
+async function dietList(){
+	let userIdReq = {
+		userid : document.querySelector('#userId').value
+	}
+	
+	let response = await fetch("http://localhost:8080/diet/diary", {
+		method: "post",
+		body: JSON.stringify(userIdReq),
+		headers: {
+			"Content-Type": "application/json; charset=utf-8"
+		}
+	});
+	
+	let parseResponse = await response.json();
+	console.log(parseResponse);
+	
+	if(parseResponse.code == 1){
+	//	alert("식단 가져오기 성공"); 
+	}else{
+		alert("식단 가져오기 실패 : "+parseResponse.msg);
+	}
+}
+dietList();
 
 </script>
 </body>

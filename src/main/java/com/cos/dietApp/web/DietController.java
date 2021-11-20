@@ -17,6 +17,7 @@ import com.cos.dietApp.handler.ex.MyNotFoundException;
 import com.cos.dietApp.service.DiaryService;
 import com.cos.dietApp.util.Script;
 import com.cos.dietApp.web.dto.CMRespDto;
+import com.cos.dietApp.web.dto.DietDiaryReqDto;
 import com.cos.dietApp.web.dto.ExerciseReqDto;
 import com.cos.dietApp.web.dto.FoodReqDto;
 
@@ -69,7 +70,6 @@ public class DietController {
 		
 		if (principal == null ) {
 			throw new MyNotFoundException("인증이 되지 않습니다.");
-			
 		}
 		model.addAttribute("exercisesEntity", diaryService.운동일기보기(id));
 		return "diary/exerciseList";
@@ -80,7 +80,6 @@ public class DietController {
 		
 		if (principal == null ) {
 			throw new MyNotFoundException("인증이 되지 않습니다.");
-			
 		}
 		model.addAttribute("foodsEntity", diaryService.식단일기보기(id));
 		return "diary/dietList";
@@ -91,7 +90,6 @@ public class DietController {
 		
 		if (principal == null ) {
 			throw new MyNotFoundException("인증이 되지 않습니다.");
-			
 		}
 		model.addAttribute("exercisesEntity", diaryService.운동일기상세보기(id));
 		return "diary/exerciseDetail";
@@ -102,7 +100,6 @@ public class DietController {
 		
 		if (principal == null ) {
 			throw new MyNotFoundException("인증이 되지 않습니다.");
-			
 		}
 		
 		model.addAttribute("foodsEntity", diaryService.식단일기상세보기(id));
@@ -115,6 +112,12 @@ public class DietController {
 		
 		return "popup/foodAdd";
 	}
-	//규호
+	
+	@PostMapping("/diet/diary")
+	public @ResponseBody CMRespDto<?> getDietList(DietDiaryReqDto userId){
+		
+		System.out.println("전달");
+		return new CMRespDto<>(1, "성공", diaryService.식단가져오기((User)session.getAttribute("principal")));
+	}
 	
 }
