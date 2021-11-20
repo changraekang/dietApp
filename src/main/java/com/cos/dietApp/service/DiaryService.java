@@ -1,6 +1,5 @@
 package com.cos.dietApp.service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -150,6 +149,10 @@ public class DiaryService {
 	public FoodDiary 식단일기상세보기 (int id ) {
 		FoodDiary foodDiaryEntity = foodDiaryRepository.findById(id).orElseThrow(() -> new MyNotFoundException(id + "를 못 찾았어요"));
 		return foodDiaryEntity;
+	}
+	public List<?> 식단가져오기(User principal) {
+		List<FoodDiary> dietList = foodDiaryRepository.findByUser(principal);
+		return dietList;
 	}
 
 }

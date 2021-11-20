@@ -20,6 +20,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query(value = "insert into user (username, password, uName, uPhone, uEmail, uWeight, uHeight, uMuscle, uBMI) values(:username,:password,:uName,:uPhone,:uEmail, :uWeight, :Height, :uMuscle, :uBMI)", nativeQuery = true)
 	void join(String username, String password, String uName, String uPhone, String uEmail);
 	
+//	@Query(value = "SELECT * FROM user WHERE username = :username AND password = :password", nativeQuery = true)
+//	User mLogin(String username, String password);
 	User findByUsernameAndPassword(String username, String password);
 
 	@Query(value = "SELECT * FROM user WHERE id = :id ", nativeQuery = true)
@@ -27,11 +29,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	User findByUsername(String data);
 
-	User findByUsernameAndName(String username, String name);
-
-	List<User> findByNameContaining(String name);
-	Page<User> findByNameContaining(String name, Pageable page);
-	
 	Page<User> findByUserHeightContaining(Integer id, Pageable page);
 
 }
