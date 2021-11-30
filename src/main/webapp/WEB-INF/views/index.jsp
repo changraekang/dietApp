@@ -153,8 +153,7 @@ margin-left: 4px;
 						<input type="submit" value="Login" class="btn float-right login_btn">
 					</div>
 				</form>
-			</div>
-			<a href="/myBody">이동</a>
+			</div>\
 			<div class="card-footer">
 				<div class="d-flex justify-content-center links">
 					아직 회원이 아니십니까?<a href="/joinForm" class="btn float-right join_btn">회원가입</a>

@@ -333,11 +333,44 @@ async function calenderClick(event) {
      }
 	
 }
-document.addEventListener('DOMContentLoaded', function() {
-	var calendarEl = document.getElementById('calendar');
+// 캘린더 부분
+document.addEventListener('DOMContentLoaded', async function() {
+	// 기존 다이어리 가져오기
+	let userIdReq = {
+		userid : document.querySelector('#userId').value
+	}
 	
+	let response = await fetch("http://localhost:8080/diet/diary", {
+		method: "post",
+		body: JSON.stringify(userIdReq),
+		headers: {
+			"Content-Type": "application/json; charset=utf-8"
+		}
+	});
+	
+	let parseResponse = await response.json();
+	console.log(parseResponse);
+	
+	if(parseResponse.code == 1){
+	//	alert("식단 가져오기 성공"); 
+	}else{
+		alert("식단 가져오기 실패 : "+parseResponse.msg);
+	}
+	let diarydata = parseResponse.body;
+	// 캘린더에 맞게 데이터 가공
+	let events = diarydata.map(function(item) {
+		return {
+			title: item.mealtime + " " + item.kcal +"kcal",
+			start: item.date,
+			allDay: true
+		}
+	});
+	
+	// 캘린더 생성 시작
+	var calendarEl = document.getElementById('calendar');
 
 	var calendar = new FullCalendar.Calendar(calendarEl, {
+		events : events,
 		initialView : 'dayGridMonth',
 		selectable : true,
 		locale : 'ko',
@@ -386,7 +419,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 
 	});
-
+	
 	calendar.render();
 });
 
@@ -452,7 +485,7 @@ function kcalcalc(){
 kcalcalc();
 
 // DB에서 식단 가져오기
-async function dietList(){
+/* async function dietList(){
 	let userIdReq = {
 		userid : document.querySelector('#userId').value
 	}
@@ -474,7 +507,7 @@ async function dietList(){
 		alert("식단 가져오기 실패 : "+parseResponse.msg);
 	}
 }
-dietList();
+dietList(); */
 
 </script>
 </body>
