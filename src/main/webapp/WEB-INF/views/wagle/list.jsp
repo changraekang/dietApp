@@ -91,7 +91,7 @@
 			</span>
 		</div>
 		<div align="right">
-			<h2><a href="/board/saveForm?menuId=${menuId}" class="btn btn-primary">글쓰기</a></h2>
+			<h2><a href="/board/saveForm?menuId=${boardMenu.id}" class="btn btn-primary">글쓰기</a></h2>
 		</div>
 	</div>
 </div>

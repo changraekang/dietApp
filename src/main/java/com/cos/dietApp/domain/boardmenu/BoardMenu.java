@@ -15,6 +15,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+/*
+ * 1 : 자유
+ * 2 : QnA
+ * 3 : 인증
+ */
 public class BoardMenu {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

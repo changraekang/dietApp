@@ -11,6 +11,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import com.cos.dietApp.domain.boardmenu.BoardMenu;
+import com.cos.dietApp.domain.user.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,7 +35,9 @@ public class Board {
 	@JoinColumn(name = "menuId")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private BoardMenu boardMenu;
-	
-	
+
+	@JoinColumn(name = "userId")
+	@ManyToOne(fetch = FetchType.LAZY)
+	private User user;
 
 }
