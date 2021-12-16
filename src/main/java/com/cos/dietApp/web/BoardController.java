@@ -3,6 +3,7 @@ package com.cos.dietApp.web;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
@@ -22,15 +23,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cos.dietApp.domain.board.Board;
-import com.cos.dietApp.domain.board.BoardRepository;
 import com.cos.dietApp.domain.boardmenu.BoardMenu;
-import com.cos.dietApp.domain.boardmenu.BoardMenuRepository;
+import com.cos.dietApp.domain.user.User;
 import com.cos.dietApp.handler.ex.MyAPINotFoundException;
 import com.cos.dietApp.handler.ex.MyNotFoundException;
+import com.cos.dietApp.service.BoardService;
 import com.cos.dietApp.util.PageCalc;
 import com.cos.dietApp.web.dto.BoardSaveReqDto;
 import com.cos.dietApp.web.dto.CMRespDto;
-import com.cos.dietApp.web.dto.PageRespDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -38,8 +38,8 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class BoardController {
 	
-	private final BoardRepository boardRepository;
-	private final BoardMenuRepository boardMenuRepository;
+	private final BoardService boardService;
+	private final HttpSession session;
 	private final PageCalc calc;
 	
 	//창래
@@ -47,18 +47,16 @@ public class BoardController {
 	
 	// ---- 게시글 목록 보기
 	@GetMapping("/board")
-	public String home(Model model, int menuId, @PageableDefault(page=0, size=10, sort="id", direction = Sort.Direction.DESC) Pageable pageRequest) {
-		BoardMenu boardMenu = boardMenuRepository.findById(menuId).get();
-		Page<Board> boardsEntity = boardRepository.findByBoardMenu(boardMenu, pageRequest);
+	public String home(Model model,int menuId, @PageableDefault(page=0, size=10, sort="id", direction = Sort.Direction.DESC) Pageable pageRequest) {
 		
+		BoardMenu boardMenu = boardService.게시글메뉴(menuId);
+		Page<Board> boardsEntity = boardService.게시글목록(boardMenu, pageRequest);
+
 		int nowPage = pageRequest.getPageNumber() + 1;
 		int lastPage = boardsEntity.getTotalPages();
-		PageRespDto page = calc.pagecal(nowPage, lastPage);
-		System.out.println(page);
-		model.addAttribute("boardsEntity", boardsEntity);
-		model.addAttribute("menuId", menuId);
 		model.addAttribute("boardMenu", boardMenu);
-		model.addAttribute("page", page);
+		model.addAttribute("boardsEntity", boardsEntity);
+		model.addAttribute("page", calc.pagecal(nowPage, lastPage));
 		
 		return "wagle/list";
 	}
@@ -67,16 +65,15 @@ public class BoardController {
 	// ---- 게시글 상세보기
 	@GetMapping("/board/{id}")
 	public String detail(@PathVariable int id, Model model) {
-		Board boardEntity = boardRepository.findById(id)
-				.orElseThrow(() -> new MyNotFoundException(id + "번은 없는 게시글입니다") );
-		model.addAttribute("boardEntity", boardEntity);
+		model.addAttribute("boardEntity", boardService.게시글상세보기(id));
 		return "wagle/detail"; // ViewResolver
 	}
 	
 	// ---- 게시글 쓰기
 	@PostMapping("/board")
 	public @ResponseBody CMRespDto boardInsert(@Valid @RequestBody BoardSaveReqDto dto, BindingResult bindingResult) {
-		
+		User principal = (User) session.getAttribute("principal");
+
 		// 유효성 검사
 		if (bindingResult.hasErrors()) {
 			Map<String, String> errorMap = new HashMap<>();
@@ -86,17 +83,19 @@ public class BoardController {
 			throw new MyAPINotFoundException(errorMap.toString());
 		}
 		
-		BoardMenu bm = boardMenuRepository.findById(Integer.parseInt(dto.getMenuId()))
-				.orElseThrow( () -> new MyAPINotFoundException("없는 게시판입니다.") );
-		
-		boardRepository.save(dto.toEntity(bm));
-		
+		boardService.게시글쓰기(dto, principal);
+
 		return new CMRespDto(1,"성공",null);
 	}
 	
 	// ---- 게시글 쓰기 페이지 이동
 	@GetMapping("/board/saveForm")
 	public String saveForm(Model model, int menuId) {
+		User principal = (User) session.getAttribute("principal");
+		
+		if (principal == null ) {
+			throw new MyNotFoundException("로그인이 필요합니다.");
+		}
 		model.addAttribute("menuId", menuId);
 		return "wagle/saveForm";
 	}
@@ -105,7 +104,8 @@ public class BoardController {
 	//@requestBody -> 있는 그대로 가져온다
 	@PutMapping("/board/{id}")
 	public @ResponseBody CMRespDto<String> update(@PathVariable int id,@Valid @RequestBody BoardSaveReqDto dto, BindingResult bindingResult){
-		
+		User principal = (User) session.getAttribute("principal");
+
 		// 유효성 검사
 		if (bindingResult.hasErrors()) {
 			Map<String, String> errorMap = new HashMap<>();
@@ -115,30 +115,25 @@ public class BoardController {
 			throw new MyAPINotFoundException(errorMap.toString());
 		}
 		
-		Board boardEntity = boardRepository.findById(id)
-				.orElseThrow( () -> new MyAPINotFoundException("없는 게시글입니다.") );
-		
-		boardEntity.setTitle(dto.getTitle());
-		boardEntity.setContent(dto.getContent());
-		boardEntity.setThumbnail(dto.getThumbnail());
-		
-		boardRepository.save(boardEntity);
+		Board boardEntity = boardService.게시글상세보기(id);
+		boardService.게시글수정(dto, boardEntity, principal);
 		return new CMRespDto<>(1, "업데이트 성공", null);
 	}
 	
 	// ---- 게시글 수정 페이지 이동
 	@GetMapping("/board/{id}/updateForm")
 	public String updateForm(Model model, @PathVariable int id) {
-		Board boardEntity = boardRepository.findById(id)
-				.orElseThrow(() -> new MyNotFoundException("없는 게시글입니다."));
-		model.addAttribute("boardEntity",boardEntity);
+		User principal = (User) session.getAttribute("principal");
+		model.addAttribute("boardEntity",boardService.수정페이지이동(id, principal));
 		return "wagle/updateForm";
 	}
 	
 	// ---- 게시글 삭제
 	@DeleteMapping("/board/{id}")
 	public CMRespDto<Object> delete(@PathVariable int id) {
-		boardRepository.deleteById(id);
+		User principal = (User) session.getAttribute("principal");
+		
+		boardService.게시글삭제(id, principal);
 		
 		return new CMRespDto<>(1, "업데이트 성공", null);
 	}
